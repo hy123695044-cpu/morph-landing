@@ -598,13 +598,30 @@ function openCourseDetail(id) {
   h += '</div><div class="cd-meta">';
   h += '<span style="color:rgba(255,255,255,0.5)">' + course.teacher + '</span><span class="star" style="color:#d4b88a">★ ' + course.rating + '</span><span style="color:rgba(255,255,255,0.5)">' + course.lessons + '节课</span><span style="color:rgba(255,255,255,0.5)">' + course.duration + '</span>';
   h += '</div><div class="cd-desc">' + course.full + '</div>';
-  h += '<div class="cd-inc-h">📦 课程包含</div><div class="cd-inc">';
+  /* Course lessons list */
+  var lessons = [
+    '第1课 · ' + course.title + '：入门导学（' + (course.price===0?'可看':'试看') + '）',
+    '第2课 · ' + (course.teacher||'兵姐') + '手把手教学：基础操作（' + (course.price===0?'可看':'试看') + '）',
+    '第3课 · 实战演练：案例讲解',
+    '第4课 · 进阶技巧与应用',
+    '第5课 · 综合实操与答疑',
+    '第6课 · 结业项目与成果展示'
+  ];
+  if (course.lessons > 6) lessons.push('第7课 · 拓展提高', '第8课 · 学员作品点评');
+  h += '<div class="cd-inc-h">课程目录 · ' + course.lessons + '节课</div><div class="cd-inc">';
+  lessons.forEach(function(lesson, li) {
+    var isFree = course.price === 0 || li < 2;
+    h += '<div class="cd-lesson' + (isFree?' cd-lesson-free':'') + '"><span class="cd-lesson-n">' + (li+1) + '</span><span class="cd-lesson-t">' + lesson + '</span><span class="cd-lesson-tag">' + (isFree?'免费':'🔒') + '</span></div>';
+  });
+  h += '</div>';
+  /* Course includes */
+  h += '<div class="cd-inc-h">课程包含</div><div class="cd-inc">';
   if (course.includes) course.includes.forEach(function(item) {
     h += '<div class="cd-inc-item">' + item + '</div>';
   });
   h += '</div>';
-  h += '<button class="cd-buy' + (course.price===0?' free':'') + '" onclick="alert(\'' + (course.price===0?'报名成功！':'购买成功！消耗' + course.price + '粮票') + '\')">' + (course.price===0?'免费报名':'💰 ' + course.price + '粮票购买') + '</button>';
-  h += '<div style="text-align:center;margin-top:8px;font-size:0.36rem;color:#8a7a6a">' + course.learners + '人已报名</div></div>';
+  h += '<button class="cd-buy' + (course.price===0?' free':'') + '" onclick="document.getElementById(\'sub-course-detail\').classList.remove(\'open\');document.body.style.overflow=\'\';alert(\'' + (course.price===0?'🎉 报名成功！立即开始学习吧':'🎉 购买成功！消耗' + course.price + '粮票') + '\')">' + (course.price===0?'免费报名学习':'💰 ' + course.price + '粮票购买') + '</button>';
+  h += '<div style="text-align:center;margin-top:8px;font-size:0.36rem;color:#8a7a6a">' + course.learners + '人已报名 · ' + (course.price===0?'永久免费':'永久有效') + '</div></div>';
   body.innerHTML = h;
   document.getElementById('sub-course-detail').classList.add('open');
 }
@@ -678,7 +695,7 @@ function renderShopSub() {
   var h = '';
 
   /* Hero - diamond booth */
-  h += '<div class="shop-hero"><div class="shop-hero-t">💎 钻石展位</div><div class="shop-hero-d">战友精选 · 粮票就能换</div></div>';
+  h += '<div class="shop-hero"><div class="shop-hero-t">钻石展位</div><div class="shop-hero-d">战友精选 · 粮票就能换</div></div>';
 
   /* Official products grid */
   var official = items.filter(function(i){return i.type==='official'});
@@ -687,8 +704,7 @@ function renderShopSub() {
   official.forEach(function(item) {
     var hasDiscount = item.original && item.original > item.price;
     h += '<div class="shop-card" onclick="alert(\'' + item.name + ' - 详情页\')">';
-    h += '<div class="shop-card-badge">' + (item.tag || '🛒') + '</div>';
-    h += '<div class="shop-card-img">' + (item.img || '📦') + '</div>';
+    h += '<div class="shop-card-badge">' + (item.tag ? item.tag.replace(/[^\w一-鿿]/g,'') : '') + '</div>';
     h += '<div class="shop-card-name">' + item.name + '</div>';
     h += '<div class="shop-card-desc">' + (item.desc || '') + '</div>';
     h += '<div class="shop-card-row">';
@@ -707,14 +723,14 @@ function renderShopSub() {
 
   /* Stalls section */
   var stalls = items.filter(function(i){return i.type==='stall'});
-  h += '<div class="shop-sec-h" style="margin-top:16px">👥 战友摊位 <span style="font-weight:400;font-size:0.45rem;color:#8a7a6a">邻居家的好东西</span></div>';
+  h += '<div class="shop-sec-h" style="margin-top:16px">战友摊位 <span style="font-weight:400;font-size:0.45rem;color:#8a7a6a">邻居家的好东西</span></div>';
   h += '<div class="shop-stalls">';
   stalls.forEach(function(s) {
     if (s.status === 'open') {
       h += '<div class="shop-stall shop-stall-open" onclick="alert(\'申请入驻\')"><div class="shop-stall-name">+ 招募中</div><div class="shop-stall-desc">等你来入驻</div></div>';
     } else {
       h += '<div class="shop-stall" onclick="alert(\'' + (s.owner||'') + ' - ' + s.name + '\')">';
-      h += '<div class="shop-stall-img">' + (s.img || '🛍️') + '</div>';
+      h += '<div class="shop-stall-img"><span style="display:inline-flex;width:32px;height:32px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;align-items:center;justify-content:center;font-size:0.5rem;font-weight:600">摊</span></div>';
       h += '<div class="shop-stall-info"><div class="shop-stall-name">' + s.name + '</div><div class="shop-stall-owner">' + (s.owner||'') + '</div><div class="shop-stall-desc">' + (s.desc||'') + '</div></div>';
       h += '<div class="shop-stall-right"><div class="shop-stall-price">' + s.price + '</div><div class="shop-stall-unit">粮票</div><div class="shop-stall-sales">已售' + (s.sales||0) + '</div></div>';
       h += '</div>';
@@ -724,6 +740,31 @@ function renderShopSub() {
 
   body.innerHTML = h;
 }
+
+/* Shop detail overlay */
+function openShopDetail(idx) {
+  var items = C.marketplace && C.marketplace.shopItems;
+  if (!items || !items[idx]) return;
+  var item = items[idx];
+  var h = '<div class="shop-detail-overlay" onclick="this.remove()">';
+  h += '<div class="shop-detail" onclick="event.stopPropagation()">';
+  h += '<div class="shop-detail-close" onclick="this.closest(\'.shop-detail-overlay\').remove()">x</div>';
+  h += '<div class="shop-detail-name">' + item.name + '</div>';
+  if (item.desc) h += '<div class="shop-detail-desc">' + item.desc + '</div>';
+  if (item.owner) h += '<div class="shop-detail-row"><span class="shop-detail-lb">摊主</span><span>' + item.owner + '</span></div>';
+  h += '<div class="shop-detail-row"><span class="shop-detail-lb">价格</span><span style="color:#d4733e;font-weight:600">' + item.price + ' 粮票</span></div>';
+  if (item.original) h += '<div class="shop-detail-row"><span class="shop-detail-lb">原价</span><span style="text-decoration:line-through;color:#8a7a6a">' + item.original + ' 粮票</span></div>';
+  h += '<div class="shop-detail-row"><span class="shop-detail-lb">已售</span><span>' + (item.sales||0) + '件</span></div>';
+  if (item.rating) h += '<div class="shop-detail-row"><span class="shop-detail-lb">评分</span><span>★ ' + item.rating.toFixed(1) + ' (' + (item.reviews||0) + '条评价)</span></div>';
+  h += '<div style="margin-top:12px;display:flex;gap:8px">';
+  h += '<button class="cd-buy free" style="flex:1" onclick="alert(\'已加入购物车！\')">加入购物车</button>';
+  h += '<button class="cd-buy" style="flex:1" onclick="alert(\'购买成功！消耗' + item.price + '粮票\')">立即购买</button>';
+  h += '</div></div></div>';
+  document.body.appendChild(document.createElement('div'));
+  var last = document.body.lastElementChild;
+  last.outerHTML = h;
+}
+
 function renderAISub() {
   var body = document.getElementById('sub-body-s-ai');
   if (!body || !C.aiServices) return;

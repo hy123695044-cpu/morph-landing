@@ -1,10 +1,14 @@
 var C = window.CONTENT;
 
-/* Shared photo paths for Chinese elderly portraits */
-var _photos = [
-  'images/p1.jpg','images/p2.jpg','images/p3.jpg',
-  'images/p4.jpg','images/p8.jpg','images/p9.jpg','images/p10.jpg'
-];
+/* Shared placeholder avatars (Chinese surname initials) - replace with real photos later */
+var _avatarColors = ['#d4733e','#7a9a5a','#c4956a','#6a9ac8','#b88a6a','#5a9a8a','#d48a8a','#8a7a9a'];
+var _avatarNames = ['王','张','李','刘','陈','赵','吴','周','孙','钱','郑','冯','蒋','沈','韩','杨','朱','秦','许','何','吕','施','孔','曹','严','华','金','魏','陶','姜'];
+var _photos = [];
+for(var _i=0;_i<_avatarNames.length;_i++){
+  var _c = _avatarColors[_i%_avatarColors.length];
+  var _n = _avatarNames[_i];
+  _photos.push('data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect width="80" height="80" rx="40" fill="' + _c + '"/><text x="40" y="45" text-anchor="middle" fill="white" font-size="28" font-weight="600" font-family="sans-serif">' + _n + '</text></svg>'));
+}
 
 /* ===== 1. HERO PARTICLES (glowing dots) ===== */
 (function(){
@@ -1365,20 +1369,7 @@ function onMapClick(el, idx) {
 
   /* Generate people avatars - Chinese elderly portraits */
   var count = isVisited ? Math.min(loc.count || 30, 60) : 20;
-  var photos = [
-    'https://images.unsplash.com/photo-Bcjc7woD95k?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-IxSFy7hVkJE?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-mAOyMhdtcMw?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-RaC2IyYYY4A?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-I0uU4rjFGs8?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-2Iku4SwlHuQ?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-6jqamcohgmw?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-k4JOI3zfnUA?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-kb0dClMo6CI?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-LDQwLOIi5l0?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-wiV3YzgWCHk?w=80&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-j-E-s8N9Iik?w=80&q=60&auto=format&fit=crop'
-  ];
+  var photos = _photos;
   var h = '';
 
   /* Cluster people around this location instead of random across map */

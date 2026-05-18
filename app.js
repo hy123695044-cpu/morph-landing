@@ -1470,5 +1470,137 @@ function onMapClick(el, idx) {
   peopleDiv.innerHTML = h;
 }
 
+/* ===== CHAT & AUTH ===== */
+var _chatUser = null;
+var _chatMsgs = [];
+var _authMode = 'login';
 
+function toggleChat() {
+  var p = document.getElementById('chat-panel');
+  if (!p) return;
+  p.classList.toggle('open');
+  if (p.classList.contains('open') && _chatMsgs.length === 0 && _chatUser) {
+    loadChatHistory();
+  }
+  if (p.classList.contains('open') && !_chatUser) {
+    openAuth();
+  }
+}
 
+function openAuth() { var o = document.getElementById('auth-overlay'); if(o) o.classList.add('open'); }
+function closeAuth() { var o = document.getElementById('auth-overlay'); if(o) o.classList.remove('open'); }
+
+function switchAuthTab(mode) {
+  _authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach(function(t){t.classList.remove('active')});
+  var tabs = document.querySelectorAll('.auth-tab');
+  if (mode === 'login' && tabs[0]) tabs[0].classList.add('active');
+  if (mode === 'register' && tabs[1]) tabs[1].classList.add('active');
+  document.getElementById('auth-btn').textContent = mode === 'login' ? '登录' : '注册';
+  document.getElementById('auth-nick').style.display = mode === 'register' ? 'block' : 'none';
+}
+
+function doAuth() {
+  var email = document.getElementById('auth-email').value.trim();
+  var pass = document.getElementById('auth-pass').value;
+  if (!email || pass.length < 3) { document.getElementById('auth-err').textContent='请填写完整'; return; }
+  if (_firebaseReady) {
+    /* Firebase real auth */
+    if (_authMode === 'login') {
+      firebase.auth().signInWithEmailAndPassword(email, pass)
+        .then(function(r){ _chatUser = r.user; afterAuth(); })
+        .catch(function(e){ document.getElementById('auth-err').textContent=e.message; });
+    } else {
+      firebase.auth().createUserWithEmailAndPassword(email, pass)
+        .then(function(r){
+          _chatUser = r.user;
+          if (document.getElementById('auth-nick').value) {
+            _chatUser.displayName = document.getElementById('auth-nick').value;
+          }
+          afterAuth();
+        })
+        .catch(function(e){ document.getElementById('auth-err').textContent=e.message; });
+    }
+  } else {
+    /* Demo mode */
+    _chatUser = { email: email, displayName: document.getElementById('auth-nick').value || email.split('@')[0], uid: 'demo_' + Date.now() };
+    afterAuth();
+  }
+}
+
+function afterAuth() {
+  closeAuth();
+  toggleChat();
+  addChatMsg({ name: '系统', text: '欢迎 ' + (_chatUser.displayName||_chatUser.email) + '！', time: new Date().toLocaleTimeString() });
+}
+
+function addChatMsg(msg, isMe) {
+  var container = document.getElementById('chat-msgs');
+  var empty = document.getElementById('chat-empty');
+  if (!container) return;
+  if (empty) empty.style.display = 'none';
+  var d = document.createElement('div');
+  d.className = 'chat-msg ' + (isMe ? 'me' : 'other');
+  d.innerHTML = (!isMe ? '<span class="chat-name">' + (msg.name||'匿名') + '</span>' : '') + msg.text + '<span class="chat-time">' + (msg.time||'刚刚') + '</span>';
+  container.appendChild(d);
+  document.getElementById('chat-body').scrollTop = document.getElementById('chat-body').scrollHeight;
+}
+
+function sendChatMsg() {
+  var input = document.getElementById('chat-input');
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  if (!_chatUser) { openAuth(); return; }
+  addChatMsg({ name: _chatUser.displayName||_chatUser.email, text: text, time: new Date().toLocaleTimeString() }, true);
+  _chatMsgs.push({ name: _chatUser.displayName||_chatUser.email, text: text, time: Date.now() });
+  if (_firebaseReady) {
+    /* Save to Firestore */
+    try {
+      firebase.firestore().collection('chats').add({ name: _chatUser.displayName||_chatUser.email, text: text, time: firebase.firestore.FieldValue.serverTimestamp(), uid: _chatUser.uid });
+    } catch(e) {}
+  }
+  /* Simulate a reply after 1-3 seconds */
+  if (Math.random() > 0.4) {
+    var replies = ['说得对！👍','哈哈是的','我也这么觉得😊','收到收到！','有道理有道理','你说得太好了','同意+1','原来如此！','学到了','好主意！'];
+    setTimeout(function(){
+      addChatMsg({ name: '战友' + Math.floor(Math.random()*100), text: replies[Math.floor(Math.random()*replies.length)], time: new Date().toLocaleTimeString() });
+    }, 1000 + Math.random() * 2000);
+  }
+}
+
+function loadChatHistory() {
+  var container = document.getElementById('chat-msgs');
+  var empty = document.getElementById('chat-empty');
+  if (!container) return;
+  if (_firebaseReady) {
+    try {
+      firebase.firestore().collection('chats').orderBy('time','desc').limit(20).get().then(function(snap){
+        container.innerHTML = '';
+        snap.forEach(function(doc){ var d=doc.data(); addChatMsg({name:d.name,text:d.text,time:d.time?d.time.toDate().toLocaleTimeString():''}); });
+        if (empty) empty.style.display = 'none';
+      });
+    } catch(e) {}
+  } else {
+    /* Demo messages */
+    var demos = [
+      {name:'王阿姨',text:'今天去安吉竹海走了走，空气真好！'},
+      {name:'张建国',text:'发一张我拍的照片🌄',time:'14:23'},
+      {name:'李老师',text:'明天晨练八段锦，有人一起吗？'},
+      {name:'刘姐',text:'周末想去杭州逛逛，有组团的吗？'},
+      {name:'兵姐',text:'@所有人 下周有新活动，敬请期待！'},
+    ];
+    demos.forEach(function(m){ addChatMsg(m); });
+    if (empty) empty.style.display = 'none';
+  }
+}
+
+/* Online count fluctuation for chat */
+setInterval(function(){
+  var el = document.getElementById('chat-online-n');
+  if (el) {
+    var base = parseInt(el.textContent) || 8;
+    var n = base + (Math.random()-0.5)*3;
+    el.textContent = Math.max(3, Math.round(n));
+  }
+}, 5000);

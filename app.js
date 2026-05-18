@@ -378,6 +378,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var bl=document.getElementById('s2-links');
   if(bl){
     bl.innerHTML=
+      '<div class="s2-links-lb">我的</div>'+
       '<button class="s2-link-btn" onclick="openSubpage(\'s-tickets\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#d4a86a,#c08850);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">券</span></span><div><div class="ln">粮票中心</div><div class="ld">等级 · 赚粮票 · 消费指南</div></div></button>'+
       '<button class="s2-link-btn" onclick="openSubpage(\'s-community\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#e8935a,#d4733e);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">赏</span></span><div><div class="ln">悬赏任务</div><div class="ld">帮个小忙赚粮票</div></div></button>'+
       '<button class="s2-link-btn" onclick="openSubpage(\'s-about\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#9aba7a,#7a9a5a);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">人</span></span><div><div class="ln">关于兵姐</div><div class="ld">退伍老兵 · 足迹遍布全国</div></div></button>';
@@ -1003,13 +1004,13 @@ function generatePhotoWall() {
   container.innerHTML = h;
 }
 
-var _accIcons = ['宿','课','聊','铺','AI'];
+var _accIcons = ['宿','AI','课','聊','铺'];
 var _accLinks = {
   's-stay':    ['房型展示','预约住宿','合作院子','往期旅居'],
+  's-ai':      ['AI写真','AI换装','老照片修复','语音克隆','AI写文案','旅游AI拍照'],
   's-courses': ['AI类','工具类','生活类','康养类','娱乐类','直播类'],
   's-community':['热门动态','悬赏任务','找旅伴'],
-  's-shop':    ['官方出品','战友摊位'],
-  's-ai':      ['AI写真','AI换装','老照片修复','语音克隆','AI写文案','旅游AI拍照']
+  's-shop':    ['官方出品','战友摊位']
 };
 
 function renderAccordion() {

@@ -24,10 +24,10 @@ window.CONTENT = {
 
   modules: [
     { id: "s-stay", name: "民宿旅居", desc: "住进安吉竹海", color: "gold" },
+    { id: "s-ai", name: "AI百宝箱", desc: "写真·换装·克隆·修复", color: "teal" },
     { id: "s-courses", name: "兵姐精选", desc: "AI·直播·康养·生活", color: "orange" },
     { id: "s-community", name: "大伙在聊啥", desc: "有事您说话", color: "green" },
-    { id: "s-shop", name: "战友小铺", desc: "官方出品·战友摊位", color: "sage" },
-    { id: "s-ai", name: "AI百宝箱", desc: "写真·换装·克隆·修复", color: "teal" }
+    { id: "s-shop", name: "战友小铺", desc: "官方出品·战友摊位", color: "sage" }
   ],
 
   anji: {
@@ -102,12 +102,12 @@ window.CONTENT = {
       { id: 2, category: "工具类", title: "手机拍大片", teacher: "兵姐", price: 37, learners: 923, rating: 4.7, tags: ["拍照", "修图", "构图"], desc: "一部手机拍出大片感。", cover: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&q=80", full: "不用单反，不用专业设备，一部手机就能拍出让人惊艳的照片。兵姐带你从构图、光线、角度入手，学会拍人像、风景、美食，再用手机修图软件调出高级感。", includes: ["8节视频课", "构图模板下载", "手机修图预设", "学员作品展示墙", "每月外拍实践活动"], lessons: 8, duration: "4小时" },
       { id: 3, category: "康养类", title: "八段锦晨间唤醒", teacher: "李老师", price: 0, learners: 2456, rating: 4.9, tags: ["养生", "晨练"], desc: "每天15分钟，疏通经络。", cover: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80", full: "退休中医李老师亲自示范教学，每天15分钟八段锦，疏通全身经络。适合零基础，动作缓慢柔和，在家就能练。坚持一个月，睡眠好了，精神足了。", includes: ["15节跟练视频", "动作要点图文手册", "晨练打卡社群", "李老师在线答疑", "月度健康讲座"], lessons: 15, duration: "每天15分钟" },
       { id: 4, category: "直播类", title: "直播带货话术", teacher: "兵姐", price: 45, learners: 567, rating: 4.6, tags: ["话术", "带货"], desc: "直播间搭建到流量变现。", cover: "https://images.unsplash.com/photo-1598128558393-70ff21433be0?w=600&q=80", full: "想做直播但不知道从哪下手？兵姐教你从直播间搭建、灯光设备、话术脚本到流量变现的全流程。特别适合中老年朋友，教你如何在直播间自然地聊天、分享、带货。", includes: ["10节录播课", "直播间搭建清单", "话术模板20套", "直播实操连麦", "流量扶持指南"], lessons: 10, duration: "5小时" },
-      { id: 5, category: "工具类", title: "剪映剪辑入门", teacher: "兵姐", price: 28, learners: 734, rating: 4.5, tags: ["剪辑", "短视频"], desc: "从0学剪映。", cover: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&q=80", full: "剪映是最适合中老年朋友的视频剪辑工具。兵姐用最简单的方式教你：分割、裁剪、配乐、字幕、滤镜……一学就会，一做就好看。", includes: ["6节视频课", "剪映安装包", "片头片尾模板", "背景音乐包", "学员作品展播"], lessons: 6, duration: "3小时" },
+      { id: 5, category: "工具类", title: "剪映剪辑入门", teacher: "兵姐", price: 0, learners: 734, rating: 4.5, tags: ["剪辑", "短视频"], desc: "从0学剪映，做出自己的短视频。", cover: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&q=80", full: "剪映是最适合中老年朋友的视频剪辑工具。兵姐用最简单的方式教你：分割、裁剪、配乐、字幕、滤镜……一学就会，一做就好看。从拍孙子到拍风景，让你的每一段视频都精彩。", includes: ["6节视频课（可反复看）", "剪映安装包+教程", "片头片尾模板20套", "免费背景音乐包", "学员作品展播机会", "兵姐在线答疑"], lessons: 6, duration: "3小时" },
       { id: 6, category: "AI类", title: "AI数字人怎么做", teacher: "兵姐", price: 68, learners: 345, rating: 4.7, tags: ["数字人", "AI"], desc: "生成自己的数字分身。", cover: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&q=80", full: "你有没有想过，有一天你可以有一个「数字分身」帮你拍视频、做直播？兵姐教你用AI工具生成自己的数字人——只需要录几段话，AI就能学会你的声音和形象。", includes: ["8节录播课", "数字人制作工具", "声音克隆教程", "数字人视频模板", "1对1远程指导"], lessons: 8, duration: "4小时" },
       { id: 7, category: "生活类", title: "春季养生食疗", teacher: "陈医生", price: 0, learners: 1123, rating: 4.8, tags: ["食疗", "养生"], desc: "退休中医教你调养身体。", cover: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80", full: "陈医生从中医角度，教你春季如何通过饮食调养身体。从体质辨识到食材搭配，从药膳配方到日常食谱，实用性满分。", includes: ["10节图文+音频课", "春季食谱电子书", "体质自测表", "食材购买清单", "社群打卡交流"], lessons: 10, duration: "自学" },
-      { id: 8, category: "生活类", title: "中老年穿搭指南", teacher: "兵姐", price: 12, learners: 456, rating: 4.4, tags: ["穿搭", "形象"], desc: "年纪大了也能美美的。", cover: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80", full: "谁说年纪大了就不能讲究穿搭？兵姐教你如何根据自己的身材、气质选择合适的衣服，用简单的搭配穿出高级感。花少钱，穿出彩。", includes: ["6节视频课", "穿搭色卡指南", "衣橱整理清单", "线上穿搭诊断", "团购优惠券"], lessons: 6, duration: "3小时" },
+      { id: 8, category: "生活类", title: "中老年穿搭指南", teacher: "兵姐", price: 0, learners: 456, rating: 4.4, tags: ["穿搭", "形象"], desc: "年纪大了也能美美的。", cover: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80", full: "谁说年纪大了就不能讲究穿搭？兵姐教你如何根据自己的身材、气质选择合适的衣服，用简单的搭配穿出高级感。花少钱，穿出彩。", includes: ["6节视频课（永久回看）", "穿搭色卡指南", "衣橱整理清单", "线上穿搭诊断服务", "团购优惠券"], lessons: 6, duration: "3小时" },
       { id: 9, category: "娱乐类", title: "手机摄影与修图", teacher: "兵姐", price: 15, learners: 678, rating: 4.6, tags: ["摄影", "手机"], desc: "拍花拍人拍风景。", cover: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&q=80", full: "专门为中老年朋友设计的手机摄影课。教你拍花、拍人、拍风景，还有简单好用的修图技巧。让每一张照片都能发朋友圈获赞无数。", includes: ["8节视频课", "拍摄场景指南", "修图APP推荐", "每周拍摄主题", "优秀作品展示"], lessons: 8, duration: "4小时" },
-      { id: 10, category: "康养类", title: "高血压居家调理", teacher: "陈医生", price: 5, learners: 892, rating: 4.7, tags: ["健康", "居家"], desc: "日常调理实用干货。" }
+      { id: 10, category: "康养类", title: "高血压居家调理", teacher: "陈医生", price: 0, learners: 892, rating: 4.7, tags: ["健康", "居家"], desc: "日常调理实用干货，免费学。", cover: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80", full: "陈医生结合40年临床经验，专门为中老年朋友讲解高血压的日常调理方法。从饮食控制到运动建议，从用药提醒到情绪管理，全方位守护你的健康。", includes: ["10节音频+图文课", "血压记录表下载", "每日食谱推荐", "用药提醒助手", "在线问诊优惠券", "陈医生答疑直播"], lessons: 10, duration: "自学" }
     ]
   },
 

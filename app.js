@@ -1,5 +1,11 @@
 var C = window.CONTENT;
 
+/* Shared photo paths for Chinese elderly portraits */
+var _photos = [
+  'images/p1.jpg','images/p2.jpg','images/p3.jpg',
+  'images/p4.jpg','images/p8.jpg','images/p9.jpg','images/p10.jpg'
+];
+
 /* ===== 1. HERO PARTICLES (glowing dots) ===== */
 (function(){
   var c = document.getElementById('particle-canvas');
@@ -898,14 +904,7 @@ function renderAboutSub() {
     {place:'海南', season:'第10-13期', count:40},
     {place:'三亚', season:'第10-13期', count:35}
   ];
-  var ftPhotos = [
-    'https://images.unsplash.com/photo-Bcjc7woD95k?w=60&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-IxSFy7hVkJE?w=60&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-mAOyMhdtcMw?w=60&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-RaC2IyYYY4A?w=60&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-I0uU4rjFGs8?w=60&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-6jqamcohgmw?w=60&q=60&auto=format&fit=crop'
-  ];
+  var ftPhotos = _photos;
   visitedPlaces.forEach(function(v) {
     h += '<div class="about-ft-card">';
     h += '<div class="about-ft-top"><span class="about-ft-place">' + v.place + '</span><span class="about-ft-season">' + v.season + '</span></div>';
@@ -970,16 +969,7 @@ function generatePhotoWall() {
   container.style.background = '#f5f2ec';
   
   // Real photo grid - Chinese elderly portraits
-      var photos = [
-    'https://images.unsplash.com/photo-Bcjc7woD95k?w=120&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-IxSFy7hVkJE?w=120&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-mAOyMhdtcMw?w=120&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-RaC2IyYYY4A?w=120&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-2Iku4SwlHuQ?w=120&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-6jqamcohgmw?w=120&q=60&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-k4JOI3zfnUA?w=120&q=60&auto=format&fit=crop'
-    /* 中国战友真实照片 */
-  ];
+      var photos = _photos;
   
   var h = '';
   h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:1px;position:absolute;inset:0;overflow:hidden;padding:2px">';

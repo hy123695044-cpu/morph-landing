@@ -1,26 +1,56 @@
 var C = window.CONTENT;
 
-/* ===== 1. HERO PARTICLES ===== */
+/* ===== 1. HERO PARTICLES (glowing dots) ===== */
 (function(){
   var c = document.getElementById('particle-canvas');
   if(!c) return;
   var ctx = c.getContext('2d');
-  var p = [], anim;
+  var p = [], anim, mouse = {x:0, y:0, active:false};
   function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
   resize(); window.addEventListener('resize', resize);
-  var n = Math.min(30, Math.floor(window.innerWidth/20));
-  var cs = ['rgba(196,149,106,','rgba(180,136,90,','rgba(74,107,74,'];
-  for(var i=0;i<n;i++) p.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-0.5)*0.12,vy:(Math.random()-0.5)*0.12-0.02,r:Math.random()*1.8+0.3,op:Math.random()*0.18+0.05,color:cs[Math.floor(Math.random()*3)],ph:Math.random()*Math.PI*2});
+  c.addEventListener('mousemove', function(e){mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true});
+  c.addEventListener('mouseleave', function(){mouse.active=false});
+  var n = Math.min(80, Math.floor(window.innerWidth/12));
+  var cs = ['rgba(255,255,255,','rgba(255,220,180,','rgba(196,149,106,'];
+  for(var i=0;i<n;i++) p.push({
+    x:Math.random()*c.width,y:Math.random()*c.height,
+    vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3-0.05,
+    r:Math.random()*2.5+0.8,op:Math.random()*0.35+0.15,
+    baseOp:Math.random()*0.35+0.15,
+    color:cs[Math.floor(Math.random()*3)],
+    ph:Math.random()*Math.PI*2, speed:0.008+Math.random()*0.015,
+    trail:[]
+  });
   function loop(){
     ctx.clearRect(0,0,c.width,c.height);
     p.forEach(function(d){
-      d.x+=d.vx;d.y+=d.vy;d.ph+=0.012;
-      if(d.x<-10)d.x=c.width+10;if(d.x>c.width+10)d.x=-10;
-      if(d.y<-10)d.y=c.height+10;if(d.y>c.height+10)d.y=-10;
-      var po=d.op*(0.6+0.4*Math.sin(d.ph));
+      /* Mouse tracking attraction */
+      if(mouse.active){
+        var dx=mouse.x-d.x, dy=mouse.y-d.y, dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<300){
+          var force=0.0008*(300-dist)/300;
+          d.vx+=dx*force; d.vy+=dy*force;
+        }
+      }
+      d.x+=d.vx;d.y+=d.vy;d.ph+=d.speed;
+      /* Friction to keep movement smooth */
+      d.vx*=0.995;d.vy*=0.995;
+      /* Random drift */
+      d.vx+=(Math.random()-0.5)*0.008;d.vy+=(Math.random()-0.5)*0.008;
+      /* Boundary wrap with padding */
+      if(d.x<-20)d.x=c.width+20;if(d.x>c.width+20)d.x=-20;
+      if(d.y<-20)d.y=c.height+20;if(d.y>c.height+20)d.y=-20;
+      /* Opacity pulse */
+      var po=d.baseOp*(0.55+0.45*Math.sin(d.ph));
+      /* Glow: outer halo */
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r*4,0,Math.PI*2);
+      ctx.fillStyle=d.color+(po*0.06)+')';ctx.fill();
+      /* Glow: mid halo */
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r*2,0,Math.PI*2);
+      ctx.fillStyle=d.color+(po*0.15)+')';ctx.fill();
+      /* Core dot */
       ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
       ctx.fillStyle=d.color+po+')';ctx.fill();
-      if(d.r>1){ctx.beginPath();ctx.arc(d.x,d.y,d.r*2.5,0,Math.PI*2);ctx.fillStyle=d.color+(po*0.07)+')';ctx.fill()}
     });
     anim=requestAnimationFrame(loop);
   }
@@ -87,9 +117,9 @@ var C = window.CONTENT;
           speed: 0.008 + Math.random()*0.008,
           angle: angle,
           radius: rad,
-          r: Math.random()*1.2+0.4,
+          r: Math.random()*2.5+1.2,
           color: dotColors[ci % dotColors.length],
-          op: Math.random()*0.25+0.1,
+          op: Math.random()*0.4+0.25,
           origX: 0, origY: 0,
           x: 0, y: 0,
           targetX: 0, targetY: 0,
@@ -157,15 +187,15 @@ var C = window.CONTENT;
       var po = d.op * (0.7 + 0.3 * Math.sin(tick*0.02 + d.angle));
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+      /* outer glow */
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r*5,0,Math.PI*2);
+      ctx.fillStyle = d.color + (po*0.04) + ')';ctx.fill();
+      /* mid glow */
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r*2.5,0,Math.PI*2);
+      ctx.fillStyle = d.color + (po*0.12) + ')';ctx.fill();
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
       ctx.fillStyle = d.color + po + ')';
       ctx.fill();
-      /* glow */
-      if(d.r > 0.8){
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r*3, 0, Math.PI*2);
-        ctx.fillStyle = d.color + (po*0.06) + ')';
-        ctx.fill();
-      }
     });
 
     /* check if all gravitating dots have arrived */
@@ -893,7 +923,7 @@ function generatePhotoWall() {
   container.style.position = 'relative';
   container.style.overflow = 'hidden';
   container.style.borderRadius = '10px';
-  container.style.background = 'rgba(255,255,255,0.06)';
+  container.style.background = '#f5f2ec';
   
   // Real photo grid - Chinese elderly portraits
       var photos = [
@@ -915,10 +945,10 @@ function generatePhotoWall() {
     h += '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:url(' + url + ') center/cover;opacity:0.75;border:1.5px solid rgba(255,255,255,0.3);margin:auto"></div>';
   }
   h += '</div>';
-  // Gradient overlay at bottom for readability on dark bg
-  h += '<div style="position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(22,34,22,0.9) 75%);pointer-events:none"></div>';
+  // Gradient overlay at bottom
+  h += '<div style="position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(250,248,245,0.9) 75%);pointer-events:none"></div>';
   // Caption
-  h += '<div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:0.55rem;color:rgba(255,255,255,0.7);font-weight:600;letter-spacing:2px;text-shadow:0 1px 8px rgba(0,0,0,0.5)">\u2764 5000+ \u6218\u53cb\u7684\u9009\u62e9</div>';
+  h += '<div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:0.55rem;color:#2d2a24;font-weight:600;letter-spacing:2px">\u2764 5000+ \u6218\u53cb\u7684\u9009\u62e9</div>';
   container.innerHTML = h;
 }
 

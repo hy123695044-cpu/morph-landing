@@ -1138,6 +1138,24 @@ img{max-width:100%;display:block}
 #auth-btn{width:100%;padding:9px;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;border:none;border-radius:8px;font-size:0.5rem;font-weight:600;cursor:pointer;font-family:inherit}
 #auth-btn:active{transform:scale(0.98)}
 
+/* AI客服 */
+#kf-btn{position:fixed;bottom:24px;right:86px;width:42px;height:42px;border-radius:50%;background:linear-gradient(145deg,#7a9a5a,#5a8a4a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;cursor:pointer;z-index:99;box-shadow:0 3px 12px rgba(122,154,90,0.35);transition:transform 0.25s;animation:kf-pulse 2s ease-in-out infinite}
+@keyframes kf-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+#kf-btn:hover{transform:scale(1.1)}
+#kf-panel{position:fixed;bottom:90px;right:24px;width:300px;height:380px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.12);z-index:99;display:none;flex-direction:column;overflow:hidden;border:1px solid #f0ece4}
+#kf-panel.open{display:flex}
+#kf-h{display:flex;align-items:center;padding:10px 14px;background:linear-gradient(135deg,#5a8a4a,#7a9a5a);color:#fff;flex-shrink:0;font-size:0.5rem;font-weight:600}
+#kf-close{margin-left:auto;cursor:pointer;font-size:0.55rem;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+#kf-close:hover{background:rgba(255,255,255,0.15)}
+#kf-body{flex:1;overflow-y:auto;padding:10px;background:#faf8f5;font-size:0.45rem}
+.kf-welcome{background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:8px;color:#2d2a24;line-height:1.5;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+#kf-qs{display:flex;flex-direction:column;gap:4px}
+.kf-q{background:#fff;border:1px solid #e8e0d8;border-radius:8px;padding:7px 10px;color:#2d2a24;cursor:pointer;transition:all 0.2s;text-align:center}
+.kf-q:hover{background:#f5f2ec;border-color:#c4956a}
+#kf-ans{background:#fff;border-radius:8px;padding:10px;color:#2d2a24;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+#kf-foot{padding:8px;text-align:center;font-size:0.42rem;color:#c4956a;cursor:pointer;border-top:1px solid #f0ece4;flex-shrink:0}
+#kf-foot:hover{background:#faf8f5}
+
 @media(max-width:820px){
   .tickets-grid{grid-template-columns:1fr}
   /* journey responsive 820 removed */
@@ -1375,6 +1393,23 @@ img{max-width:100%;display:block}
 
 <!-- Chat button -->
 <div id="chat-btn" onclick="toggleChat()"><span>💬</span></div>
+<div id="kf-btn" onclick="toggleKF()"><span>?</span></div>
+<div id="kf-panel">
+  <div id="kf-h"><span>🤖 AI小助手</span><span id="kf-close" onclick="toggleKF()">x</span></div>
+  <div id="kf-body">
+    <div class="kf-welcome">您好！我是兵姐的小助手，请问有什么可以帮您？</div>
+    <div id="kf-qs">
+      <div class="kf-q" onclick="kfAnswer(this)">怎么报名课程？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">粮票怎么获得？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">民宿怎么预约？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">有什么免费课程？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">怎么联系兵姐？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">AI工具怎么用？</div>
+    </div>
+    <div id="kf-ans" style="display:none"></div>
+  </div>
+  <div id="kf-foot" onclick="toggleChat()">💬 转人工客服 →</div>
+</div>
 
 <!-- Chat panel -->
 <div id="chat-panel">

@@ -1470,6 +1470,30 @@ function onMapClick(el, idx) {
   peopleDiv.innerHTML = h;
 }
 
+/* ===== AI客服 ===== */
+function toggleKF() {
+  document.getElementById('kf-panel').classList.toggle('open');
+}
+function kfAnswer(el) {
+  var q = el.textContent.trim();
+  var answers = {
+    '怎么报名课程':'点击首页的「兵姐精选」或「大伙在聊啥」下方的模块，进入课程列表。选择你感兴趣的课程，点进去可以看到详细介绍。免费课程直接点击「免费报名学习」即可。付费课程需要消耗粮票。',
+    '粮票怎么获得':'每天签到获得10+工分；发一篇帖子获得20工分；收到一个赞获得2工分；回答被采纳获得15工分；推荐好友注册获得100工分。100工分自动转为1粮票。',
+    '民宿怎么预约':'点击「民宿旅居」模块 → 「预约住宿」→ 选择房型和日期 → 提交预约信息。也可以直接联系兵姐微信：bingjie_anji。',
+    '有什么免费课程':'目前有5门免费课程：1️⃣ 八段锦晨间唤醒 2️⃣ 春季养生食疗 3️⃣ 剪映剪辑入门 4️⃣ 中老年穿搭指南 5️⃣ 高血压居家调理。全部免费报名学习。',
+    '怎么联系兵姐':'微信：bingjie_anji（备注"战友"）\n电话：138-xxxx-xxxx\n地址：浙江·安吉·天荒坪镇\n也可以直接在聊天室找在线战友帮忙。',
+    'AI工具怎么用':'在「AI百宝箱」模块中，有AI写真、AI换装、老照片修复、语音克隆、AI写文案、旅游AI拍照等工具。每个工具都有详细的引导，按步骤操作即可。'
+  };
+  document.getElementById('kf-qs').style.display = 'none';
+  var ans = document.getElementById('kf-ans');
+  ans.style.display = 'block';
+  ans.innerHTML = '<div style="font-weight:600;color:#2d2a24;margin-bottom:4px">' + q + '</div><div style="color:#5a4a3a">' + (answers[q]||'正在为您查询，请稍候...') + '</div><div style="text-align:right;margin-top:6px"><span style="font-size:0.38rem;color:#c4956a;cursor:pointer" onclick="kfBack()">← 返回问题列表</span></div>';
+}
+function kfBack() {
+  document.getElementById('kf-qs').style.display = 'flex';
+  document.getElementById('kf-ans').style.display = 'none';
+}
+
 /* ===== CHAT & AUTH ===== */
 var _chatUser = null;
 var _chatMsgs = [];

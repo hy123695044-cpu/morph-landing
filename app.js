@@ -883,9 +883,53 @@ function renderAboutSub() {
   
   /* Belief */
   h += '<div class="about-belief">「 ' + bj.belief + ' 」</div>';
-  
+
+  /* Journey footprint - locations visited and planned */
+  h += '<div class="about-ft-h">兵姐的足迹</div>';
+  h += '<div class="about-ft-grid">';
+  /* Visited locations */
+  var visitedPlaces = [
+    {place:'绍兴', season:'第1-4期', count:37},
+    {place:'柯桥', season:'第1期', count:7},
+    {place:'杭州', season:'第5-6期', count:30},
+    {place:'安吉', season:'第14-16期', count:45},
+    {place:'上海', season:'第7-9期', count:28},
+    {place:'崇明岛', season:'第7-9期', count:20},
+    {place:'海南', season:'第10-13期', count:40},
+    {place:'三亚', season:'第10-13期', count:35}
+  ];
+  var ftPhotos = [
+    'https://images.unsplash.com/photo-Bcjc7woD95k?w=60&q=60&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-IxSFy7hVkJE?w=60&q=60&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-mAOyMhdtcMw?w=60&q=60&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-RaC2IyYYY4A?w=60&q=60&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-I0uU4rjFGs8?w=60&q=60&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-6jqamcohgmw?w=60&q=60&auto=format&fit=crop'
+  ];
+  visitedPlaces.forEach(function(v) {
+    h += '<div class="about-ft-card">';
+    h += '<div class="about-ft-top"><span class="about-ft-place">' + v.place + '</span><span class="about-ft-season">' + v.season + '</span></div>';
+    h += '<div class="about-ft-avs">';
+    for (var a = 0; a < Math.min(5, v.count); a++) {
+      h += '<div class="about-ft-av" style="background:url(' + ftPhotos[a % ftPhotos.length] + ') center/cover"></div>';
+    }
+    h += '</div>';
+    h += '<div class="about-ft-count">' + v.count + '位战友同行</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+
+  /* Future destinations */
+  h += '<div class="about-ft-h" style="margin-top:10px">即将出发</div>';
+  h += '<div class="about-ft-grid">';
+  var futurePlaces = ['威海','青岛','云南','大理','成都','重庆','桂林','西安','洛阳','哈尔滨','厦门','武夷山','武汉','南京','太原'];
+  futurePlaces.forEach(function(p) {
+    h += '<div class="about-ft-card about-ft-future"><div class="about-ft-place">' + p + '</div><div class="about-ft-season" style="color:rgba(255,255,255,0.4)">计划中</div></div>';
+  });
+  h += '</div>';
+
   /* Photo wall */
-  h += '<div class="about-photo-h">战友风采 · 已累计接待5000+人</div>';
+  h += '<div class="about-photo-h" style="margin-top:14px">战友风采 · 已累计接待5000+人</div>';
   h += '<div id="photo-wall-canvas"></div>';
   
   /* Story */

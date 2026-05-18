@@ -315,6 +315,16 @@ img{max-width:100%;display:block}
   padding:20px 24px;text-align:center;margin:0 0 6px
 }
 #s2-promise *{color:#fff}
+/* Sign-in card (S2) */
+#s2-signin{background:#fff;border-radius:12px;padding:12px 16px;margin:0 0 8px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,0.03);border:1px solid #f0ece4}
+#s2-signin .si-icon{width:40px;height:40px;border-radius:50%;background:linear-gradient(145deg,#f0b87a,#d4733e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.65rem;flex-shrink:0}
+#s2-signin .si-info{flex:1;min-width:0}
+#s2-signin .si-t{font-size:0.55rem;font-weight:600;color:#2d2a24}
+#s2-signin .si-d{font-size:0.48rem;color:#8a7a6a;margin-top:1px}
+#s2-signin .si-btn{background:linear-gradient(145deg,#f0b87a,#d4733e);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:0.5rem;font-family:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:transform 0.2s}
+#s2-signin .si-btn:active{transform:scale(0.95)}
+#s2-signin .si-btn.done{background:#e0d8d0;color:#8a7a6a}
+#s2-signin .si-strk{font-size:0.42rem;color:#c4956a;white-space:nowrap}
 .prom-badge{
   display:inline-block;padding:3px 14px;background:rgba(196,149,106,0.2);
   border:1px solid rgba(196,149,106,0.3);border-radius:14px;
@@ -1167,6 +1177,7 @@ img{max-width:100%;display:block}
   <div class="scr-inner">
     <div id="s2-ticker"><span class="lb">小喇叭</span><span class="tx" id="ticker-tx"></span></div>
     <div id="s2-promise"></div>
+    <div id="s2-signin"></div>
     <div id="s2-circles"></div>
     <div id="s2-links"></div>
   </div>

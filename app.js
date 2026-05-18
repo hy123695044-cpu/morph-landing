@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded',function(){
   /* Render new inline sections */
   renderStats();
   renderPromise();
+  renderSignIn();
   renderPainPoints();
   renderStayAccordion();
   renderCommunityPreview();
@@ -614,11 +615,23 @@ function renderCommunitySub() {
   var cm = C.community;
   var h = '';
 
-  /* Hero - subtle交友 theme */
-  h += '<div class="com-hero"><div class="com-hero-t">🌅 战友俱乐部</div><div class="com-hero-d">找同好 · 聊心事 · 约活动 — 这里是大家的线上小院</div></div>';
+  /* Hero */
+  h += '<div class="com-hero"><div class="com-hero-t">战友俱乐部</div><div class="com-hero-d">找同好 · 聊心事 · 约活动 — 这里是大家的线上小院</div></div>';
 
-  /* Online count */
-  h += '<div class="com-online"><div class="com-online-dot"></div><span class="com-online-n">' + (cm.onlineUsers ? cm.onlineUsers.length * 3 + 18 : 28) + '</span><span class="com-online-l">位战友在线</span></div>';
+  /* Dynamic online count */
+  var onlineBase = cm.onlineUsers ? cm.onlineUsers.length * 3 + 18 : 28;
+  h += '<div class="com-online"><div class="com-online-dot"></div><span class="com-online-n" id="com-online-n">' + onlineBase + '</span><span class="com-online-l">位战友在线</span></div>';
+  /* Fluctuate online count */
+  (function(base){
+    var el = document.getElementById('com-online-n');
+    if (!el) return;
+    var val = base;
+    setInterval(function(){
+      val += (Math.random() - 0.5) * 4;
+      val = Math.max(base - 5, Math.min(base + 10, val));
+      el.textContent = Math.round(val);
+    }, 3000);
+  })(onlineBase);
 
   /* Online avatars row */
   if (cm.onlineUsers) {
@@ -1078,6 +1091,28 @@ function renderPromise() {
   h += '<div class="prom-h">' + p.headline + '</div>';
   h += '<div class="prom-sub">' + p.subhead + '</div>';
   el.innerHTML = h;
+}
+
+/* Sign-in / check-in for Screen 2 */
+function renderSignIn() {
+  var el = document.getElementById('s2-signin');
+  if (!el) return;
+  var checked = localStorage.getItem('signin_today') === new Date().toDateString();
+  el.innerHTML =
+    '<div class="si-icon">✓</div>' +
+    '<div class="si-info"><div class="si-t">每日签到' + (checked ? ' · 已签到' : '') + '</div><div class="si-d">' + (checked ? '明天再来，保持连胜！' : '签到赚粮票，连续签到奖励更多') + '</div></div>' +
+    '<button class="si-btn' + (checked ? ' done' : '') + '" onclick="doSignIn(this)">' + (checked ? '已签到' : '签到') + '</button>' +
+    '<span class="si-strk">🔥 连续' + (parseInt(localStorage.getItem('signin_streak')||'0')) + '天</span>';
+}
+
+function doSignIn(btn) {
+  var today = new Date().toDateString();
+  if (localStorage.getItem('signin_today') === today) return;
+  localStorage.setItem('signin_today', today);
+  var streak = parseInt(localStorage.getItem('signin_streak')||'0') + 1;
+  localStorage.setItem('signin_streak', streak);
+  renderSignIn();
+  alert('🎉 签到成功！已连续签到' + streak + '天，获得' + (10 + streak) + '工分');
 }
 
 function renderStayAccordion() {

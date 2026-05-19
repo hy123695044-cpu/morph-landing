@@ -395,14 +395,28 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   var sm = document.getElementById('s2-modules');
   if(sm && C.modules){
-    var mh = '<div class="s2-acc-h" onclick="toggleS2Accordion(\'mods\')"><span class="s2-acc-lb">全部服务</span><span class="s2-acc-a">›</span></div>';
-    mh += '<div class="s2-acc-b" id="s2-acc-mods"><div class="mod-grid mod-grid-s2">';
+    var mh = '<div class="s2-mod-bar">';
     C.modules.forEach(function(m, i) {
-      mh += '<div class="mod-acc" onclick="openSubpage(\'' + m.id + '\')"><div class="mod-acc-h" style="flex-direction:column;text-align:center;padding:10px 4px"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span><div class="mod-acc-info"><span class="mod-acc-n">' + m.name + '</span><span class="mod-acc-sub">' + m.desc + '</span></div></div></div>';
+      mh += '<div class="s2-mod-item" onclick="toggleS2ModMenu(' + i + ')"><div class="mod-acc-ico">' + (_accIcons[i]||'·') + '</div><div class="s2-mod-name">' + m.name + '</div></div>';
     });
-    mh += '</div></div>';
+    mh += '</div>';
+    C.modules.forEach(function(m, i) {
+      var links = _accLinks[m.id] || [];
+      mh += '<div class="s2-mod-menu" id="s2-mod-menu-' + i + '">';
+      links.forEach(function(l) {
+        mh += '<span class="s2-mod-link" onclick="openSubpage(\'' + m.id + '\')">' + l + '</span>';
+      });
+      mh += '</div>';
+    });
     sm.innerHTML = mh;
   }
+  window.toggleS2ModMenu = function(idx) {
+    var menus = document.querySelectorAll('.s2-mod-menu');
+    menus.forEach(function(m, i) {
+      if (i === idx) { m.classList.toggle('open'); }
+      else { m.classList.remove('open'); }
+    });
+  };
 
   /* Toggle accordion function */
   window.toggleS2Accordion = function(id) {

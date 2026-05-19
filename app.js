@@ -1,13 +1,23 @@
 var C = window.CONTENT;
 
 /* Shared placeholder avatars (Chinese surname initials) - replace with real photos later */
-var _avatarColors = ['#d4733e','#7a9a5a','#c4956a','#6a9ac8','#b88a6a','#5a9a8a','#d48a8a','#8a7a9a'];
-var _avatarNames = ['王','张','李','刘','陈','赵','吴','周','孙','钱','郑','冯','蒋','沈','韩','杨','朱','秦','许','何','吕','施','孔','曹','严','华','金','魏','陶','姜'];
 var _photos = [];
-for(var _i=0;_i<_avatarNames.length;_i++){
-  var _c = _avatarColors[_i%_avatarColors.length];
-  var _n = _avatarNames[_i];
-  _photos.push('data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect width="80" height="80" rx="40" fill="' + _c + '"/><text x="40" y="45" text-anchor="middle" fill="white" font-size="28" font-weight="600" font-family="sans-serif">' + _n + '</text></svg>'));
+/* Generate nice avatar icons: 兵姐-themed */
+var _avatarStyles = [
+  {char:'兵',bg:'linear-gradient(145deg,#c4956a,#d4733e)'},
+  {char:'姐',bg:'linear-gradient(145deg,#d4733e,#c4956a)'},
+  {char:'战',bg:'linear-gradient(145deg,#7a9a5a,#5a8a4a)'},
+  {char:'友',bg:'linear-gradient(145deg,#5a9a8a,#4a8a7a)'},
+  {char:'家',bg:'linear-gradient(145deg,#6a9ac8,#5a8ab8)'},
+  {char:'竹',bg:'linear-gradient(145deg,#5a8a4a,#7aba6a)'},
+  {char:'康',bg:'linear-gradient(145deg,#d4a86a,#c08850)'},
+  {char:'养',bg:'linear-gradient(145deg,#b88a6a,#a87a5a)'},
+  {char:'乐',bg:'linear-gradient(145deg,#d48a8a,#c47a7a)'},
+  {char:'安',bg:'linear-gradient(145deg,#8aaa70,#7a9a5a)'}
+];
+for(var _i=0;_i<30;_i++){
+  var _s = _avatarStyles[_i%_avatarStyles.length];
+  _photos.push('data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><defs><linearGradient id="g"><stop offset="0%" stop-color="' + _s.bg.split(',')[0].replace('linear-gradient(','').replace(')','').trim() + '"/><stop offset="100%" stop-color="' + _s.bg.split(',')[1].trim() + '"/></linearGradient></defs><rect width="80" height="80" rx="40" fill="url(#g)"/><text x="40" y="45" text-anchor="middle" fill="white" font-size="28" font-weight="600" font-family="sans-serif">' + _s.char + '</text></svg>'));
 }
 
 /* ===== 1. HERO PARTICLES (glowing dots) ===== */
@@ -592,6 +602,22 @@ function openCourseDetail(id) {
   if (!body || !title) return;
   title.textContent = course.title;
   var h = '<div class="cd-cover" style="background-image:url(' + course.cover + ')"></div>';
+  /* Video/Audio player area */
+  h += '<div class="cd-player" id="cd-player-' + course.id + '" style="' + (course.video ? '' : 'display:none') + '">';
+  h += '<div class="cd-player-bar"><span id="cd-player-label">播放：第1课</span><span id="cd-player-status">点击下方课程开始学习</span></div>';
+  h += '<div class="cd-player-inner">';
+  if (course.video) {
+    if (course.video.indexOf('bilibili') > -1) {
+      h += '<iframe src="' + course.video + '" style="width:100%;height:200px;border:none;border-radius:8px" allowfullscreen></iframe>';
+    } else {
+      h += '<video style="width:100%;border-radius:8px" controls><source src="' + course.video + '" type="video/mp4"></video>';
+    }
+  } else if (course.audio) {
+    h += '<audio style="width:100%" controls><source src="' + course.audio + '" type="audio/mpeg"></audio>';
+  } else {
+    h += '<div style="text-align:center;padding:20px;color:#8a7a6a;font-size:0.45rem">🎬 暂无视频，讲师上传后将自动显示</div>';
+  }
+  h += '</div></div>';
   h += '<div class="cd-body">';
   h += '<div class="cd-h"><div class="cd-t">' + course.title + '</div>';
   h += course.price === 0 ? '<span class="cd-pr free">免费</span>' : '<span class="cd-pr">' + course.price + '粮票</span>';
@@ -600,8 +626,8 @@ function openCourseDetail(id) {
   h += '</div><div class="cd-desc">' + course.full + '</div>';
   /* Course lessons list */
   var lessons = [
-    '第1课 · ' + course.title + '：入门导学（' + (course.price===0?'可看':'试看') + '）',
-    '第2课 · ' + (course.teacher||'兵姐') + '手把手教学：基础操作（' + (course.price===0?'可看':'试看') + '）',
+    '第1课 · ' + course.title + '：入门导学',
+    '第2课 · ' + (course.teacher||'兵姐') + '手把手教学：基础操作',
     '第3课 · 实战演练：案例讲解',
     '第4课 · 进阶技巧与应用',
     '第5课 · 综合实操与答疑',
@@ -611,7 +637,7 @@ function openCourseDetail(id) {
   h += '<div class="cd-inc-h">课程目录 · ' + course.lessons + '节课</div><div class="cd-inc">';
   lessons.forEach(function(lesson, li) {
     var isFree = course.price === 0 || li < 2;
-    h += '<div class="cd-lesson' + (isFree?' cd-lesson-free':'') + '"><span class="cd-lesson-n">' + (li+1) + '</span><span class="cd-lesson-t">' + lesson + '</span><span class="cd-lesson-tag">' + (isFree?'免费':'🔒') + '</span></div>';
+    h += '<div class="cd-lesson' + (isFree?' cd-lesson-free':'') + '" onclick="playCourseLesson(' + course.id + ',' + (li+1) + ',\'' + lesson.replace(/'/g,"\\'") + '\')"><span class="cd-lesson-n">' + (li+1) + '</span><span class="cd-lesson-t">' + lesson + '</span><span class="cd-lesson-tag">' + (isFree?'免费':'🔒') + '</span></div>';
   });
   h += '</div>';
   /* Course includes */
@@ -1492,6 +1518,36 @@ function kfAnswer(el) {
 function kfBack() {
   document.getElementById('kf-qs').style.display = 'flex';
   document.getElementById('kf-ans').style.display = 'none';
+}
+
+/* Play course lesson (video/audio) */
+function playCourseLesson(courseId, lessonNum, lessonName) {
+  var player = document.getElementById('cd-player-' + courseId);
+  var label = document.getElementById('cd-player-label');
+  if (player) player.style.display = 'block';
+  if (label) label.textContent = '播放：' + lessonName;
+}
+
+/* Share button */
+function shareSite() {
+  var url = window.location.href;
+  var text = '兵姐康养旅居 - 后半生的另一种活法';
+  if (navigator.share) {
+    navigator.share({title: text, text: text, url: url}).catch(function(){});
+  } else {
+    /* Fallback: copy link */
+    var ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('✅ 链接已复制！分享给好友，TA 注册后你将获得粮票奖励！');
+  }
+}
+/* Check referral */
+if (window.location.search.indexOf('ref=') > -1) {
+  localStorage.setItem('referral', window.location.search.split('ref=')[1].split('&')[0]);
 }
 
 /* ===== CHAT & AUTH ===== */

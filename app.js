@@ -1223,10 +1223,15 @@ function renderStayBookInline() {
     var name = document.getElementById('b-name').value;
     var phone = document.getElementById('b-phone').value;
     if (!name || !phone) { alert('请填写联系人和电话'); return; }
-    var data = {dateIn:document.getElementById('b-date-in').value,dateOut:document.getElementById('b-date-out').value,room:document.getElementById('b-room').value,guests:document.getElementById('b-guests').value,name:name,phone:phone,time:new Date().toISOString()};
+    var data = {dateIn:document.getElementById("b-date-in").value,dateOut:document.getElementById("b-date-out").value,room:document.getElementById("b-room").value,guests:document.getElementById("b-guests").value,name:name,phone:phone};
     var list = JSON.parse(localStorage.getItem('bookings')||'[]');
     list.push(data);
     localStorage.setItem('bookings', JSON.stringify(list));
+    var btn = document.querySelector(".s4-submit");
+    if(btn)btn.textContent="提交中...";
+    fetch("http://YOUR_SERVER_IP:3000/api/booking",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)})
+      .then(function(r){return r.json()}).then(function(d){alert(d.msg);if(btn)btn.textContent="提交预约"})
+      .catch(function(){alert("✅ 预约成功！已保存本地");if(btn)btn.textContent="提交预约"});
     alert('✅ 预约成功！兵姐会尽快联系您确认。');
   };
   return h;

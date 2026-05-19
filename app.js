@@ -384,17 +384,33 @@ document.addEventListener('DOMContentLoaded',function(){
     }).join('');
   }
 
-  /* S2: bottom links */
+  /* S2 accordions: 我的 + 全部服务 */
   var bl=document.getElementById('s2-links');
   if(bl){
     bl.innerHTML=
-      '<div class="s2-links-lb">我的</div>'+
-      '<button class="s2-link-btn" onclick="openSubpage(\'s-tickets\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#d4a86a,#c08850);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">券</span></span><div><div class="ln">粮票中心</div><div class="ld">等级 · 赚粮票 · 消费指南</div></div></button>'+
+      '<div class="s2-acc-h" onclick="toggleS2Accordion(\'my\')"><span class="s2-acc-lb">我的</span><span class="s2-acc-a">›</span></div>'+
+      '<div class="s2-acc-b" id="s2-acc-my"><button class="s2-link-btn" onclick="openSubpage(\'s-tickets\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#d4a86a,#c08850);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">券</span></span><div><div class="ln">粮票中心</div><div class="ld">等级 · 赚粮票 · 消费指南</div></div></button>'+
       '<button class="s2-link-btn" onclick="openSubpage(\'s-community\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#e8935a,#d4733e);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">赏</span></span><div><div class="ln">悬赏任务</div><div class="ld">帮个小忙赚粮票</div></div></button>'+
-      '<button class="s2-link-btn" onclick="openSubpage(\'s-about\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#9aba7a,#7a9a5a);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">人</span></span><div><div class="ln">关于兵姐</div><div class="ld">退伍老兵 · 足迹遍布全国</div></div></button>';
+      '<button class="s2-link-btn" onclick="openSubpage(\'s-about\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#9aba7a,#7a9a5a);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">人</span></span><div><div class="ln">关于兵姐</div><div class="ld">退伍老兵 · 足迹遍布全国</div></div></button></div>';
+  }
+  var sm = document.getElementById('s2-modules');
+  if(sm && C.modules){
+    var mh = '<div class="s2-acc-h" onclick="toggleS2Accordion(\'mods\')"><span class="s2-acc-lb">全部服务</span><span class="s2-acc-a">›</span></div>';
+    mh += '<div class="s2-acc-b" id="s2-acc-mods"><div class="mod-grid mod-grid-s2">';
+    C.modules.forEach(function(m, i) {
+      mh += '<div class="mod-acc" onclick="openSubpage(\'' + m.id + '\')"><div class="mod-acc-h" style="flex-direction:column;text-align:center;padding:10px 4px"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span><div class="mod-acc-info"><span class="mod-acc-n">' + m.name + '</span><span class="mod-acc-sub">' + m.desc + '</span></div></div></div>';
+    });
+    mh += '</div></div>';
+    sm.innerHTML = mh;
   }
 
-  /* Render accordion modules */
+  /* Toggle accordion function */
+  window.toggleS2Accordion = function(id) {
+    var b = document.getElementById('s2-acc-' + id);
+    if(b) b.classList.toggle('open');
+  };
+
+  /* Render old mod-acc-container (for standalone accordion if needed) */
   renderAccordion();
 
   /* Render new inline sections */

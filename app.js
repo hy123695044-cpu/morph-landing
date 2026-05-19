@@ -394,20 +394,7 @@ document.addEventListener('DOMContentLoaded',function(){
       '<div class="s2-btn-3" onclick="openSubpage(\'s-about\')"><span class="s2-ico-3" style="background:linear-gradient(145deg,#9aba7a,#7a9a5a)">人</span><span class="s2-t-3">关于兵姐</span></div></div>';
   }
   var sm = document.getElementById('s2-modules');
-  if(sm && C.modules){
-    var mh = '<div class="s2-row-5">';
-    C.modules.forEach(function(m, i) {
-      mh += '<div class="s2-btn-5" onclick="openSubpage(\'' + m.id + '\')"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span><span class="s2-t-5">' + m.name + '</span></div>';
-    });
-    mh += '</div>';
-    sm.innerHTML = mh;
-  }
-
-  /* Toggle accordion function */
-  window.toggleS2Accordion = function(id) {
-    var b = document.getElementById('s2-acc-' + id);
-    if(b) b.classList.toggle('open');
-  };
+  if(sm) sm.innerHTML = '';
 
   /* Render old mod-acc-container (for standalone accordion if needed) */
   renderAccordion();
@@ -1096,28 +1083,26 @@ var _accLinks = {
 };
 
 function renderAccordion() {
-  /* Render in both S2 modules container and standalone section */
-  var targets = ['s2-modules', 'mod-acc-container'];
-  targets.forEach(function(tid) {
-    var container = document.getElementById(tid);
-    if (!container || !C.modules) return;
-    /* S2 gets compact style, standalone gets full grid */
-    var isS2 = tid === 's2-modules';
-    var h = isS2 ? '<div class="s2-mod-head">全部服务</div>' : '';
-    h += '<div class="mod-grid' + (isS2 ? ' mod-grid-s2' : '') + '">';
-    C.modules.forEach(function(m, i) {
-      var links = _accLinks[m.id] || [];
-      var isLast = i === C.modules.length - 1;
-      h += '<div class="mod-acc' + (isLast ? ' mod-grid-5' : '') + '" id="mod-acc-' + i + '-' + tid + '">';
-      h += '<div class="mod-acc-h" onclick="openSubpage(\'' + m.id + '\')">';
-      h += '<div class="mod-acc-l"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span>';
-      h += '<div class="mod-acc-info"><span class="mod-acc-n">' + m.name + '</span><span class="mod-acc-sub">' + m.desc + '</span></div></div>';
-      h += '<span class="mod-acc-a">›</span>';
-      h += '</div>';
-    });
+  var container = document.getElementById('mod-acc-container');
+  if (!container || !C.modules) return;
+  var h = '<div class="mod-grid">';
+  C.modules.forEach(function(m, i) {
+    var links = _accLinks[m.id] || [];
+    var isLast = i === C.modules.length - 1;
+    h += '<div class="mod-acc' + (isLast ? ' mod-grid-5' : '') + '" id="mod-acc-' + i + '">';
+    h += '<div class="mod-acc-h" onclick="toggleModAcc(' + i + ')">';
+    h += '<div class="mod-acc-l"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span>';
+    h += '<div class="mod-acc-info"><span class="mod-acc-n">' + m.name + '</span><span class="mod-acc-sub">' + m.desc + '</span></div></div>';
+    h += '<span class="mod-acc-a">›</span>';
     h += '</div>';
-    container.innerHTML = h;
+    h += '<div class="mod-acc-b"><div class="mod-acc-links">';
+    links.forEach(function(l) {
+      h += '<span class="mod-acc-link" onclick="openSubpage(\'' + m.id + '\')">' + l + '</span>';
+    });
+    h += '</div></div></div>';
   });
+  h += '</div>';
+  container.innerHTML = h;
 }
 
 function toggleModAcc(idx) {

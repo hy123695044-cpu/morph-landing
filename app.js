@@ -1453,9 +1453,45 @@ function afterAuth() {
   closeAuth();
   toggleChat();
   addChatMsg({ name: '系统', text: '欢迎 ' + (_chatUser._nick||_chatUser.displayName||_chatUser.email) + '！', time: new Date().toLocaleTimeString() });
-  /* Update nav login button */
+  /* Save session to localStorage */
+  var userData = {email:_chatUser.email||'',nick:_chatUser._nick||_chatUser.displayName||'',uid:_chatUser.uid||'demo'};
+  localStorage.setItem('chatUser', JSON.stringify(userData));
+  updateUserUI();
+}
+
+/* Auto-restore session on page load */
+(function(){
+  var saved = localStorage.getItem('chatUser');
+  if(saved){
+    try{
+      var d = JSON.parse(saved);
+      _chatUser = {email:d.email,_nick:d.nick,uid:d.uid};
+      /* Firebase may restore auth automatically */
+      if(_firebaseReady){
+        firebase.auth().onAuthStateChanged(function(user){
+          if(user) _chatUser = user;
+        });
+      }
+    }catch(e){}
+  }
+})();
+
+/* Update login button and user badge */
+function updateUserUI() {
   var navLogin = document.getElementById('nav-login');
-  if (navLogin) navLogin.textContent = (_chatUser._nick||'我') + '✓';
+  if (navLogin) {
+    if(_chatUser) navLogin.innerHTML = '<span style="font-weight:600">' + (_chatUser._nick||'我') + '</span>';
+    else navLogin.innerHTML = '登录';
+  }
+}
+
+/* Show user profile card */
+function showUserInfo() {
+  if(!_chatUser) { openAuth(); return; }
+  var gongfen = parseInt(localStorage.getItem('signin_streak')||'0') * 10 + 50;
+  var liangpiao = Math.floor(gongfen / 100);
+  var level = liangpiao < 5 ? '青铜战友' : liangpiao < 15 ? '白银战友' : liangpiao < 30 ? '黄金战友' : '钻石战友';
+  alert('👤 ' + (_chatUser._nick||'战友') + '\n📊 等级：' + level + '\n💰 工分：' + gongfen + '\n🎫 粮票：' + liangpiao);
 }
 
 function addChatMsg(msg, isMe) {

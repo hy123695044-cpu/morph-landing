@@ -1278,7 +1278,7 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
 <nav id="top-nav">
   <a class="nav-logo" href="#">兵姐<span>·</span>养心栖居</a>
   <button id="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
-  <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="openAuth()">登录</span></div>
+  <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="if(_chatUser){showUserInfo()}else{openAuth()}">登录</span></div>
   <ul id="nav-menu">
 	    <li><a class="nav-link active" href="#s1">首页</a></li>
 	    <li><a class="nav-link" href="#s-15">背书</a></li>

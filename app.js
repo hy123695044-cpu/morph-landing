@@ -411,7 +411,6 @@ document.addEventListener('DOMContentLoaded',function(){
   renderStats();
   renderPromise();
   renderSignIn();
-  renderPainPoints();
   renderStayAccordion();
   renderCommunityPreview();
   renderShopPreview();

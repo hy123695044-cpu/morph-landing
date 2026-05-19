@@ -161,11 +161,11 @@ img{max-width:100%;display:block}
 
 /* S1.5 stats */
 .s15-stats{
-  display:flex;gap:24px;justify-content:center;align-items:center;
-  margin-top:20px;padding:18px 24px;
+  display:flex;gap:10px;justify-content:center;align-items:center;
+  margin-top:20px;padding:14px 16px;
   background:rgba(255,255,255,0.03);border-radius:14px;
   border:1px solid rgba(196,149,106,0.08);
-  position:relative;z-index:1
+  position:relative;z-index:1;flex-wrap:wrap
 }
 .s15-stat-item{text-align:center}
 .s15-stat-n{
@@ -1275,6 +1275,8 @@ body.loaded{opacity:1}
 	    <li><a class="nav-link" href="#s2">服务</a></li>
 	    <li><a class="nav-link" href="#s7">安吉</a></li>
 	    <li><a class="nav-link" style="cursor:pointer" onclick="openSearch()">搜索</a></li>
+		    <li><a class="nav-link" style="cursor:pointer" onclick="shareSite()">🎁分享</a></li>
+		    <li><a class="nav-link" style="cursor:pointer" onclick="openAuth()">登录</a></li>
 	    <li><a class="nav-link" onclick="openSubpage('s-about')" style="cursor:pointer;color:#c4956a!important">兵姐</a></li>
 	  </ul>
 </nav>

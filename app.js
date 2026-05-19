@@ -1448,11 +1448,13 @@ function afterAuth() {
   closeAuth();
   toggleChat();
   addChatMsg({ name: '系统', text: '欢迎 ' + (_chatUser._nick||_chatUser.displayName||_chatUser.email) + '！', time: new Date().toLocaleTimeString() });
-  /* Update hero login card */
+  /* Update hero login card & nav */
   var authCard = document.getElementById('s1-auth');
   if (authCard) {
     authCard.innerHTML = '<div class="s1-auth-av">😊</div><div class="s1-auth-info"><div class="s1-auth-t">' + (_chatUser._nick||'战友') + '</div><div class="s1-auth-d">已登录 · 去聊天室看看</div></div><button class="s1-auth-btn" onclick="toggleChat()">进入聊天</button>';
   }
+  var navLogin = document.querySelector('.nav-login');
+  if (navLogin) navLogin.textContent = (_chatUser._nick||'我') + '✓';
 }
 
 function addChatMsg(msg, isMe) {

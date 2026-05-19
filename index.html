@@ -293,17 +293,6 @@ img{max-width:100%;display:block}
 .s2-link-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.06)}
 #s2-links button:active{transform:scale(0.97)}
 #s2-modules{margin-top:0}
-/* Horizontal module bar with inline dropdowns */
-.s2-mod-bar{display:flex;gap:4px;margin-bottom:0}
-.s2-mod-item{flex:1;background:#fff;border:1px solid #f0ece4;border-radius:8px;padding:8px 2px;text-align:center;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:3px}
-.s2-mod-item:hover{background:#faf8f5;border-color:#c4956a}
-.s2-mod-item .mod-acc-ico{width:28px;height:28px;font-size:0.5rem}
-.s2-mod-name{font-size:0.4rem;font-weight:600;color:#2d2a24;letter-spacing:0.5px}
-.s2-mod-menu{max-height:0;overflow:hidden;transition:max-height 0.3s ease,opacity 0.2s;opacity:0;display:flex;gap:4px;flex-wrap:wrap;padding:0}
-.s2-mod-menu.open{max-height:200px;opacity:1;padding:4px 0}
-.s2-mod-link{padding:5px 10px;background:rgba(255,255,255,0.85);border-radius:6px;font-size:0.42rem;color:#5a4a3a;cursor:pointer;transition:all 0.2s;border:1px solid #e8e0d8}
-.s2-mod-link:hover{background:#fff;border-color:#c4956a;color:#c4956a}
-@media(max-width:640px){.s2-mod-item{padding:6px 2px}.s2-mod-name{font-size:0.38rem}}
 .s2-link-icon{font-size:1.2rem;flex-shrink:0}
 #s2-links .ln, .s2-link-btn .ln{font-size:0.55rem;font-weight:600;color:#2d2a24;letter-spacing:1px}
 #s2-links .ld, .s2-link-btn .ld{font-size:0.5rem;color:#8a7a6a;margin-top:1px}
@@ -1269,8 +1258,7 @@ body.loaded, .subpage.open{opacity:1}
 #kf-foot:hover{background:#faf8f5}
 
 @media(min-width:820px){
-  .s2-mod-menu{position:absolute;z-index:5;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #f0ece4;padding:6px!important;max-width:300px}
-  #s2-modules{position:relative}
+  .s2-mod-menu{background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #f0ece4;padding:6px!important}
 }
 @media(max-width:820px){
   .tickets-grid{grid-template-columns:1fr}

@@ -669,7 +669,7 @@ function renderCommunitySub() {
 
   /* Dynamic online count */
   var onlineBase = cm.onlineUsers ? cm.onlineUsers.length * 3 + 18 : 28;
-  h += '<div class="com-online"><div class="com-online-dot"></div><span class="com-online-n" id="com-online-n">' + onlineBase + '</span><span class="com-online-l">位战友在线</span></div>';
+  h += '<div class="com-online"><div class="com-online-dot"></div><span class="com-online-n" id="com-online-n">' + (onlineBase * 10) + '</span><span class="com-online-l">位战友在线</span></div>';
   /* Fluctuate online count */
   (function(base){
     var el = document.getElementById('com-online-n');

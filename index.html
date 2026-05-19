@@ -1131,6 +1131,7 @@ img{max-width:100%;display:block}
 @keyframes fab-item-in{0%{opacity:0;transform:translateX(20px)}100%{opacity:1;transform:translateX(0)}}
 /* Hero login card */
 #chat-panel{position:fixed;bottom:90px;right:24px;width:340px;height:460px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.12);z-index:99;display:none;flex-direction:column;overflow:hidden;border:1px solid #f0ece4}
+@media(max-width:640px){#chat-panel{width:calc(100vw - 20px);height:calc(100vh - 120px);bottom:10px;right:10px;left:10px;border-radius:12px}}
 #chat-panel.open{display:flex}
 #chat-h{display:flex;align-items:center;padding:12px 14px;background:linear-gradient(135deg,#2d2a24,#4a6b4a);color:#fff;flex-shrink:0}
 #chat-h-t{flex:1;font-size:0.52rem;font-weight:600;letter-spacing:1px}
@@ -1468,12 +1469,12 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
   <div id="kf-body">
     <div class="kf-welcome">您好！我是兵姐的小助手，请问有什么可以帮您？</div>
     <div id="kf-qs">
-      <div class="kf-q" onclick="kfAnswer(this)">怎么报名课程？</div>
-      <div class="kf-q" onclick="kfAnswer(this)">粮票怎么获得？</div>
-      <div class="kf-q" onclick="kfAnswer(this)">民宿怎么预约？</div>
-      <div class="kf-q" onclick="kfAnswer(this)">有什么免费课程？</div>
-      <div class="kf-q" onclick="kfAnswer(this)">怎么联系兵姐？</div>
-      <div class="kf-q" onclick="kfAnswer(this)">AI工具怎么用？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">怎么报名课程</div>
+      <div class="kf-q" onclick="kfAnswer(this)">粮票怎么获得</div>
+      <div class="kf-q" onclick="kfAnswer(this)">民宿怎么预约</div>
+      <div class="kf-q" onclick="kfAnswer(this)">有什么免费课程</div>
+      <div class="kf-q" onclick="kfAnswer(this)">怎么联系兵姐</div>
+      <div class="kf-q" onclick="kfAnswer(this)">AI工具怎么用</div>
     </div>
     <div id="kf-ans" style="display:none"></div>
   </div>

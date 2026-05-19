@@ -1739,7 +1739,7 @@ function toggleDark() {
   document.body.classList.toggle('dark');
   localStorage.setItem('darkMode', document.body.classList.contains('dark') ? '1' : '0');
 }
-if (localStorage.getItem('darkMode') === '1') document.body.classList.add('dark');
+/* Dark mode disabled by default */
 
 /* ===== SEARCH ===== */
 function openSearch() {

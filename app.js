@@ -384,48 +384,24 @@ document.addEventListener('DOMContentLoaded',function(){
     }).join('');
   }
 
-  /* S2: 我的 + 全部服务 */
+  /* S2: 我的 + 全部服务 (简化版：点击直接跳转，无下拉) */
   var bl=document.getElementById('s2-links');
   if(bl){
     bl.innerHTML=
-      '<div class="s2-sec-h">我的</div>'+
-      '<div class="s2-my-row">'+
-      '<div class="s2-my-group"><div class="s2-my-item" onclick="toggleMyMenu(\'tickets\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#d4a86a,#c08850)">券</span><span class="s2-my-t">粮票中心</span></div><div class="s2-my-menu" id="s2-my-tickets"><span onclick="openSubpage(\'s-tickets\')">等级说明</span><span onclick="openSubpage(\'s-tickets\')">赚粮票攻略</span><span onclick="openSubpage(\'s-tickets\')">消费指南</span></div></div>'+
-      '<div class="s2-my-group"><div class="s2-my-item" onclick="toggleMyMenu(\'tasks\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#e8935a,#d4733e)">赏</span><span class="s2-my-t">悬赏任务</span></div><div class="s2-my-menu" id="s2-my-tasks"><span onclick="openSubpage(\'s-community\')">热门任务</span><span onclick="openSubpage(\'s-community\')">我的悬赏</span><span onclick="openSubpage(\'s-community\')">排行榜</span></div></div>'+
-      '<div class="s2-my-group"><div class="s2-my-item" onclick="toggleMyMenu(\'about\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#9aba7a,#7a9a5a)">人</span><span class="s2-my-t">关于兵姐</span></div><div class="s2-my-menu" id="s2-my-about"><span onclick="openSubpage(\'s-about\')">个人介绍</span><span onclick="openSubpage(\'s-about\')">兵姐的足迹</span><span onclick="openSubpage(\'s-about\')">联系兵姐</span></div></div>'+
-      '</div>';
+      '<div class="s2-row-3">'+
+      '<div class="s2-btn-3" onclick="openSubpage(\'s-tickets\')"><span class="s2-ico-3" style="background:linear-gradient(145deg,#d4a86a,#c08850)">券</span><span class="s2-t-3">粮票中心</span></div>'+
+      '<div class="s2-btn-3" onclick="openSubpage(\'s-community\')"><span class="s2-ico-3" style="background:linear-gradient(145deg,#e8935a,#d4733e)">赏</span><span class="s2-t-3">悬赏任务</span></div>'+
+      '<div class="s2-btn-3" onclick="openSubpage(\'s-about\')"><span class="s2-ico-3" style="background:linear-gradient(145deg,#9aba7a,#7a9a5a)">人</span><span class="s2-t-3">关于兵姐</span></div></div>';
   }
-  window.toggleMyMenu = function(id) {
-    document.querySelectorAll('.s2-my-menu').forEach(function(m){ m.classList.remove('open'); });
-    var m = document.getElementById('s2-my-' + id);
-    if(m) m.classList.toggle('open');
-  };
-
   var sm = document.getElementById('s2-modules');
   if(sm && C.modules){
-    var mh = '<div class="s2-sec-h">全部服务</div><div class="s2-mod-bar">';
+    var mh = '<div class="s2-row-5">';
     C.modules.forEach(function(m, i) {
-      mh += '<div class="s2-mod-item" onclick="toggleS2ModMenu(' + i + ')"><div class="mod-acc-ico">' + (_accIcons[i]||'·') + '</div><div class="s2-mod-name">' + m.name + '</div><span class="s2-mod-arrow">›</span></div>';
-    });
-    mh += '</div><div class="s2-mod-menus">';
-    C.modules.forEach(function(m, i) {
-      var links = _accLinks[m.id] || [];
-      mh += '<div class="s2-mod-menu" id="s2-mod-menu-' + i + '">';
-      links.forEach(function(l) {
-        mh += '<span class="s2-mod-link" onclick="openSubpage(\'' + m.id + '\')">' + l + '</span>';
-      });
-      mh += '</div>';
+      mh += '<div class="s2-btn-5" onclick="openSubpage(\'' + m.id + '\')"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span><span class="s2-t-5">' + m.name + '</span></div>';
     });
     mh += '</div>';
     sm.innerHTML = mh;
   }
-  window.toggleS2ModMenu = function(idx) {
-    var menus = document.querySelectorAll('.s2-mod-menu');
-    menus.forEach(function(m, i) {
-      if (i === idx) { m.classList.toggle('open'); }
-      else { m.classList.remove('open'); }
-    });
-  };
 
   /* Toggle accordion function */
   window.toggleS2Accordion = function(id) {

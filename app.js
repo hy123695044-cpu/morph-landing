@@ -1604,6 +1604,3 @@ window.addEventListener('scroll', function() {
 function scrollTop() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
-/* Page load animation */
-});

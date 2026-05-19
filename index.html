@@ -308,22 +308,23 @@ img{max-width:100%;display:block}
 #s3 .scr-desc{color:#8a7a6a;font-size:clamp(0.5rem,1.2vw,0.65rem);font-weight:500}
 .s3-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
 .pp-card{
-  background:#fff;border-radius:14px;padding:16px;
-  display:flex;align-items:flex-start;gap:14px;
+  background:#fff;border-radius:14px;padding:14px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
   box-shadow:0 2px 8px rgba(0,0,0,0.03);border:1px solid #f0ece4;
-  transition:transform 0.2s,box-shadow 0.2s
+  transition:transform 0.2s,box-shadow 0.2s;text-align:center
 }
 .pp-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.06)}
+.pp-ico{display:flex;justify-content:center}
 .pp-ico .pp-c{
   display:inline-flex;width:48px;height:48px;border-radius:50%;
   align-items:center;justify-content:center;
   font-size:0.65rem;font-weight:700;flex-shrink:0;
   background:rgba(196,149,106,0.1);color:#c4956a
 }
-.pp-body{min-width:0}
-.pp-t{font-size:0.6rem;font-weight:700;color:#2d2a24;margin-bottom:3px}
-.pp-d{font-size:0.55rem;color:#8a7a6a;margin-bottom:5px;line-height:1.7}
-.pp-s{font-size:0.52rem;color:#d4733e;line-height:1.7;padding:6px 12px;background:rgba(212,115,62,0.08);border-radius:8px;font-weight:600}
+.pp-body{width:100%}
+.pp-t{font-size:0.6rem;font-weight:700;color:#2d2a24;margin-bottom:3px;text-align:center}
+.pp-d{font-size:0.5rem;color:#8a7a6a;margin-bottom:5px;line-height:1.6;text-align:center}
+.pp-s{font-size:0.5rem;color:#d4733e;line-height:1.6;padding:6px 10px;background:#fff;border:1px solid #d4733e;border-radius:8px;font-weight:600;width:100%;box-sizing:border-box}
 
 /* Promise (in S2) */
 #s2-promise{
@@ -514,8 +515,8 @@ img{max-width:100%;display:block}
 }
 .sub-back{
   background:none;border:none;cursor:pointer;
-  font-size:0.52rem;color:#2d2a24;padding:6px 2px;display:flex;align-items:center;gap:2px;
-  font-family:inherit;font-weight:600;letter-spacing:1px
+  font-size:0.9rem;color:#2d2a24;padding:10px 12px;display:flex;align-items:center;gap:4px;
+  font-family:inherit;font-weight:700;letter-spacing:2px;min-width:60px
 }
 .sub-back:hover{color:#c4956a}
 .sub-title{font-size:0.55rem;font-weight:600;letter-spacing:2px;color:#2d2a24}
@@ -1242,6 +1243,10 @@ body.loaded{opacity:1}
   .mod-grid-5{max-width:100%}
   .sub1-rooms,.sub2-grid,.sub4-grid,.sub5-grid{grid-template-columns:1fr 1fr}
   .sub1-trips{grid-template-columns:1fr}
+  .s3-grid{grid-template-columns:1fr!important}
+  .sub-body{padding:0 12px 40px!important}
+  .s4-rooms,.s4-trips,.shop-grid{grid-template-columns:1fr!important}
+  .cd-cover{height:160px!important}
   .sub1-form-row{grid-template-columns:1fr}
   .sub3-layout{grid-template-columns:1fr}
   .sub3-side{display:none}

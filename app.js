@@ -30,12 +30,14 @@ for(var _i=0;_i<30;_i++){
   resize(); window.addEventListener('resize', resize);
   c.addEventListener('mousemove', function(e){mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true});
   c.addEventListener('mouseleave', function(){mouse.active=false});
-  var n = Math.min(80, Math.floor(window.innerWidth/12));
+  var isMobile = window.innerWidth < 640;
+  var n = isMobile ? 15 : Math.min(60, Math.floor(window.innerWidth/15));
   var cs = ['rgba(255,255,255,','rgba(255,220,180,','rgba(196,149,106,'];
   for(var i=0;i<n;i++) p.push({
     x:Math.random()*c.width,y:Math.random()*c.height,
     vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3-0.05,
-    r:Math.random()*2.5+0.8,op:Math.random()*0.35+0.15,
+    r:isMobile ? Math.random()*1.2+0.5 : Math.random()*2.5+0.8,
+    op:Math.random()*0.35+0.15,
     baseOp:Math.random()*0.35+0.15,
     color:cs[Math.floor(Math.random()*3)],
     ph:Math.random()*Math.PI*2, speed:0.008+Math.random()*0.015,
@@ -515,7 +517,7 @@ function renderStayBook() {
 
 function renderStayYard() {
   var h = '<div class="sub1-cta">';
-  h += '<div class="sub1-cta-t">小隐村 · 合作院子招募中</div>';
+  h += '<div class="sub1-cta-t">合作院子招募中</div>';
   h += '<div class="sub1-cta-d">在安吉竹林深处，有一个小村落正在寻找有缘人。如果你也想过「采菊东篱下」的生活，欢迎来坐坐。</div>';
   h += '<button class="sub1-btn" style="margin-top:10px">了解详情</button>';
   h += '</div>';
@@ -1216,12 +1218,22 @@ function renderStayRoomsInline() {
 }
 
 function renderStayBookInline() {
-  var h = '<div class="s4-book"><div class="s4-book-row"><div><label>入住</label><input type="date"></div><div><label>退房</label><input type="date"></div></div><div class="s4-book-row"><div><label>房型</label><select><option>竹景大床房</option><option>竹景双床房</option><option>全景套房</option></select></div><div><label>人数</label><select><option>1人</option><option>2人</option><option>3人</option><option>4人</option></select></div></div><div><label>联系人</label><input type="text" placeholder="姓名"></div><div style="margin-top:6px"><label>电话</label><input type="tel" placeholder="手机号"></div><button class="s4-submit">提交预约</button></div>';
+  var h = '<div class="s4-book"><div class="s4-book-row"><div><label>入住</label><input type="date" id="b-date-in"></div><div><label>退房</label><input type="date" id="b-date-out"></div></div><div class="s4-book-row"><div><label>房型</label><select id="b-room"><option>竹景大床房</option><option>竹景双床房</option><option>全景套房</option></select></div><div><label>人数</label><select id="b-guests"><option>1人</option><option>2人</option><option>3人</option><option>4人</option></select></div></div><div><label>联系人</label><input type="text" id="b-name" placeholder="姓名"></div><div style="margin-top:6px"><label>电话</label><input type="tel" id="b-phone" placeholder="手机号"></div><button class="s4-submit" onclick="submitBooking()">提交预约</button></div>';
+  window.submitBooking = function() {
+    var name = document.getElementById('b-name').value;
+    var phone = document.getElementById('b-phone').value;
+    if (!name || !phone) { alert('请填写联系人和电话'); return; }
+    var data = {dateIn:document.getElementById('b-date-in').value,dateOut:document.getElementById('b-date-out').value,room:document.getElementById('b-room').value,guests:document.getElementById('b-guests').value,name:name,phone:phone,time:new Date().toISOString()};
+    var list = JSON.parse(localStorage.getItem('bookings')||'[]');
+    list.push(data);
+    localStorage.setItem('bookings', JSON.stringify(list));
+    alert('✅ 预约成功！兵姐会尽快联系您确认。');
+  };
   return h;
 }
 
 function renderStayYardInline() {
-  return '<div class="s4-yard"><div class="s4-yard-t">小隐村 · 合作院子招募中</div><div class="s4-yard-d">在安吉竹林深处，有一个小村落正在寻找有缘人。如果你也想过「采菊东篱下」的生活，欢迎来坐坐。</div><button class="s4-yard-btn">了解详情</button></div>';
+  return '<div class="s4-yard"><div class="s4-yard-t">合作院子招募中</div><div class="s4-yard-d">在安吉竹林深处，有一个小村落正在寻找有缘人。如果你也想过「采菊东篱下」的生活，欢迎来坐坐。</div><button class="s4-yard-btn">了解详情</button></div>';
 }
 
 function renderStayTripsInline() {
@@ -1521,7 +1533,7 @@ setInterval(function(){
   var p = [], anim;
   function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
   resize(); window.addEventListener('resize', resize);
-  var n = 40;
+  var n = window.innerWidth < 640 ? 8 : 25;
   var cs = ['rgba(196,149,106,','rgba(255,220,180,','rgba(255,255,255,'];
   for(var i=0;i<n;i++) p.push({
     x:Math.random()*c.width,y:Math.random()*c.height,

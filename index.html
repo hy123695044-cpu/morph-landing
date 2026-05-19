@@ -1111,9 +1111,19 @@ img{max-width:100%;display:block}
 .ai-card-btn:active{transform:scale(0.96)}
 
 /* Chat button + panel + auth */
-#chat-btn{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;z-index:99;box-shadow:0 6px 24px rgba(196,149,106,0.5);transition:all 0.3s;animation:chat-pulse 2.5s ease-in-out infinite}
-@keyframes chat-pulse{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(196,149,106,0.5)}50%{transform:scale(1.08);box-shadow:0 8px 36px rgba(196,149,106,0.7)}}
-#chat-btn:hover{transform:scale(1.12)}
+#fab-main{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;z-index:99;box-shadow:0 6px 24px rgba(196,149,106,0.5);transition:all 0.3s;animation:fab-pulse 2.5s ease-in-out infinite}
+@keyframes fab-pulse{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(196,149,106,0.5)}50%{transform:scale(1.08);box-shadow:0 8px 36px rgba(196,149,106,0.7)}}
+#fab-main:hover{transform:scale(1.1)}
+#fab-icon{transition:transform 0.3s}
+#fab-main.open #fab-icon{transform:rotate(135deg)}
+#fab-menu{position:fixed;bottom:90px;right:24px;z-index:99;display:none;flex-direction:column;gap:6px}
+#fab-menu.open{display:flex}
+.fab-item{display:flex;align-items:center;gap:6px;background:#fff;border-radius:10px;padding:6px 10px 6px 6px;box-shadow:0 4px 16px rgba(0,0,0,0.08);cursor:pointer;transition:all 0.2s;animation:fab-item-in 0.25s ease-out both;border:1px solid #f0ece4}
+.fab-item:hover{transform:scale(1.05)}
+.fab-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0}
+.fab-lb{font-size:0.42rem;font-weight:600;color:#2d2a24;white-space:nowrap}
+@keyframes fab-item-in{0%{opacity:0;transform:translateX(20px)}100%{opacity:1;transform:translateX(0)}}
+/* Hero login card */
 #chat-panel{position:fixed;bottom:90px;right:24px;width:340px;height:460px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.12);z-index:99;display:none;flex-direction:column;overflow:hidden;border:1px solid #f0ece4}
 #chat-panel.open{display:flex}
 #chat-h{display:flex;align-items:center;padding:12px 14px;background:linear-gradient(135deg,#2d2a24,#4a6b4a);color:#fff;flex-shrink:0}
@@ -1147,12 +1157,6 @@ img{max-width:100%;display:block}
 #auth-btn:active{transform:scale(0.98)}
 
 /* AI客服 */
-#share-fab{position:fixed;bottom:100px;right:100px;width:52px;height:52px;border-radius:50%;background:linear-gradient(145deg,#e8935a,#d4733e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;z-index:99;box-shadow:0 4px 16px rgba(212,115,62,0.4);transition:all 0.3s;animation:share-pulse 2s ease-in-out infinite}
-@keyframes share-pulse{0%,100%{transform:scale(1);box-shadow:0 4px 16px rgba(212,115,62,0.4)}50%{transform:scale(1.08);box-shadow:0 6px 24px rgba(212,115,62,0.6)}}
-#share-fab:hover{transform:scale(1.12)}
-/* Video player */
-.cd-player{margin:10px 14px 0;background:rgba(0,0,0,0.04);border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.04)}
-.cd-player-bar{display:flex;justify-content:space-between;padding:8px 12px;font-size:0.42rem;color:#8a7a6a}
 .cd-player-inner{padding:0 8px 8px}
 #kf-btn{position:fixed;bottom:100px;right:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(145deg,#5a8a4a,#7aba6a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;z-index:99;box-shadow:0 6px 24px rgba(90,138,74,0.5);transition:all 0.3s;animation:kf-pulse 2s ease-in-out infinite}
 @keyframes kf-pulse{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(90,138,74,0.5)}50%{transform:scale(1.06);box-shadow:0 8px 36px rgba(90,138,74,0.7)}}
@@ -1161,31 +1165,6 @@ img{max-width:100%;display:block}
 /* Hero login card */
 .s1-share{position:absolute;bottom:70px;left:24px;z-index:4;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:12px;padding:8px 14px;border:1px solid rgba(255,255,255,0.9);box-shadow:0 4px 20px rgba(0,0,0,0.08);cursor:pointer;transition:all 0.3s;max-width:320px}
 .s1-share:hover{box-shadow:0 6px 28px rgba(0,0,0,0.12);transform:translateY(-2px)}
-.s1-share-ico{font-size:1rem;flex-shrink:0}
-.s1-share-t{font-size:0.42rem;color:#2d2a24;flex:1}
-.s1-share-btn{padding:4px 12px;background:linear-gradient(145deg,#e8935a,#d4733e);color:#fff;border:none;border-radius:6px;font-size:0.4rem;font-weight:600;cursor:pointer;white-space:nowrap}
-@media(max-width:640px){.s1-share{left:24px;right:24px;max-width:none;bottom:116px}.s1-auth{bottom:60px}}
-.s1-auth{position:absolute;bottom:70px;right:24px;z-index:4;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:14px;padding:10px 14px;border:1px solid rgba(255,255,255,0.9);box-shadow:0 4px 20px rgba(0,0,0,0.08);max-width:300px;transition:all 0.3s}
-.s1-auth:hover{box-shadow:0 6px 28px rgba(0,0,0,0.12);transform:translateY(-2px)}
-.s1-auth-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.s1-auth-info{flex:1;min-width:0}
-.s1-auth-t{font-size:0.5rem;font-weight:600;color:#2d2a24}
-.s1-auth-d{font-size:0.4rem;color:#8a7a6a}
-.s1-auth-btn{padding:6px 14px;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;border:none;border-radius:8px;font-size:0.45rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:transform 0.2s}
-.s1-auth-btn:active{transform:scale(0.95)}
-@media(max-width:640px){.s1-auth{left:24px;right:24px;max-width:none;bottom:60px}}
-
-#dark-btn{position:fixed;bottom:24px;right:100px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
-#search-btn{position:fixed;bottom:68px;right:100px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
-#dark-btn:hover,#search-btn:hover{background:#f5f2ec}
-#top-btn{position:fixed;bottom:68px;right:148px;width:36px;height:36px;border-radius:50%;background:#c4956a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.55rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:all 0.3s;opacity:0;pointer-events:none;transform:translateY(10px)}
-#top-btn.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-#search-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.4);display:none;padding:60px 20px}
-#search-overlay.open{display:block}
-#search-box{display:flex;gap:8px;max-width:500px;margin:0 auto 12px}
-#search-input{flex:1;padding:10px 14px;border:1px solid #e0d8d0;border-radius:10px;font-size:0.5rem;font-family:inherit;outline:none;background:#fff}
-#search-input:focus{border-color:#c4956a}
-#search-box button{padding:10px 16px;background:#fff;border:1px solid #e0d8d0;border-radius:10px;font-size:0.45rem;cursor:pointer;font-family:inherit;color:#2d2a24}
 #search-results{max-width:500px;margin:0 auto}
 .search-result{background:#fff;border-radius:8px;padding:10px;margin-bottom:4px;cursor:pointer;transition:background 0.2s;border:1px solid #f0ece4}
 .search-result:hover{background:#faf8f5}
@@ -1489,12 +1468,15 @@ body.loaded{opacity:1}
 </div>
 
 <!-- Chat button -->
-<div id="kf-btn" onclick="toggleKF()" title="AI小助手">👩‍🦰</div>
-<div id="share-fab" onclick="shareSite()" title="分享有奖">🎁</div>
-<div id="chat-btn" onclick="toggleChat()" title="战友聊天">💬</div>
-<div id="dark-btn" onclick="toggleDark()">🌙</div>
-<div id="top-btn" onclick="scrollTop()">↑</div>
-<div id="search-btn" onclick="openSearch()">⌕</div>
+<div id="fab-main" onclick="toggleFabMenu()"><span id="fab-icon">⚡</span></div>
+<div id="fab-menu">
+  <div class="fab-item" onclick="toggleChat()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#d4733e)">💬</span><span class="fab-lb">聊天</span></div>
+  <div class="fab-item" onclick="toggleKF()"><span class="fab-ico" style="background:linear-gradient(145deg,#5a8a4a,#7aba6a)">👩‍🦰</span><span class="fab-lb">客服</span></div>
+  <div class="fab-item" onclick="shareSite()"><span class="fab-ico" style="background:linear-gradient(145deg,#e8935a,#d4733e)">🎁</span><span class="fab-lb">分享</span></div>
+  <div class="fab-item" onclick="openSearch()"><span class="fab-ico" style="background:linear-gradient(145deg,#6a9ac8,#5a8ab8)">⌕</span><span class="fab-lb">搜索</span></div>
+  <div class="fab-item" onclick="toggleDark()"><span class="fab-ico" style="background:linear-gradient(145deg,#8a7a9a,#7a6a8a)">🌙</span><span class="fab-lb">暗色</span></div>
+  <div class="fab-item" onclick="scrollTop()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#b88a6a)">↑</span><span class="fab-lb">顶部</span></div>
+</div>
 <div id="kf-panel">
   <div id="kf-h"><span>🤖 AI小助手</span><span id="kf-close" onclick="toggleKF()">x</span></div>
   <div id="kf-body">

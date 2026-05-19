@@ -41,10 +41,16 @@ for(var _i=0;_i<30;_i++){
     ph:Math.random()*Math.PI*2, speed:0.008+Math.random()*0.015,
     trail:[]
   });
+  /* Pause when tab hidden for perf */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden && anim){cancelAnimationFrame(anim);anim=null}
+    else if(!document.hidden && !anim)loop();
+  });
   function loop(){
+    /* Mobile perf: reduce detail */
+    var isMobile = c.width < 640;
     ctx.clearRect(0,0,c.width,c.height);
     p.forEach(function(d){
-      /* Mouse tracking attraction */
       if(mouse.active){
         var dx=mouse.x-d.x, dy=mouse.y-d.y, dist=Math.sqrt(dx*dx+dy*dy);
         if(dist<300){
@@ -53,22 +59,17 @@ for(var _i=0;_i<30;_i++){
         }
       }
       d.x+=d.vx;d.y+=d.vy;d.ph+=d.speed;
-      /* Friction to keep movement smooth */
       d.vx*=0.995;d.vy*=0.995;
-      /* Random drift */
       d.vx+=(Math.random()-0.5)*0.008;d.vy+=(Math.random()-0.5)*0.008;
-      /* Boundary wrap with padding */
       if(d.x<-20)d.x=c.width+20;if(d.x>c.width+20)d.x=-20;
       if(d.y<-20)d.y=c.height+20;if(d.y>c.height+20)d.y=-20;
-      /* Opacity pulse */
       var po=d.baseOp*(0.55+0.45*Math.sin(d.ph));
-      /* Glow: outer halo */
-      ctx.beginPath();ctx.arc(d.x,d.y,d.r*4,0,Math.PI*2);
-      ctx.fillStyle=d.color+(po*0.06)+')';ctx.fill();
-      /* Glow: mid halo */
-      ctx.beginPath();ctx.arc(d.x,d.y,d.r*2,0,Math.PI*2);
-      ctx.fillStyle=d.color+(po*0.15)+')';ctx.fill();
-      /* Core dot */
+      if(!isMobile){ /* Desktop: full glow */
+        ctx.beginPath();ctx.arc(d.x,d.y,d.r*4,0,Math.PI*2);
+        ctx.fillStyle=d.color+(po*0.06)+')';ctx.fill();
+        ctx.beginPath();ctx.arc(d.x,d.y,d.r*2,0,Math.PI*2);
+        ctx.fillStyle=d.color+(po*0.15)+')';ctx.fill();
+      }
       ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
       ctx.fillStyle=d.color+po+')';ctx.fill();
     });
@@ -1367,6 +1368,18 @@ if (window.location.search.indexOf('ref=') > -1) {
 var _chatUser = null;
 var _chatMsgs = [];
 var _authMode = 'login';
+
+/* FAB menu toggle */
+function toggleFabMenu() {
+  var m = document.getElementById('fab-menu');
+  var b = document.getElementById('fab-main');
+  if (!m || !b) return;
+  m.classList.toggle('open');
+  b.classList.toggle('open');
+  /* Stagger animation delay for items */
+  var items = m.querySelectorAll('.fab-item');
+  items.forEach(function(el, i) { el.style.animationDelay = (i*0.04) + 's'; });
+}
 
 function toggleChat() {
   var p = document.getElementById('chat-panel');

@@ -1356,26 +1356,24 @@ function playCourseLesson(courseId, lessonNum, lessonName) {
 function shareSite() {
   var url = window.location.href;
   var text = '兵姐康养旅居 - 后半生的另一种活法';
-  /* Try Web Share API first */
+  var msg = '✅ 链接已复制！打开微信粘贴分享给好友，TA注册后双方都得粮票奖励！';
+  /* Try Web Share API (works in Chrome/Safari) */
   if (navigator.share) {
-    navigator.share({title: text, text: text, url: url}).catch(function(e){});
+    navigator.share({title: text, text: text, url: url}).catch(function(e){
+      /* User cancelled or failed - fallback to copy */
+      copyUrl(url, msg);
+    });
     return;
   }
-  /* Fallback: copy link */
+  copyUrl(url, msg);
+}
+function copyUrl(url, msg) {
   try {
-    navigator.clipboard.writeText(url).then(function() {
-      alert('✅ 链接已复制！分享给好友，TA注册后双方都得粮票奖励！');
-    }).catch(function() {
-      /* Final fallback */
+    navigator.clipboard.writeText(url).then(function() { alert(msg); }).catch(function() {
       var ta = document.createElement('textarea');
-      ta.value = url;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      alert('✅ 链接已复制！分享给好友，TA注册后双方都得粮票奖励！');
+      ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta); alert(msg);
     });
   } catch(e) {
     prompt('复制链接分享给好友：', url);

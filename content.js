@@ -97,7 +97,7 @@ window.CONTENT = {
     rooms: [
       { name: "竹景大床房", beds: "1.8m大床", capacity: "2人", area: "28m²", price: "128", desc: "推窗见竹海，夜听风入眠" },
       { name: "竹景双床房", beds: "1.2m×2", capacity: "2人", area: "32m²", price: "188", desc: "适合闺蜜/战友同住" },
-      { name: "全景套房", beds: "1.8m大床+榻", capacity: "4人", area: "52m²", price: "368", desc: "带独立茶室，家庭首选" }
+      { name: "全景套房", beds: "1.8m大床+榻", capacity: "4人", area: "52m²", price: "368", desc: "带独立茶室，家庭首选" ,img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400}q=60"}
     ],
     booking: {
       tips: "含双早·免费停车·可代订安吉白茶",

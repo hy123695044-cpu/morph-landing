@@ -1211,7 +1211,7 @@ function renderStayRoomsInline() {
   if (!C.stay.rooms) return '<div class="s4-empty">暂无房型信息</div>';
   var h = '<div class="s4-rooms">';
   C.stay.rooms.forEach(function(r) {
-    h += '<div class="s4-room"><div class="s4-room-n">' + r.name + '</div><div class="s4-room-info">' + r.beds + ' · ' + r.capacity + ' · ' + r.area + '</div><div class="s4-room-d">' + r.desc + '</div><div class="s4-room-pr">¥' + r.price + '<small>/晚</small></div></div>';
+    h += '<div class="s4-room"><div class="s4-room-img" style="background-image:url(' + (r.img||'') + ')"></div><div class="s4-room-n">' + r.name + '</div><div class="s4-room-info">' + r.beds + ' · ' + r.capacity + ' · ' + r.area + '</div><div class="s4-room-d">' + r.desc + '</div><div class="s4-room-pr">¥' + r.price + '<small>/晚</small></div></div>';
   });
   h += '</div>';
   return h;

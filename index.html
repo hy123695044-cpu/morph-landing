@@ -379,8 +379,8 @@ img{max-width:100%;display:block}
 .s4-room{
   background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);
   border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.06)
-}
 .s4-room-img{width:100%;height:120px;border-radius:6px;margin-bottom:8px;background-size:cover;background-position:center}
+}
 .s4-room-n{font-size:0.52rem;font-weight:600;color:#d4b88a!important;letter-spacing:2px;margin-bottom:2px}
 .s4-room-info{font-size:0.5rem;color:rgba(255,255,255,0.4)!important}
 .s4-room-d{font-size:0.5rem;color:rgba(255,255,255,0.5)!important;margin:4px 0;line-height:1.6}
@@ -1172,3 +1172,339 @@ img{max-width:100%;display:block}
 #kf-btn:hover{transform:scale(1.12)}
 /* Dark mode toggle, search, top button */
 /* Hero login card */
+.search-rd{font-size:0.42rem;color:#8a7a6a}
+/* Dark mode */
+body.dark{background:#1a1a1a;color:rgba(255,255,255,0.85)}
+body.dark #s2{background:#222 !important}
+body.dark #s3{background:#222 !important}
+body.dark #s7{background:#222 !important}
+body.dark #s-modules{background:#222 !important}
+body.dark .mod-acc{background:#2a2a2a !important;border-color:#333}
+body.dark .mod-acc-n{color:rgba(255,255,255,0.85) !important}
+body.dark .mod-acc-sub{color:rgba(255,255,255,0.4) !important}
+body.dark .s5-post-p,.dark .shop-card,.dark .pp-card,.dark .s6-p-item,.dark #s2-ticker,.dark .s2-link-btn{background:#2a2a2a !important;border-color:#333 !important}
+body.dark .s5-post-pn,.dark .shop-card-name,.dark .pp-t,.dark .s6-p-n,.dark #s2-links .ln{color:rgba(255,255,255,0.85) !important}
+body.dark .s5-post-pc,.dark .shop-card-desc,.dark .pp-d,.dark #s2-links .ld{color:rgba(255,255,255,0.5) !important}
+body.dark #s2-signin{background:#2a2a2a !important;border-color:#333 !important}
+body.dark #s2-signin .si-t{color:rgba(255,255,255,0.85) !important}
+body.dark #s2-signin .si-d{color:rgba(255,255,255,0.4) !important}
+body.dark #top-nav.scrolled{background:rgba(26,26,26,0.95) !important}
+body.dark .sub-body{color:rgba(255,255,255,0.85) !important}
+body.dark .sub2-card,.dark .com-cat,.dark .shop-detail{background:#2a2a2a !important;border-color:#333 !important}
+body.dark .sub2-card-t{color:rgba(255,255,255,0.85) !important}
+body.dark .about-story{background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important}
+body.dark .about-story-p,.dark .sub2-card-d{color:rgba(255,255,255,0.6) !important}
+body.dark .about-belief{background:rgba(196,149,106,0.12) !important}
+body.dark .about-ft-card{background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important}
+body.dark .about-ft-place{color:rgba(255,255,255,0.85) !important}
+body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
+/* Page load animation */
+body{opacity:0;transition:opacity 0.4s ease}
+body.loaded{opacity:1}
+#kf-panel{position:fixed;bottom:90px;right:24px;width:300px;height:380px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.12);z-index:99;display:none;flex-direction:column;overflow:hidden;border:1px solid #f0ece4}
+#kf-panel.open{display:flex}
+#kf-h{display:flex;align-items:center;padding:10px 14px;background:linear-gradient(135deg,#5a8a4a,#7a9a5a);color:#fff;flex-shrink:0;font-size:0.5rem;font-weight:600}
+#kf-close{margin-left:auto;cursor:pointer;font-size:0.55rem;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+#kf-close:hover{background:rgba(255,255,255,0.15)}
+#kf-body{flex:1;overflow-y:auto;padding:10px;background:#faf8f5;font-size:0.45rem}
+.kf-welcome{background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:8px;color:#2d2a24;line-height:1.5;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+#kf-qs{display:flex;flex-direction:column;gap:4px}
+.kf-q{background:#fff;border:1px solid #e8e0d8;border-radius:8px;padding:7px 10px;color:#2d2a24;cursor:pointer;transition:all 0.2s;text-align:center}
+.kf-q:hover{background:#f5f2ec;border-color:#c4956a}
+#kf-ans{background:#fff;border-radius:8px;padding:10px;color:#2d2a24;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+#kf-foot{padding:8px;text-align:center;font-size:0.42rem;color:#c4956a;cursor:pointer;border-top:1px solid #f0ece4;flex-shrink:0}
+#kf-foot:hover{background:#faf8f5}
+
+@media(max-width:820px){
+  .tickets-grid{grid-template-columns:1fr}
+  .shop-grid{grid-template-columns:1fr}
+  .ai-grid{grid-template-columns:1fr}
+  .com-lobby{grid-template-columns:1fr}
+  .s2-row-5{flex-wrap:wrap}
+  .s2-btn-5{flex:1 1 30%}
+}
+@media(max-width:480px){
+  /* journey responsive 480 removed */
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:820px){
+  #nav-menu{
+    position:fixed;top:0;right:-100%;width:220px;height:100vh;
+    background:rgba(250,248,245,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    flex-direction:column;justify-content:center;gap:16px;
+    transition:right 0.4s;box-shadow:-4px 0 20px rgba(0,0,0,0.06)
+  }
+  #nav-menu.open{right:0}
+  .nav-link{color:#2d2a24!important;font-size:0.5rem;letter-spacing:3px}
+  #nav-toggle{display:block}
+  .scr{padding:40px 16px}
+  .s2-btn-3{flex:1 1 45%}
+  .mod-grid{grid-template-columns:1fr}
+  .mod-grid-5{max-width:100%}
+  .sub1-rooms,.sub2-grid,.sub4-grid,.sub5-grid{grid-template-columns:1fr 1fr}
+  .sub1-trips{grid-template-columns:1fr}
+  .s3-grid{grid-template-columns:1fr!important}
+  .sub-body{padding:0 12px 40px!important}
+  .s4-rooms,.s4-trips,.shop-grid{grid-template-columns:1fr!important}
+  .cd-cover{height:160px!important}
+  .sub1-form-row{grid-template-columns:1fr}
+  .sub3-layout{grid-template-columns:1fr}
+  .sub3-side{display:none}
+}
+@media(max-width:480px){
+  .s1-title{letter-spacing:6px}
+  .s1-loc{letter-spacing:5px}
+  .s1-sub{letter-spacing:3px}
+  #s2-endorse span{font-size:0.5rem}
+  .sub1-rooms,.sub2-grid,.sub4-grid,.sub5-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<canvas id="particle-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="top-nav">
+  <a class="nav-logo" href="#">兵姐<span>·</span>养心栖居</a>
+  <button id="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+  <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="openAuth()">登录</span></div>
+  <ul id="nav-menu">
+	    <li><a class="nav-link active" href="#s1">首页</a></li>
+	    <li><a class="nav-link" href="#s-15">背书</a></li>
+	    <li><a class="nav-link" href="#s2">发现</a></li>
+	    <li><a class="nav-link" href="#s3">承诺</a></li>
+	    <li><a class="nav-link" href="#s2">服务</a></li>
+	    <li><a class="nav-link" href="#s7">安吉</a></li>
+	    <li><a class="nav-link" style="cursor:pointer" onclick="openSearch()">搜索</a></li>
+	    <li><a class="nav-link" onclick="openSubpage('s-about')" style="cursor:pointer;color:#c4956a!important">兵姐</a></li>
+	  </ul>
+</nav>
+
+<!-- ===== S1 HERO ===== -->
+<section class="scr" id="s1">
+  <div id="s1-bg"></div>
+  <div id="s1-ol"></div>
+  <div id="s1c">
+    <p class="s1-loc reveal">浙江 · 安吉</p>
+    <h1 class="s1-title reveal">安吉 · 兵姐的养心栖居</h1>
+    <p class="s1-sub reveal">慢下来，与自然共生</p>
+    <p class="s1-note reveal">在安吉竹海深处，有一个叫兵姐的人</p>
+  </div>
+  <div class="s1-scroll"><span class="s1-scroll-t">向下</span><div class="s1-scroll-bar"></div></div>
+	</section>
+
+	<!-- ===== S1.5 背书 ===== -->
+	<section class="scr" id="s-15">
+	  <div class="scr-inner">
+	    <p class="scr-num reveal">官方背书</p>
+	    <h2 class="scr-title reveal">官方认可 · 值得信赖</h2>
+	    <p class="scr-desc reveal" style="max-width:100%">兵姐的坚持，得到了各级政府与社会各界的认可。每一份荣誉，都是一份责任。</p>
+	    <div id="s-15-badges" class="s15-badges"></div>
+	    <div id="s-15-stats" class="s15-stats"></div>
+	  </div>
+	</section>
+
+
+<!-- ===== S2 HUB ===== -->
+<section class="scr" id="s2">
+  <canvas id="orbit-canvas"></canvas>
+  <div class="scr-inner">
+    <div id="s2-ticker"><span class="lb">小喇叭</span><span class="tx" id="ticker-tx"></span></div>
+    <div id="s2-promise"></div>
+    <div id="s2-signin"></div>
+    <div id="s2-circles"></div>
+    <div id="s2-links"></div>
+  </div>
+</section>
+
+<!-- ===== S3 痛点与承诺 ===== -->
+<section class="scr" id="s3">
+  <div class="scr-inner">
+    <p class="scr-num reveal">为什么选兵姐</p>
+    <h2 class="scr-title reveal">你的顾虑，我们都想到了</h2>
+    <p class="scr-desc reveal">50-70岁的每一位朋友，都有自己担心的理由。我们一条一条来解决。</p>
+    <div id="s3-grid" class="s3-grid"></div>
+  </div>
+</section>
+
+<!-- ===== S4 住进安吉竹海 ===== -->
+<section class="scr" id="s4">
+  <div class="scr-inner">
+    <p class="scr-num reveal">住进安吉竹海</p>
+    <h2 class="scr-title reveal">12间竹景房，藏在竹林深处</h2>
+    <p class="scr-desc reveal">推窗见竹海，夜听风入眠。每一间都是与自然对话的空间。</p>
+    <div id="s4-tabs"></div>
+  </div>
+</section>
+
+<!-- ===== S5 大伙在聊啥 预览 ===== -->
+<section class="scr" id="s5">
+  <div class="scr-inner">
+    <p class="scr-num reveal">大伙在聊啥</p>
+    <h2 class="scr-title reveal">有事您说话</h2>
+    <p class="scr-desc reveal">看看战友们最近在聊什么。</p>
+    <div id="s5-feed"></div>
+  </div>
+</section>
+
+<!-- ===== S6 战友小铺 预览 ===== -->
+<section class="scr" id="s6">
+  <div class="scr-inner">
+    <p class="scr-num reveal">战友小铺</p>
+    <h2 class="scr-title reveal">官方出品 · 战友摊位</h2>
+    <p class="scr-desc reveal">好东西，自己人做的。</p>
+    <div id="s6-grid"></div>
+  </div>
+</section>
+
+<!-- ===== MODULE ACCORDION ===== -->
+<section class="scr" id="s-modules">
+  <div class="scr-inner" id="mod-acc-container"></div>
+</section>
+
+<!-- ===== S7 关于安吉 + 联系 ===== -->
+<section class="scr" id="s7">
+  <div class="scr-inner">
+    <div>
+      <p class="scr-num reveal">关于安吉</p>
+      <h2 class="scr-title reveal">安且吉兮</h2>
+      <p class="s7-etym reveal">「安且吉兮」——取自《诗经》</p>
+      <p class="s7-p reveal">安吉，位于浙江省西北部，中国首个生态县。百万亩竹林，森林覆盖率71%，被誉为「中国竹乡」。</p>
+      <p class="s7-p reveal">白茶飘香，竹海如涛。春挖笋、夏避暑、秋登高、冬赏雪——四时皆景。</p>
+      <div class="s7-contact reveal">微信：zxbj1960　地址：浙江省湖州市安吉县递铺三官老庄 · 安吉逸睿客栈</div>
+    </div>
+    <div id="s7-stats"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="ft">
+  <div class="ft-b">安吉逸睿客栈 · 兵姐康养旅居</div>
+  <div class="ft-t">微信：zxbj1960</div>
+  <div class="ft-c">浙江省湖州市安吉县递铺三官老庄</div>
+</footer>
+
+<div id="search-overlay"><div id="search-box"><input id="search-input" placeholder="搜课程、搜帖子..." onkeydown="if(event.key==='Enter')doSearch()"><button onclick="closeSearch()">取消</button></div><div id="search-results"></div></div>
+<canvas id="sub-particle-canvas"></canvas>
+<!-- ===== 二级页面：民宿旅居 ===== -->
+<div class="subpage" id="sub-s-stay">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">民宿旅居</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-stay"></div>
+</div>
+
+<!-- ===== 二级页面：兵姐精选 ===== -->
+<div class="subpage" id="sub-s-courses">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">兵姐精选</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-courses"></div>
+</div>
+
+<!-- ===== 三级页面：课程详情 ===== -->
+<div class="subpage" id="sub-course-detail">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeCourseDetail()">← 返回</button>
+    <span class="sub-title" id="cd-title">课程详情</span>
+  </div>
+  <div class="sub-body" id="sub-body-course"></div>
+</div>
+
+<!-- ===== 二级页面：大伙在聊啥 ===== -->
+<div class="subpage" id="sub-s-community">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">大伙在聊啥</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-community"></div>
+</div>
+
+<!-- ===== 二级页面：战友小铺 ===== -->
+<div class="subpage" id="sub-s-shop">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">战友小铺</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-shop"></div>
+</div>
+
+<!-- ===== 二级页面：AI百宝箱 ===== -->
+<div class="subpage" id="sub-s-ai">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">AI百宝箱</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-ai"></div>
+</div>
+
+<!-- ===== 二级页面：粮票中心 ===== -->
+<div class="subpage" id="sub-s-tickets">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">粮票中心</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-tickets"></div>
+</div>
+
+<!-- ===== 二级页面：关于兵姐 ===== -->
+<div class="subpage" id="sub-s-about">
+  <div class="sub-header">
+    <button class="sub-back" onclick="closeSubpage()">← 返回</button>
+    <span class="sub-title">关于兵姐</span>
+  </div>
+  <div class="sub-body" id="sub-body-s-about"></div>
+</div>
+
+<!-- Chat button -->
+<div id="fab-main" onclick="toggleFabMenu()"><span id="fab-icon">⚡</span></div>
+<div id="fab-menu">
+  <div class="fab-item" onclick="toggleChat()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#d4733e)">💬</span><span class="fab-lb">聊天</span></div>
+  <div class="fab-item" onclick="toggleKF()"><span class="fab-ico" style="background:linear-gradient(145deg,#5a8a4a,#7aba6a)">👩‍🦰</span><span class="fab-lb">客服</span></div>
+  <div class="fab-item" onclick="openSearch()"><span class="fab-ico" style="background:linear-gradient(145deg,#6a9ac8,#5a8ab8)">⌕</span><span class="fab-lb">搜索</span></div>
+  <div class="fab-item" onclick="toggleDark()"><span class="fab-ico" style="background:linear-gradient(145deg,#8a7a9a,#7a6a8a)">🌙</span><span class="fab-lb">暗色</span></div>
+  <div class="fab-item" onclick="scrollTop()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#b88a6a)">↑</span><span class="fab-lb">顶部</span></div>
+</div>
+<div id="kf-panel">
+  <div id="kf-h"><span>🤖 AI小助手</span><span id="kf-close" onclick="toggleKF()">x</span></div>
+  <div id="kf-body">
+    <div class="kf-welcome">您好！我是兵姐的小助手，请问有什么可以帮您？</div>
+    <div id="kf-qs">
+      <div class="kf-q" onclick="kfAnswer(this)">怎么报名课程？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">粮票怎么获得？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">民宿怎么预约？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">有什么免费课程？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">怎么联系兵姐？</div>
+      <div class="kf-q" onclick="kfAnswer(this)">AI工具怎么用？</div>
+    </div>
+    <div id="kf-ans" style="display:none"></div>
+  </div>
+  <div id="kf-foot" onclick="toggleChat()">💬 转人工客服 →</div>
+</div>
+
+<!-- Chat panel -->
+<div id="chat-panel">
+  <div id="chat-h"><span id="chat-h-t">战友聊天室</span><span id="chat-h-online"><span class="com-online-dot"></span> <span id="chat-online-n">0</span>在线</span><span id="chat-h-close" onclick="toggleChat()">—</span></div>
+  <div id="chat-body"><div id="chat-msgs"></div><div id="chat-empty">加载中...</div></div>
+  <div id="chat-input-row"><input id="chat-input" placeholder="说点什么..." maxlength="200"><button id="chat-send" onclick="sendChatMsg()">发送</button></div>
+</div>
+
+<!-- Auth modal -->
+<div id="auth-overlay">
+  <div id="auth-modal">
+    <div id="auth-tabs"><span class="auth-tab active" onclick="switchAuthTab('login')">登录</span><span class="auth-tab" onclick="switchAuthTab('register')">注册</span><span id="auth-close" onclick="closeAuth()">x</span></div>
+    <div id="auth-form"><input id="auth-nick" placeholder="昵称" style="display:none"><input id="auth-email" type="email" placeholder="手机号或邮箱"><input id="auth-pass" type="password" placeholder="密码（6位以上）"><div id="auth-err"></div><button id="auth-btn" onclick="doAuth()">登录</button></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

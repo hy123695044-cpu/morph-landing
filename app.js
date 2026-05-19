@@ -1459,27 +1459,35 @@ function afterAuth() {
   closeAuth();
   toggleChat();
   addChatMsg({ name: '系统', text: '欢迎 ' + (_chatUser._nick||_chatUser.displayName||_chatUser.email) + '！', time: new Date().toLocaleTimeString() });
-  /* Save session to localStorage */
+  /* Save session to localStorage + cookie fallback */
   var userData = {email:_chatUser.email||'',nick:_chatUser._nick||_chatUser.displayName||'',uid:_chatUser.uid||'demo'};
-  localStorage.setItem('chatUser', JSON.stringify(userData));
+  try{localStorage.setItem('chatUser', JSON.stringify(userData));}catch(e){}
+  try{document.cookie='cu='+encodeURIComponent(JSON.stringify(userData))+';path=/;max-age=2592000';}catch(e){}
   updateUserUI();
 }
 
 /* Auto-restore session on page load */
 (function(){
-  var saved = localStorage.getItem('chatUser');
+  var saved;
+  try{saved = localStorage.getItem('chatUser');}catch(e){}
+  if(!saved){
+    /* Try cookie fallback */
+    var m = document.cookie.match(/cu=([^;]+)/);
+    if(m) try{saved=decodeURIComponent(m[1]);}catch(e){}
+  }
   if(saved){
     try{
       var d = JSON.parse(saved);
       _chatUser = {email:d.email,_nick:d.nick,uid:d.uid};
-      /* Firebase may restore auth automatically */
       if(_firebaseReady){
         firebase.auth().onAuthStateChanged(function(user){
-          if(user) _chatUser = user;
+          if(user){user._nick=d.nick;_chatUser=user;}
         });
       }
     }catch(e){}
   }
+  /* Update UI if user was restored */
+  if(_chatUser) updateUserUI();
 })();
 
 /* Update login button and user badge */

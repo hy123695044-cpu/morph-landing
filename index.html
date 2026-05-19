@@ -485,7 +485,7 @@ img{max-width:100%;display:block}
   transform:translateX(100%);
   transition:transform 0.45s cubic-bezier(0.22,1,0.36,1);
   -webkit-overflow-scrolling:touch;
-  background:#faf8f5
+  background:rgba(250,248,245,0.95)
 }
 .subpage.open{transform:translateX(0)}
 .sub-header{
@@ -1142,6 +1142,54 @@ img{max-width:100%;display:block}
 #kf-btn{position:fixed;bottom:24px;right:86px;width:42px;height:42px;border-radius:50%;background:linear-gradient(145deg,#7a9a5a,#5a8a4a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;cursor:pointer;z-index:99;box-shadow:0 3px 12px rgba(122,154,90,0.35);transition:transform 0.25s;animation:kf-pulse 2s ease-in-out infinite}
 @keyframes kf-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 #kf-btn:hover{transform:scale(1.1)}
+/* Dark mode toggle, search, top button */
+#dark-btn{position:fixed;bottom:24px;right:140px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
+#search-btn{position:fixed;bottom:68px;right:24px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
+#dark-btn:hover,#search-btn:hover{background:#f5f2ec}
+#top-btn{position:fixed;bottom:112px;right:24px;width:36px;height:36px;border-radius:50%;background:#c4956a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.55rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:all 0.3s;opacity:0;pointer-events:none;transform:translateY(10px)}
+#top-btn.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+#search-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.4);display:none;padding:60px 20px}
+#search-overlay.open{display:block}
+#search-box{display:flex;gap:8px;max-width:500px;margin:0 auto 12px}
+#search-input{flex:1;padding:10px 14px;border:1px solid #e0d8d0;border-radius:10px;font-size:0.5rem;font-family:inherit;outline:none;background:#fff}
+#search-input:focus{border-color:#c4956a}
+#search-box button{padding:10px 16px;background:#fff;border:1px solid #e0d8d0;border-radius:10px;font-size:0.45rem;cursor:pointer;font-family:inherit;color:#2d2a24}
+#search-results{max-width:500px;margin:0 auto}
+.search-result{background:#fff;border-radius:8px;padding:10px;margin-bottom:4px;cursor:pointer;transition:background 0.2s;border:1px solid #f0ece4}
+.search-result:hover{background:#faf8f5}
+.search-rt{font-size:0.4rem;color:#c4956a;margin-bottom:2px}
+.search-rn{font-size:0.48rem;font-weight:600;color:#2d2a24}
+.search-rd{font-size:0.42rem;color:#8a7a6a}
+/* Dark mode */
+body.dark{background:#1a1a1a;color:rgba(255,255,255,0.85)}
+body.dark #s2{background:#222 !important}
+body.dark #s3{background:#222 !important}
+body.dark #s7{background:#222 !important}
+body.dark #s-modules{background:#222 !important}
+body.dark .mod-acc{background:#2a2a2a !important;border-color:#333}
+body.dark .mod-acc-n{color:rgba(255,255,255,0.85) !important}
+body.dark .mod-acc-sub{color:rgba(255,255,255,0.4) !important}
+body.dark .s5-post-p,.dark .shop-card,.dark .pp-card,.dark .s6-p-item,.dark #s2-ticker,.dark .s2-link-btn{background:#2a2a2a !important;border-color:#333 !important}
+body.dark .s5-post-pn,.dark .shop-card-name,.dark .pp-t,.dark .s6-p-n,.dark #s2-links .ln{color:rgba(255,255,255,0.85) !important}
+body.dark .s5-post-pc,.dark .shop-card-desc,.dark .pp-d,.dark #s2-links .ld{color:rgba(255,255,255,0.5) !important}
+body.dark #s2-signin{background:#2a2a2a !important;border-color:#333 !important}
+body.dark #s2-signin .si-t{color:rgba(255,255,255,0.85) !important}
+body.dark #s2-signin .si-d{color:rgba(255,255,255,0.4) !important}
+body.dark #top-nav.scrolled{background:rgba(26,26,26,0.95) !important}
+body.dark .subpage{background:rgba(22,22,22,0.98) !important}
+body.dark .sub-header{background:#222 !important}
+body.dark .sub-body{color:rgba(255,255,255,0.85) !important}
+body.dark .sub2-card,.dark .com-cat,.dark .shop-detail{background:#2a2a2a !important;border-color:#333 !important}
+body.dark .sub2-card-t{color:rgba(255,255,255,0.85) !important}
+body.dark .about-story{background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important}
+body.dark .about-story-p,.dark .sub2-card-d{color:rgba(255,255,255,0.6) !important}
+body.dark .about-belief{background:rgba(196,149,106,0.12) !important}
+body.dark .about-ft-card{background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important}
+body.dark .about-ft-place{color:rgba(255,255,255,0.85) !important}
+body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
+/* Page load animation */
+body, .subpage{opacity:0;transition:opacity 0.4s ease}
+body.loaded, .subpage.open{opacity:1}
 #kf-panel{position:fixed;bottom:90px;right:24px;width:300px;height:380px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.12);z-index:99;display:none;flex-direction:column;overflow:hidden;border:1px solid #f0ece4}
 #kf-panel.open{display:flex}
 #kf-h{display:flex;align-items:center;padding:10px 14px;background:linear-gradient(135deg,#5a8a4a,#7a9a5a);color:#fff;flex-shrink:0;font-size:0.5rem;font-weight:600}
@@ -1211,6 +1259,7 @@ img{max-width:100%;display:block}
 	    <li><a class="nav-link" href="#s3">承诺</a></li>
 	    <li><a class="nav-link" href="#s-modules">模块</a></li>
 	    <li><a class="nav-link" href="#s7">安吉</a></li>
+	    <li><a class="nav-link" style="cursor:pointer" onclick="openSearch()">搜索</a></li>
 	    <li><a class="nav-link" onclick="openSubpage('s-about')" style="cursor:pointer;color:#c4956a!important">兵姐</a></li>
 	  </ul>
 </nav>
@@ -1319,6 +1368,8 @@ img{max-width:100%;display:block}
   <div class="ft-c">© 2025 兵姐康养旅居</div>
 </footer>
 
+<div id="search-overlay"><div id="search-box"><input id="search-input" placeholder="搜课程、搜帖子..." onkeydown="if(event.key==='Enter')doSearch()"><button onclick="closeSearch()">取消</button></div><div id="search-results"></div></div>
+<canvas id="sub-particle-canvas"></canvas>
 <!-- ===== 二级页面：民宿旅居 ===== -->
 <div class="subpage" id="sub-s-stay">
   <div class="sub-header">
@@ -1394,6 +1445,9 @@ img{max-width:100%;display:block}
 <!-- Chat button -->
 <div id="chat-btn" onclick="toggleChat()"><span>💬</span></div>
 <div id="kf-btn" onclick="toggleKF()"><span>?</span></div>
+<div id="dark-btn" onclick="toggleDark()">🌙</div>
+<div id="top-btn" onclick="scrollTop()">↑</div>
+<div id="search-btn" onclick="openSearch()">⌕</div>
 <div id="kf-panel">
   <div id="kf-h"><span>🤖 AI小助手</span><span id="kf-close" onclick="toggleKF()">x</span></div>
   <div id="kf-body">

@@ -1628,3 +1628,85 @@ setInterval(function(){
     el.textContent = Math.max(3, Math.round(n));
   }
 }, 5000);
+
+/* ===== SUB-PARTICLES (for subpages) ===== */
+(function(){
+  var c = document.getElementById('sub-particle-canvas');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  var p = [], anim;
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
+  resize(); window.addEventListener('resize', resize);
+  var n = 40;
+  var cs = ['rgba(196,149,106,','rgba(255,220,180,','rgba(255,255,255,'];
+  for(var i=0;i<n;i++) p.push({
+    x:Math.random()*c.width,y:Math.random()*c.height,
+    vx:(Math.random()-0.5)*0.15,vy:(Math.random()-0.5)*0.15,
+    r:Math.random()*2+0.5,baseOp:Math.random()*0.25+0.08,
+    color:cs[Math.floor(Math.random()*3)],ph:Math.random()*Math.PI*2,speed:0.005+Math.random()*0.01
+  });
+  function loop(){
+    ctx.clearRect(0,0,c.width,c.height);
+    p.forEach(function(d){
+      d.x+=d.vx;d.y+=d.vy;d.ph+=d.speed;
+      if(d.x<-20)d.x=c.width+20;if(d.x>c.width+20)d.x=-20;
+      if(d.y<-20)d.y=c.height+20;if(d.y>c.height+20)d.y=-20;
+      var po=d.baseOp*(0.5+0.5*Math.sin(d.ph));
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r*3,0,Math.PI*2);
+      ctx.fillStyle=d.color+(po*0.05)+')';ctx.fill();
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle=d.color+po+')';ctx.fill();
+    });
+    anim=requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ===== DARK MODE ===== */
+function toggleDark() {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark') ? '1' : '0');
+}
+if (localStorage.getItem('darkMode') === '1') document.body.classList.add('dark');
+
+/* ===== SEARCH ===== */
+function openSearch() {
+  var el = document.getElementById('search-overlay');
+  if (!el) return;
+  el.classList.add('open');
+  document.getElementById('search-input').focus();
+}
+function closeSearch() {
+  document.getElementById('search-overlay').classList.remove('open');
+}
+function doSearch() {
+  var q = document.getElementById('search-input').value.trim().toLowerCase();
+  if (!q) return;
+  var results = [];
+  if (C.courses && C.courses.list) C.courses.list.forEach(function(c){
+    if (c.title.toLowerCase().indexOf(q) > -1 || c.desc.toLowerCase().indexOf(q) > -1 || c.teacher.toLowerCase().indexOf(q) > -1) results.push({type:'课程',name:c.title,sub:c.desc,onclick:"openCourseDetail("+c.id+")"});
+  });
+  if (C.community && C.community.posts) C.community.posts.forEach(function(p){
+    if (p.content.toLowerCase().indexOf(q) > -1 || p.author.indexOf(q) > -1) results.push({type:'帖子',name:p.author,sub:p.content.slice(0,30)+'...'});
+  });
+  var h = '<div style="font-size:0.45rem;color:#8a7a6a;margin-bottom:6px">找到 ' + results.length + ' 个结果</div>';
+  results.forEach(function(r, i) {
+    h += '<div class="search-result" onclick="closeSearch();' + (r.onclick||'') + '"><div class="search-rt">' + r.type + '</div><div class="search-rn">' + r.name + '</div><div class="search-rd">' + r.sub + '</div></div>';
+  });
+  document.getElementById('search-results').innerHTML = h || '<div style="text-align:center;color:#8a7a6a;padding:20px;font-size:0.45rem">没找到相关内容</div>';
+}
+
+/* ===== SCROLL TO TOP ===== */
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('top-btn');
+  if (!btn) return;
+  btn.classList.toggle('show', window.scrollY > 400);
+});
+function scrollTop() {
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* Page load animation */
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.classList.add('loaded');
+});

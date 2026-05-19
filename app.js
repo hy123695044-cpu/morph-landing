@@ -1081,26 +1081,28 @@ var _accLinks = {
 };
 
 function renderAccordion() {
-  var container = document.getElementById('mod-acc-container');
-  if (!container || !C.modules) return;
-  var h = '<div class="mod-grid">';
-  C.modules.forEach(function(m, i) {
-    var links = _accLinks[m.id] || [];
-    var isLast = i === C.modules.length - 1;
-    h += '<div class="mod-acc' + (isLast ? ' mod-grid-5' : '') + '" id="mod-acc-' + i + '">';
-    h += '<div class="mod-acc-h" onclick="toggleModAcc(' + i + ')">';
-    h += '<div class="mod-acc-l"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span>';
-    h += '<div class="mod-acc-info"><span class="mod-acc-n">' + m.name + '</span><span class="mod-acc-sub">' + m.desc + '</span></div></div>';
-    h += '<span class="mod-acc-a">›</span>';
-    h += '</div>';
-    h += '<div class="mod-acc-b"><div class="mod-acc-links">';
-    links.forEach(function(l) {
-      h += '<span class="mod-acc-link" onclick="openSubpage(\'' + m.id + '\')">' + l + '</span>';
+  /* Render in both S2 modules container and standalone section */
+  var targets = ['s2-modules', 'mod-acc-container'];
+  targets.forEach(function(tid) {
+    var container = document.getElementById(tid);
+    if (!container || !C.modules) return;
+    /* S2 gets compact style, standalone gets full grid */
+    var isS2 = tid === 's2-modules';
+    var h = isS2 ? '<div class="s2-mod-head">全部服务</div>' : '';
+    h += '<div class="mod-grid' + (isS2 ? ' mod-grid-s2' : '') + '">';
+    C.modules.forEach(function(m, i) {
+      var links = _accLinks[m.id] || [];
+      var isLast = i === C.modules.length - 1;
+      h += '<div class="mod-acc' + (isLast ? ' mod-grid-5' : '') + '" id="mod-acc-' + i + '-' + tid + '">';
+      h += '<div class="mod-acc-h" onclick="openSubpage(\'' + m.id + '\')">';
+      h += '<div class="mod-acc-l"><span class="mod-acc-ico">' + (_accIcons[i]||'·') + '</span>';
+      h += '<div class="mod-acc-info"><span class="mod-acc-n">' + m.name + '</span><span class="mod-acc-sub">' + m.desc + '</span></div></div>';
+      h += '<span class="mod-acc-a">›</span>';
+      h += '</div>';
     });
-    h += '</div></div></div>';
+    h += '</div>';
+    container.innerHTML = h;
   });
-  h += '</div>';
-  container.innerHTML = h;
 }
 
 function toggleModAcc(idx) {

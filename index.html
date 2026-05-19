@@ -271,6 +271,12 @@ img{max-width:100%;display:block}
 }
 .s2-link-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.06)}
 #s2-links button:active{transform:scale(0.97)}
+#s2-modules{margin-top:8px}
+.s2-mod-head{font-size:0.48rem;color:#8a7a6a;letter-spacing:1px;margin-bottom:6px;padding-top:4px;border-top:1px solid #e8e0d8}
+.mod-grid-s2{grid-template-columns:repeat(5,1fr)!important;gap:6px}
+.mod-grid-s2 .mod-acc-h{flex-direction:column;text-align:center;padding:10px 6px;gap:4px}
+.mod-grid-s2 .mod-acc-l{flex-direction:column;gap:4px}
+.mod-grid-s2 .mod-acc-a{display:none}
 .s2-link-icon{font-size:1.2rem;flex-shrink:0}
 #s2-links .ln, .s2-link-btn .ln{font-size:0.55rem;font-weight:600;color:#2d2a24;letter-spacing:1px}
 #s2-links .ld, .s2-link-btn .ld{font-size:0.5rem;color:#8a7a6a;margin-top:1px}
@@ -287,28 +293,33 @@ img{max-width:100%;display:block}
 
 /* ===== S3 痛点与承诺 ===== */
 #s3{
-  background:linear-gradient(rgba(250,248,245,0.88),rgba(250,248,245,0.92)),url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1920&q=80');
+  background:linear-gradient(rgba(42,42,34,0.93),rgba(42,42,34,0.96)),url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80');
   background-size:cover;background-position:center;background-attachment:fixed;
   min-height:auto;padding-top:60px;padding-bottom:40px
 }
 #s3 .scr-inner{max-width:900px}
-.s3-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:24px}
+#s3 .scr-num{color:#d4b88a}
+#s3 .scr-title{color:#fff;font-size:clamp(1rem,3vw,1.8rem);font-weight:600}
+#s3 .scr-desc{color:rgba(255,255,255,0.6);font-size:clamp(0.5rem,1.2vw,0.65rem);font-weight:500}
+.s3-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
 .pp-card{
-  background:#fff;border-radius:10px;padding:12px;
-  display:flex;align-items:flex-start;gap:10px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.03);transition:transform 0.2s,box-shadow 0.2s
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:12px;padding:14px;
+  display:flex;align-items:flex-start;gap:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  transition:transform 0.2s,box-shadow 0.2s
 }
-.pp-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.pp-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15)}
 .pp-ico .pp-c{
-  display:inline-flex;width:36px;height:36px;border-radius:50%;
+  display:inline-flex;width:44px;height:44px;border-radius:50%;
   align-items:center;justify-content:center;
-  font-size:0.5rem;font-weight:600;flex-shrink:0;
-  background:rgba(196,149,106,0.1);color:#c4956a
+  font-size:0.6rem;font-weight:700;flex-shrink:0;
+  background:rgba(196,149,106,0.2);color:#d4b88a;box-shadow:0 2px 8px rgba(0,0,0,0.1)
 }
 .pp-body{min-width:0}
-.pp-t{font-size:0.5rem;font-weight:600;color:#2d2a24;margin-bottom:1px}
-.pp-d{font-size:0.5rem;color:#8a7a6a;margin-bottom:3px;line-height:1.6}
-.pp-s{font-size:0.5rem;color:#4a6b4a;line-height:1.7;padding:4px 8px;background:rgba(74,107,74,0.06);border-radius:4px}
+.pp-t{font-size:0.55rem;font-weight:700;color:#fff;margin-bottom:2px}
+.pp-d{font-size:0.52rem;color:rgba(255,255,255,0.5);margin-bottom:4px;line-height:1.7}
+.pp-s{font-size:0.5rem;color:#ff6b4a;line-height:1.7;padding:5px 10px;background:rgba(255,107,74,0.1);border-radius:6px;font-weight:500}
 
 /* Promise (in S2) */
 #s2-promise{
@@ -1282,7 +1293,7 @@ body.loaded, .subpage.open{opacity:1}
 	    <li><a class="nav-link" href="#s-15">背书</a></li>
 	    <li><a class="nav-link" href="#s2">发现</a></li>
 	    <li><a class="nav-link" href="#s3">承诺</a></li>
-	    <li><a class="nav-link" href="#s-modules">模块</a></li>
+	    <li><a class="nav-link" href="#s2">服务</a></li>
 	    <li><a class="nav-link" href="#s7">安吉</a></li>
 	    <li><a class="nav-link" style="cursor:pointer" onclick="openSearch()">搜索</a></li>
 	    <li><a class="nav-link" onclick="openSubpage('s-about')" style="cursor:pointer;color:#c4956a!important">兵姐</a></li>
@@ -1338,6 +1349,7 @@ body.loaded, .subpage.open{opacity:1}
     <div id="s2-signin"></div>
     <div id="s2-circles"></div>
     <div id="s2-links"></div>
+    <div id="s2-modules"></div>
   </div>
 </section>
 

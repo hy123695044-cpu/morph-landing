@@ -152,18 +152,19 @@ img{max-width:100%;display:block}
   display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
   position:relative;z-index:1
 }
+.s15-badges{display:flex;gap:8px;justify-content:center;align-items:center;position:relative;z-index:1;flex-wrap:wrap}
 .s15-badge{
-  padding:16px 28px;background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(196,149,106,0.2);
-  border-radius:12px;
-  font-size:0.5rem;color:#fff;font-weight:500;
-  letter-spacing:1px;line-height:1.6;
-  box-shadow:0 8px 32px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.06);
+  width:100px;height:100px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.08);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:2px solid rgba(196,149,106,0.2);
+  font-size:0.4rem;color:rgba(255,255,255,0.85);font-weight:500;
+  letter-spacing:0.5px;line-height:1.3;text-align:center;padding:6px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.12);
   transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
   cursor:default
 }
-.s15-badge:hover{background:rgba(196,149,106,0.15);border-color:#c4956a;box-shadow:0 8px 32px rgba(196,149,106,0.15),0 0 20px rgba(196,149,106,0.08);transform:translateY(-4px) scale(1.02)}
+.s15-badge:nth-child(3){width:110px;height:110px;border-width:3px;border-color:rgba(196,149,106,0.35)}
 
 /* S1.5 stats */
 .s15-stats{
@@ -1163,6 +1164,19 @@ img{max-width:100%;display:block}
 #auth-btn{width:100%;padding:9px;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;border:none;border-radius:8px;font-size:0.5rem;font-weight:600;cursor:pointer;font-family:inherit}
 #auth-btn:active{transform:scale(0.98)}
 
+/* Search */
+#search-ttl{font-size:0.8rem;font-weight:700;color:#fff;text-align:center;margin-bottom:8px;letter-spacing:2px}
+#search-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.5);display:none;padding:80px 20px}
+#search-overlay.open{display:block}
+#search-box{display:flex;gap:8px;max-width:700px;margin:0 auto 16px}
+#search-input{flex:1;padding:14px 18px;border:none;border-radius:12px;font-size:0.65rem;font-family:inherit;outline:none;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+#search-box button{padding:14px 24px;background:#fff;border:none;border-radius:12px;font-size:0.55rem;cursor:pointer;font-family:inherit;color:#2d2a24;font-weight:600;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+#search-results{max-width:700px;margin:0 auto}
+.search-result{background:rgba(255,255,255,0.95);border-radius:10px;padding:12px 16px;margin-bottom:6px;cursor:pointer;transition:all 0.2s}
+.search-result:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.search-rt{font-size:0.4rem;color:#c4956a;margin-bottom:2px}
+.search-rn{font-size:0.52rem;font-weight:600;color:#2d2a24}
+.search-rd{font-size:0.45rem;color:#8a7a6a}
 /* AI客服 */
 .cd-player-inner{padding:0 8px 8px}
 #kf-btn{position:fixed;bottom:100px;right:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(145deg,#5a8a4a,#7aba6a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;z-index:99;box-shadow:0 6px 24px rgba(90,138,74,0.5);transition:all 0.3s;animation:kf-pulse 2s ease-in-out infinite}
@@ -1381,7 +1395,7 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
   <div class="ft-c">浙江省湖州市安吉县递铺三官老庄</div>
 </footer>
 
-<div id="search-overlay"><div id="search-box"><input id="search-input" placeholder="搜课程、搜帖子..." onkeydown="if(event.key==='Enter')doSearch()"><button onclick="closeSearch()">取消</button></div><div id="search-results"></div></div>
+<div id="search-overlay"><div id="search-ttl">搜索课程 · 帖子 · 战友</div><div id="search-box"><input id="search-input" placeholder="搜课程、搜帖子..." onkeydown="if(event.key==='Enter')doSearch()"><button onclick="closeSearch()">取消</button></div><div id="search-results"></div></div>
 <canvas id="sub-particle-canvas"></canvas>
 <!-- ===== 二级页面：民宿旅居 ===== -->
 <div class="subpage" id="sub-s-stay">
@@ -1461,7 +1475,6 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
   <div class="fab-item" onclick="toggleChat()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#d4733e)">💬</span><span class="fab-lb">聊天</span></div>
   <div class="fab-item" onclick="toggleKF()"><span class="fab-ico" style="background:linear-gradient(145deg,#5a8a4a,#7aba6a)">👩‍🦰</span><span class="fab-lb">客服</span></div>
   <div class="fab-item" onclick="openSearch()"><span class="fab-ico" style="background:linear-gradient(145deg,#6a9ac8,#5a8ab8)">⌕</span><span class="fab-lb">搜索</span></div>
-  <div class="fab-item" onclick="toggleDark()"><span class="fab-ico" style="background:linear-gradient(145deg,#8a7a9a,#7a6a8a)">🌙</span><span class="fab-lb">暗色</span></div>
   <div class="fab-item" onclick="scrollTop()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#b88a6a)">↑</span><span class="fab-lb">顶部</span></div>
 </div>
 <div id="kf-panel">

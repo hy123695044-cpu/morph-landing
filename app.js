@@ -31,7 +31,7 @@ for(var _i=0;_i<30;_i++){
   c.addEventListener('mousemove', function(e){mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true});
   c.addEventListener('mouseleave', function(){mouse.active=false});
   var isMobile = window.innerWidth < 640;
-  var n = isMobile ? 15 : Math.min(60, Math.floor(window.innerWidth/15));
+  var n = isMobile ? 6 : Math.min(40, Math.floor(window.innerWidth/18));
   var cs = ['rgba(255,255,255,','rgba(255,220,180,','rgba(196,149,106,'];
   for(var i=0;i<n;i++) p.push({
     x:Math.random()*c.width,y:Math.random()*c.height,

@@ -43,6 +43,14 @@ img{max-width:100%;display:block}
 #top-nav.scrolled{background:rgba(250,248,245,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.04)}
 .nav-logo{font-size:0.62rem;font-weight:500;letter-spacing:3px;color:#fff;text-decoration:none;transition:color 0.4s}
 #top-nav.scrolled .nav-logo{color:#2d2a24}
+#nav-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0;z-index:101}
+#nav-share{font-size:0.85rem;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.2s;line-height:1}
+#nav-share:hover{background:rgba(255,255,255,0.1)}
+#top-nav.scrolled #nav-share:hover{background:rgba(0,0,0,0.04)}
+#nav-login{font-size:0.5rem;cursor:pointer;padding:4px 10px;border-radius:6px;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);transition:all 0.2s;font-weight:500;letter-spacing:1px}
+#nav-login:hover{background:rgba(255,255,255,0.1);color:#fff}
+#top-nav.scrolled #nav-login{color:#2d2a24;border-color:rgba(0,0,0,0.15)}
+#top-nav.scrolled #nav-login:hover{background:rgba(0,0,0,0.04);color:#2d2a24}
 .nav-logo span{color:#c4956a}
 #nav-menu{display:flex;align-items:center;gap:18px;list-style:none}
 .nav-link{
@@ -1268,6 +1276,7 @@ body.loaded{opacity:1}
 <nav id="top-nav">
   <a class="nav-logo" href="#">兵姐<span>·</span>养心栖居</a>
   <button id="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+  <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="openAuth()">登录</span></div>
   <ul id="nav-menu">
 	    <li><a class="nav-link active" href="#s1">首页</a></li>
 	    <li><a class="nav-link" href="#s-15">背书</a></li>
@@ -1276,8 +1285,6 @@ body.loaded{opacity:1}
 	    <li><a class="nav-link" href="#s2">服务</a></li>
 	    <li><a class="nav-link" href="#s7">安吉</a></li>
 	    <li><a class="nav-link" style="cursor:pointer" onclick="openSearch()">搜索</a></li>
-		    <li><a class="nav-link" style="cursor:pointer" onclick="shareSite()">🎁分享</a></li>
-		    <li><a class="nav-link" style="cursor:pointer" onclick="openAuth()">登录</a></li>
 	    <li><a class="nav-link" onclick="openSubpage('s-about')" style="cursor:pointer;color:#c4956a!important">兵姐</a></li>
 	  </ul>
 </nav>
@@ -1293,7 +1300,6 @@ body.loaded{opacity:1}
     <p class="s1-note reveal">在安吉竹海深处，有一个叫兵姐的人</p>
   </div>
   <!-- Share rewards strip -->
-  <div class="s1-share reveal" id="s1-share" onclick="shareSite()">
     <span class="s1-share-ico">🎁</span>
     <span class="s1-share-t">分享给好友 · 双方都得粮票奖励</span>
     <span class="s1-share-btn">立即分享</span>
@@ -1305,7 +1311,6 @@ body.loaded{opacity:1}
       <div class="s1-auth-t">加入战友社区</div>
       <div class="s1-auth-d">登录 · 注册 · 与战友聊天交流</div>
     </div>
-    <button class="s1-auth-btn" onclick="openAuth()">立即加入</button>
   </div>
   <div class="s1-scroll"><span class="s1-scroll-t">向下</span><div class="s1-scroll-bar"></div></div>
 	</section>
@@ -1480,7 +1485,6 @@ body.loaded{opacity:1}
 <div id="fab-menu">
   <div class="fab-item" onclick="toggleChat()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#d4733e)">💬</span><span class="fab-lb">聊天</span></div>
   <div class="fab-item" onclick="toggleKF()"><span class="fab-ico" style="background:linear-gradient(145deg,#5a8a4a,#7aba6a)">👩‍🦰</span><span class="fab-lb">客服</span></div>
-  <div class="fab-item" onclick="shareSite()"><span class="fab-ico" style="background:linear-gradient(145deg,#e8935a,#d4733e)">🎁</span><span class="fab-lb">分享</span></div>
   <div class="fab-item" onclick="openSearch()"><span class="fab-ico" style="background:linear-gradient(145deg,#6a9ac8,#5a8ab8)">⌕</span><span class="fab-lb">搜索</span></div>
   <div class="fab-item" onclick="toggleDark()"><span class="fab-ico" style="background:linear-gradient(145deg,#8a7a9a,#7a6a8a)">🌙</span><span class="fab-lb">暗色</span></div>
   <div class="fab-item" onclick="scrollTop()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#b88a6a)">↑</span><span class="fab-lb">顶部</span></div>

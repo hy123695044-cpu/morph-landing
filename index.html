@@ -1495,11 +1495,16 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
   </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
-<script src="firebase-init.js"></script>
-<script src="content.js?t=2"></script>
-<script src="app.js?t=2"></script>
+<script src="content.js?t=3"></script>
+<script src="app.js?t=3"></script>
+<script src="firebase-init.js" defer></script>
+<script defer>
+/* 异步加载 Firebase SDK（不影响页面渲染） */
+setTimeout(function(){
+  var f1=document.createElement('script');f1.src='https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js';document.body.appendChild(f1);
+  var f2=document.createElement('script');f2.src='https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js';document.body.appendChild(f2);
+  var f3=document.createElement('script');f3.src='https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js';document.body.appendChild(f3);
+}, 1000);
+</script>
 </body>
 </html>

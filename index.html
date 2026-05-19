@@ -1104,8 +1104,9 @@ img{max-width:100%;display:block}
 .ai-card-btn:active{transform:scale(0.96)}
 
 /* Chat button + panel + auth */
-#chat-btn{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;z-index:99;box-shadow:0 4px 16px rgba(196,149,106,0.4);transition:transform 0.25s}
-#chat-btn:hover{transform:scale(1.1)}
+#chat-btn{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;z-index:99;box-shadow:0 6px 24px rgba(196,149,106,0.5);transition:all 0.3s;animation:chat-pulse 2.5s ease-in-out infinite}
+@keyframes chat-pulse{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(196,149,106,0.5)}50%{transform:scale(1.08);box-shadow:0 8px 36px rgba(196,149,106,0.7)}}
+#chat-btn:hover{transform:scale(1.12)}
 #chat-panel{position:fixed;bottom:90px;right:24px;width:340px;height:460px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.12);z-index:99;display:none;flex-direction:column;overflow:hidden;border:1px solid #f0ece4}
 #chat-panel.open{display:flex}
 #chat-h{display:flex;align-items:center;padding:12px 14px;background:linear-gradient(135deg,#2d2a24,#4a6b4a);color:#fff;flex-shrink:0}
@@ -1139,14 +1140,25 @@ img{max-width:100%;display:block}
 #auth-btn:active{transform:scale(0.98)}
 
 /* AI客服 */
-#kf-btn{position:fixed;bottom:24px;right:86px;width:42px;height:42px;border-radius:50%;background:linear-gradient(145deg,#7a9a5a,#5a8a4a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;cursor:pointer;z-index:99;box-shadow:0 3px 12px rgba(122,154,90,0.35);transition:transform 0.25s;animation:kf-pulse 2s ease-in-out infinite}
-@keyframes kf-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-#kf-btn:hover{transform:scale(1.1)}
+#kf-btn{position:fixed;bottom:100px;right:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(145deg,#5a8a4a,#7aba6a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;z-index:99;box-shadow:0 6px 24px rgba(90,138,74,0.5);transition:all 0.3s;animation:kf-pulse 2s ease-in-out infinite}
+@keyframes kf-pulse{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(90,138,74,0.5)}50%{transform:scale(1.06);box-shadow:0 8px 36px rgba(90,138,74,0.7)}}
+#kf-btn:hover{transform:scale(1.12)}
 /* Dark mode toggle, search, top button */
-#dark-btn{position:fixed;bottom:24px;right:140px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
-#search-btn{position:fixed;bottom:68px;right:24px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
+/* Hero login card */
+.s1-auth{position:absolute;bottom:70px;right:24px;z-index:4;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:14px;padding:10px 14px;border:1px solid rgba(255,255,255,0.9);box-shadow:0 4px 20px rgba(0,0,0,0.08);max-width:300px;transition:all 0.3s}
+.s1-auth:hover{box-shadow:0 6px 28px rgba(0,0,0,0.12);transform:translateY(-2px)}
+.s1-auth-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(145deg,#c4956a,#d4733e);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.s1-auth-info{flex:1;min-width:0}
+.s1-auth-t{font-size:0.5rem;font-weight:600;color:#2d2a24}
+.s1-auth-d{font-size:0.4rem;color:#8a7a6a}
+.s1-auth-btn{padding:6px 14px;background:linear-gradient(145deg,#c4956a,#d4733e);color:#fff;border:none;border-radius:8px;font-size:0.45rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:transform 0.2s}
+.s1-auth-btn:active{transform:scale(0.95)}
+@media(max-width:640px){.s1-auth{left:24px;right:24px;max-width:none;bottom:60px}}
+
+#dark-btn{position:fixed;bottom:24px;right:100px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
+#search-btn{position:fixed;bottom:68px;right:100px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid #e0d8d0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s}
 #dark-btn:hover,#search-btn:hover{background:#f5f2ec}
-#top-btn{position:fixed;bottom:112px;right:24px;width:36px;height:36px;border-radius:50%;background:#c4956a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.55rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:all 0.3s;opacity:0;pointer-events:none;transform:translateY(10px)}
+#top-btn{position:fixed;bottom:68px;right:148px;width:36px;height:36px;border-radius:50%;background:#c4956a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.55rem;cursor:pointer;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:all 0.3s;opacity:0;pointer-events:none;transform:translateY(10px)}
 #top-btn.show{opacity:1;pointer-events:auto;transform:translateY(0)}
 #search-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.4);display:none;padding:60px 20px}
 #search-overlay.open{display:block}
@@ -1273,6 +1285,15 @@ body.loaded, .subpage.open{opacity:1}
     <h1 class="s1-title reveal">安吉 · 兵姐的养心栖居</h1>
     <p class="s1-sub reveal">慢下来，与自然共生</p>
     <p class="s1-note reveal">在安吉竹海深处，有一个叫兵姐的人</p>
+  </div>
+  <!-- Hero login card -->
+  <div class="s1-auth reveal" id="s1-auth">
+    <div class="s1-auth-av">👩</div>
+    <div class="s1-auth-info">
+      <div class="s1-auth-t">加入战友社区</div>
+      <div class="s1-auth-d">登录 · 注册 · 与战友聊天交流</div>
+    </div>
+    <button class="s1-auth-btn" onclick="openAuth()">立即加入</button>
   </div>
   <div class="s1-scroll"><span class="s1-scroll-t">向下</span><div class="s1-scroll-bar"></div></div>
 	</section>
@@ -1443,8 +1464,8 @@ body.loaded, .subpage.open{opacity:1}
 </div>
 
 <!-- Chat button -->
-<div id="chat-btn" onclick="toggleChat()"><span>💬</span></div>
-<div id="kf-btn" onclick="toggleKF()"><span>?</span></div>
+<div id="kf-btn" onclick="toggleKF()" title="AI小助手">👩‍🦰</div>
+<div id="chat-btn" onclick="toggleChat()" title="战友聊天">💬</div>
 <div id="dark-btn" onclick="toggleDark()">🌙</div>
 <div id="top-btn" onclick="scrollTop()">↑</div>
 <div id="search-btn" onclick="openSearch()">⌕</div>

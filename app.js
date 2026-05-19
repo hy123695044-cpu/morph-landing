@@ -384,22 +384,30 @@ document.addEventListener('DOMContentLoaded',function(){
     }).join('');
   }
 
-  /* S2 accordions: 我的 + 全部服务 */
+  /* S2: 我的 + 全部服务 */
   var bl=document.getElementById('s2-links');
   if(bl){
     bl.innerHTML=
-      '<div class="s2-acc-h" onclick="toggleS2Accordion(\'my\')"><span class="s2-acc-lb">我的</span><span class="s2-acc-a">›</span></div>'+
-      '<div class="s2-acc-b" id="s2-acc-my"><button class="s2-link-btn" onclick="openSubpage(\'s-tickets\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#d4a86a,#c08850);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">券</span></span><div><div class="ln">粮票中心</div><div class="ld">等级 · 赚粮票 · 消费指南</div></div></button>'+
-      '<button class="s2-link-btn" onclick="openSubpage(\'s-community\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#e8935a,#d4733e);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">赏</span></span><div><div class="ln">悬赏任务</div><div class="ld">帮个小忙赚粮票</div></div></button>'+
-      '<button class="s2-link-btn" onclick="openSubpage(\'s-about\')"><span class="s2-link-icon"><span style="display:inline-flex;width:28px;height:28px;border-radius:50%;background:linear-gradient(145deg,#9aba7a,#7a9a5a);align-items:center;justify-content:center;color:#fff;font-size:0.6rem">人</span></span><div><div class="ln">关于兵姐</div><div class="ld">退伍老兵 · 足迹遍布全国</div></div></button></div>';
+      '<div class="s2-sec-h">我的</div>'+
+      '<div class="s2-my-item" onclick="toggleMyMenu(\'tickets\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#d4a86a,#c08850)">券</span><span class="s2-my-t">粮票中心</span><span class="s2-my-a">›</span></div>'+
+      '<div class="s2-my-menu" id="s2-my-tickets"><span onclick="openSubpage(\'s-tickets\')">等级说明</span><span onclick="openSubpage(\'s-tickets\')">赚粮票攻略</span><span onclick="openSubpage(\'s-tickets\')">消费指南</span></div>'+
+      '<div class="s2-my-item" onclick="toggleMyMenu(\'tasks\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#e8935a,#d4733e)">赏</span><span class="s2-my-t">悬赏任务</span><span class="s2-my-a">›</span></div>'+
+      '<div class="s2-my-menu" id="s2-my-tasks"><span onclick="openSubpage(\'s-community\')">热门任务</span><span onclick="openSubpage(\'s-community\')">我的悬赏</span><span onclick="openSubpage(\'s-community\')">排行榜</span></div>'+
+      '<div class="s2-my-item" onclick="toggleMyMenu(\'about\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#9aba7a,#7a9a5a)">人</span><span class="s2-my-t">关于兵姐</span><span class="s2-my-a">›</span></div>'+
+      '<div class="s2-my-menu" id="s2-my-about"><span onclick="openSubpage(\'s-about\')">个人介绍</span><span onclick="openSubpage(\'s-about\')">兵姐的足迹</span><span onclick="openSubpage(\'s-about\')">联系兵姐</span></div>';
   }
+  window.toggleMyMenu = function(id) {
+    var m = document.getElementById('s2-my-' + id);
+    if(m) m.classList.toggle('open');
+  };
+
   var sm = document.getElementById('s2-modules');
   if(sm && C.modules){
-    var mh = '<div class="s2-mod-bar">';
+    var mh = '<div class="s2-sec-h">全部服务</div><div class="s2-mod-bar">';
     C.modules.forEach(function(m, i) {
-      mh += '<div class="s2-mod-item" onclick="toggleS2ModMenu(' + i + ')"><div class="mod-acc-ico">' + (_accIcons[i]||'·') + '</div><div class="s2-mod-name">' + m.name + '</div></div>';
+      mh += '<div class="s2-mod-item" onclick="toggleS2ModMenu(' + i + ')"><div class="mod-acc-ico">' + (_accIcons[i]||'·') + '</div><div class="s2-mod-name">' + m.name + '</div><span class="s2-mod-arrow">›</span></div>';
     });
-    mh += '</div>';
+    mh += '</div><div class="s2-mod-menus">';
     C.modules.forEach(function(m, i) {
       var links = _accLinks[m.id] || [];
       mh += '<div class="s2-mod-menu" id="s2-mod-menu-' + i + '">';
@@ -408,6 +416,7 @@ document.addEventListener('DOMContentLoaded',function(){
       });
       mh += '</div>';
     });
+    mh += '</div>';
     sm.innerHTML = mh;
   }
   window.toggleS2ModMenu = function(idx) {

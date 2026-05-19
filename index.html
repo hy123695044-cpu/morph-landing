@@ -258,21 +258,33 @@ img{max-width:100%;display:block}
 .s2c-d{font-size:0.5rem;color:rgba(255,255,255,0.6);margin-top:2px;letter-spacing:0.5px}
 
 /* Bottom links */
-#s2-links{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
-  margin-top:8px
-}
-.s2-links-lb{font-size:0.48rem;color:#8a7a6a;letter-spacing:1px;grid-column:1/-1;padding:2px 0 0;border-top:1px solid #e8e0d8;margin-top:4px}
-/* S2 accordion style */
-.s2-acc-h{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#fff;border-radius:8px;margin-bottom:4px;cursor:pointer;border:1px solid #f0ece4;transition:all 0.2s}
-.s2-acc-h:hover{background:#faf8f5}
-.s2-acc-lb{font-size:0.5rem;font-weight:600;color:#2d2a24;letter-spacing:1px}
-.s2-acc-a{font-size:0.65rem;color:#c4956a;transition:transform 0.3s}
-.s2-acc-h.open .s2-acc-a{transform:rotate(90deg)}
-.s2-acc-b{max-height:0;overflow:hidden;transition:max-height 0.35s ease,opacity 0.25s;opacity:0}
-.s2-acc-b.open{max-height:600px;opacity:1}
-#s2-acc-my{display:flex;flex-direction:column;gap:4px;margin-bottom:4px}
-#s2-acc-my .s2-link-btn{background:#fff;border:1px solid #f0ece4;border-radius:8px;padding:10px 12px;text-align:left;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px}
+/* S2: 我的 + 全部服务 */
+.s2-sec-h{font-size:0.48rem;color:#8a7a6a;letter-spacing:1px;margin:6px 0 4px;padding-top:4px;border-top:1px solid #e8e0d8}
+.s2-my-item{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#fff;border:1px solid #f0ece4;border-radius:8px;margin-bottom:4px;cursor:pointer;transition:all 0.2s}
+.s2-my-item:hover{border-color:#c4956a}
+.s2-my-ico{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.5rem;font-weight:600;flex-shrink:0}
+.s2-my-t{flex:1;font-size:0.5rem;font-weight:600;color:#2d2a24}
+.s2-my-a{font-size:0.6rem;color:#c4956a;transition:transform 0.3s;flex-shrink:0}
+.s2-my-item.open .s2-my-a{transform:rotate(90deg)}
+.s2-my-menu{max-height:0;overflow:hidden;transition:max-height 0.3s;display:flex;gap:4px;margin-bottom:0;flex-wrap:wrap}
+.s2-my-menu.open{max-height:120px;margin-bottom:4px}
+.s2-my-menu span{padding:5px 12px;background:rgba(255,255,255,0.85);border-radius:6px;font-size:0.42rem;color:#5a4a3a;cursor:pointer;transition:all 0.2s;border:1px solid #e8e0d8}
+.s2-my-menu span:hover{background:#fff;border-color:#c4956a;color:#c4956a}
+/* Modules row */
+.s2-mod-bar{display:flex;gap:4px;margin-bottom:0}
+.s2-mod-item{flex:1;background:#fff;border:1px solid #f0ece4;border-radius:8px;padding:6px 2px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.s2-mod-item:hover{background:#faf8f5;border-color:#c4956a}
+.s2-mod-item .mod-acc-ico{width:26px;height:26px;font-size:0.48rem;margin:0 auto}
+.s2-mod-name{font-size:0.38rem;font-weight:600;color:#2d2a24}
+.s2-mod-arrow{position:absolute;bottom:2px;right:4px;font-size:0.45rem;color:#c4956a;transition:transform 0.3s}
+.s2-mod-item.open .s2-mod-arrow{transform:rotate(180deg)}
+.s2-mod-menus{position:relative}
+.s2-mod-menu{max-height:0;overflow:hidden;transition:max-height 0.3s,opacity 0.2s;opacity:0;display:flex;gap:4px;flex-wrap:wrap}
+.s2-mod-menu.open{max-height:120px;opacity:1;padding:4px 0}
+.s2-mod-link{padding:5px 10px;background:rgba(255,255,255,0.85);border-radius:6px;font-size:0.42rem;color:#5a4a3a;cursor:pointer;transition:all 0.2s;border:1px solid #e8e0d8}
+.s2-mod-link:hover{background:#fff;border-color:#c4956a;color:#c4956a}
+@media(max-width:640px){.s2-mod-item{padding:4px 2px}.s2-mod-name{font-size:0.35rem}.s2-mod-arrow{display:none}}
+
 #s2-links button, .s2-link-btn{
   background:#fff;border-radius:10px;padding:14px 10px;text-align:left;
   border:none;cursor:pointer;font-family:inherit;
@@ -319,23 +331,23 @@ img{max-width:100%;display:block}
 #s3 .scr-desc{color:rgba(255,255,255,0.6);font-size:clamp(0.5rem,1.2vw,0.65rem);font-weight:500}
 .s3-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
 .pp-card{
-  background:rgba(255,255,255,0.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-radius:12px;padding:14px;
-  display:flex;align-items:flex-start;gap:12px;
-  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-radius:14px;padding:16px;
+  display:flex;align-items:flex-start;gap:14px;
+  border:1px solid rgba(255,255,255,0.1);
   transition:transform 0.2s,box-shadow 0.2s
 }
-.pp-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15)}
+.pp-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.2)}
 .pp-ico .pp-c{
-  display:inline-flex;width:44px;height:44px;border-radius:50%;
+  display:inline-flex;width:48px;height:48px;border-radius:50%;
   align-items:center;justify-content:center;
-  font-size:0.6rem;font-weight:700;flex-shrink:0;
-  background:rgba(196,149,106,0.2);color:#d4b88a;box-shadow:0 2px 8px rgba(0,0,0,0.1)
+  font-size:0.65rem;font-weight:700;flex-shrink:0;
+  background:rgba(196,149,106,0.25);color:#d4b88a;box-shadow:0 2px 10px rgba(0,0,0,0.15)
 }
 .pp-body{min-width:0}
-.pp-t{font-size:0.55rem;font-weight:700;color:#fff;margin-bottom:2px}
-.pp-d{font-size:0.52rem;color:rgba(255,255,255,0.5);margin-bottom:4px;line-height:1.7}
-.pp-s{font-size:0.5rem;color:#ff6b4a;line-height:1.7;padding:5px 10px;background:rgba(255,107,74,0.1);border-radius:6px;font-weight:500}
+.pp-t{font-size:0.6rem;font-weight:700;color:#fff;margin-bottom:3px}
+.pp-d{font-size:0.55rem;color:rgba(255,255,255,0.55);margin-bottom:5px;line-height:1.7}
+.pp-s{font-size:0.52rem;color:#ff6b4a;line-height:1.7;padding:6px 12px;background:rgba(255,107,74,0.15);border-radius:8px;font-weight:600}
 
 /* Promise (in S2) */
 #s2-promise{

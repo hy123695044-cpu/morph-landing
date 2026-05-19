@@ -43,12 +43,12 @@ img{max-width:100%;display:block}
 #top-nav.scrolled{background:rgba(250,248,245,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.04)}
 .nav-logo{font-size:0.62rem;font-weight:500;letter-spacing:3px;color:#fff;text-decoration:none;transition:color 0.4s}
 #top-nav.scrolled .nav-logo{color:#2d2a24}
-#nav-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0;z-index:101}
-#nav-share{font-size:0.85rem;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.2s;line-height:1}
+#nav-right{display:flex;align-items:center;gap:2px;margin-left:auto;flex-shrink:0;z-index:101}
+#nav-share{font-size:0.8rem;cursor:pointer;padding:3px 5px;border-radius:6px;transition:all 0.2s;line-height:1}
 #nav-share:hover{background:rgba(255,255,255,0.1)}
 #top-nav.scrolled #nav-share:hover{background:rgba(0,0,0,0.04)}
-#nav-login{font-size:0.65rem;cursor:pointer;padding:4px 12px;border-radius:8px;color:#fff;border:1px solid rgba(255,255,255,0.3);transition:all 0.2s;font-weight:600;letter-spacing:1px}
-@media(max-width:480px){#nav-share{font-size:0.7rem;padding:4px}#nav-login{font-size:0.5rem;padding:3px 8px;letter-spacing:0}}
+#nav-login{font-size:0.55rem;cursor:pointer;padding:3px 10px;border-radius:6px;color:#fff;border:1px solid rgba(255,255,255,0.3);transition:all 0.2s;font-weight:600;letter-spacing:1px}
+@media(max-width:480px){#nav-share{font-size:0.5rem;padding:2px 3px}#nav-login{font-size:0.4rem;padding:2px 5px;letter-spacing:0}}
 #nav-login:hover{background:rgba(255,255,255,0.1);color:#fff}
 #top-nav.scrolled #nav-login{color:#2d2a24;border-color:rgba(0,0,0,0.15)}
 #top-nav.scrolled #nav-login:hover{background:rgba(0,0,0,0.04);color:#2d2a24}
@@ -132,11 +132,11 @@ img{max-width:100%;display:block}
 .s1-scroll{
   position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
   z-index:3;display:flex;flex-direction:column;align-items:center;gap:3px;
-  animation:s1b 2.4s ease-in-out infinite;opacity:0.3
+  animation:s1b 2.4s ease-in-out infinite;opacity:0.4
 }
-@keyframes s1b{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.3}50%{transform:translateX(-50%) translateY(6px);opacity:0.55}}
-.s1-scroll-bar{width:1px;height:24px;background:rgba(255,255,255,0.25)}
-.s1-scroll-t{font-size:0.48rem;letter-spacing:2px;color:rgba(255,255,255,0.25);writing-mode:vertical-lr}
+@keyframes s1b{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.4}50%{transform:translateX(-50%) translateY(6px);opacity:0.7}}
+.s1-scroll-bar{width:2px;height:32px;background:rgba(255,255,255,0.4)}
+.s1-scroll-t{font-size:0.55rem;letter-spacing:3px;color:rgba(255,255,255,0.4);writing-mode:vertical-lr}
 
 /* ===== S1.5 背书 ===== */
 #s-15{
@@ -150,24 +150,26 @@ img{max-width:100%;display:block}
   pointer-events:none
 }
 #s-15 .scr-num{color:#c4956a;letter-spacing:6px}
-#s-15 .scr-title{color:#fff;font-weight:200;letter-spacing:6px;margin-bottom:4px}
-#s-15 .scr-desc{color:rgba(255,255,255,0.3);margin:0 auto 22px;max-width:480px}
+#s-15 .scr-title{color:#ff8c42;font-weight:700;letter-spacing:6px;margin-bottom:4px;font-size:clamp(1rem,3vw,1.8rem)}
+#s-15 .scr-desc{color:rgba(255,255,255,0.7);font-weight:600;font-size:clamp(0.5rem,1.2vw,0.65rem);margin:0 auto 22px;max-width:520px}
 .s15-badges{
-  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
-  position:relative;z-index:1
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  max-width:700px;margin:0 auto;position:relative;z-index:1
 }
 .s15-badge{
-  padding:16px 24px;background:rgba(255,255,255,0.1);
+  padding:14px 16px;background:rgba(255,255,255,0.1);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(196,149,106,0.25);
-  border-radius:14px;
-  font-size:0.5rem;color:#fff;font-weight:500;
-  letter-spacing:1px;line-height:1.6;
+  border-radius:50px;
+  font-size:0.45rem;color:#fff;font-weight:500;
+  letter-spacing:1px;line-height:1.5;text-align:center;
   box-shadow:0 8px 32px rgba(0,0,0,0.2);
   transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  cursor:default
+  cursor:default;white-space:normal
 }
-.s15-badge:active{background:rgba(196,149,106,0.2);border-color:#c4956a;box-shadow:0 8px 32px rgba(196,149,106,0.15),0 0 30px rgba(196,149,106,0.12);transform:translateY(-4px) scale(1.02)}
+.s15-badge:nth-child(4),.s15-badge:nth-child(5){grid-column:span 1;max-width:200px;margin:0 auto}
+.s15-badge:nth-child(4){grid-column:2}
+.s15-badge:active{background:rgba(196,149,106,0.2);border-color:#c4956a;box-shadow:0 8px 32px rgba(196,149,106,0.2),0 0 30px rgba(196,149,106,0.15);transform:translateY(-4px) scale(1.02)}
 
 /* S1.5 stats */
 .s15-stats{
@@ -1266,8 +1268,7 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
 <!-- NAV -->
 <nav id="top-nav">
   <a class="nav-logo" href="#">兵姐<span>·</span>养心栖居</a>
-  <button id="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
-  <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="openAuth()">登录</span></div>
+  <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="openAuth()">登录</span><button id="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button></div>
   <ul id="nav-menu">
 	    <li><a class="nav-link active" href="#s1">首页</a></li>
 	    <li><a class="nav-link" href="#s-15">背书</a></li>
@@ -1459,7 +1460,7 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
 </div>
 
 <!-- Chat button -->
-<div id="fab-main" onclick="toggleFabMenu()"><span id="fab-icon">⚡</span></div>
+<div id="fab-main" onclick="toggleFabMenu()"><span id="fab-icon">◎</span></div>
 <div id="fab-menu">
   <div class="fab-item" onclick="toggleChat()"><span class="fab-ico" style="background:linear-gradient(145deg,#c4956a,#d4733e)">💬</span><span class="fab-lb">聊天</span></div>
   <div class="fab-item" onclick="toggleKF()"><span class="fab-ico" style="background:linear-gradient(145deg,#5a8a4a,#7aba6a)">👩‍🦰</span><span class="fab-lb">客服</span></div>

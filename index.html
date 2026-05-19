@@ -364,14 +364,15 @@ img{max-width:100%;display:block}
 #s4 .scr-num{color:#d4b88a}
 #s4 .scr-title{color:#fff}
 #s4 .scr-desc{color:rgba(255,255,255,0.6)}
-.s4-tab-h{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.s4-tab-h{display:flex;gap:2px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.1);overflow-x:auto}
+.s4-tab-h::-webkit-scrollbar{height:0}
 .s4-tab-btn{
-  flex:1;min-width:120px;padding:10px 8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);cursor:pointer;
-  font-size:0.6rem;font-family:inherit;color:rgba(255,255,255,0.7);border-radius:10px;
-  transition:all 0.25s;letter-spacing:2px;font-weight:700;text-align:center
+  padding:6px 14px;background:none;border:none;cursor:pointer;
+  font-size:0.5rem;font-family:inherit;color:rgba(255,255,255,0.4);
+  border-bottom:2px solid transparent;transition:all 0.25s;white-space:nowrap;letter-spacing:1px;font-weight:500
 }
-.s4-tab-btn.active{background:rgba(212,184,138,0.2);color:#d4b88a;border-color:#d4b88a}
-.s4-tab-btn:hover{background:rgba(255,255,255,0.15);color:#fff}
+.s4-tab-btn.active{color:#d4b88a;border-bottom-color:#d4b88a;font-weight:500}
+.s4-tab-btn:hover{color:rgba(255,255,255,0.7)}
 .s4-rooms{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .s4-room{
   background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);
@@ -1275,7 +1276,7 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
 
 <!-- NAV -->
 <nav id="top-nav">
-  <a class="nav-logo" href="#">逸睿<span>·</span>康养旅居</a>
+  <a class="nav-logo" href="#">兵姐<span>·</span>养心栖居</a>
   <button id="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
   <div id="nav-right"><span id="nav-share" onclick="shareSite()" title="分享有奖">🎁</span><span id="nav-login" onclick="if(_chatUser){showUserInfo()}else{openAuth()}">登录</span></div>
   <ul id="nav-menu">
@@ -1295,9 +1296,9 @@ body.dark .about-ft-count{color:rgba(255,255,255,0.4) !important}
   <div id="s1-bg"></div>
   <div id="s1-ol"></div>
   <div id="s1c">
-    <p class="s1-loc reveal">浙江 · 安吉 · 逸睿客栈</p>
-    <h1 class="s1-title reveal">安吉 · 逸睿</h1>
-    <p class="s1-sub reveal">兵姐康养旅居</p>
+    <p class="s1-loc reveal">浙江 · 安吉</p>
+    <h1 class="s1-title reveal">安吉 · 兵姐的养心栖居</h1>
+    <p class="s1-sub reveal">慢下来，与自然共生</p>
     <p class="s1-note reveal">在安吉竹海深处，有一个叫兵姐的人</p>
   </div>
   <div class="s1-scroll"><span class="s1-scroll-t">向下</span><div class="s1-scroll-bar"></div></div>

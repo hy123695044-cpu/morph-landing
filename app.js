@@ -1168,6 +1168,14 @@ function renderPromise() {
   var h = '<div class="prom-badge">兵姐的承诺</div>';
   h += '<div class="prom-h">' + p.headline + '</div>';
   h += '<div class="prom-sub">' + p.subhead + '</div>';
+  /* Pain points right below promise */
+  if (C.painPoints) {
+    h += '<div class="s3-grid" style="margin-top:14px">';
+    C.painPoints.forEach(function(pp) {
+      h += '<div class="pp-card"><div class="pp-ico"><span class="pp-c">' + pp.icon + '</span></div><div class="pp-body"><div class="pp-t">' + pp.title + '</div><div class="pp-d">' + pp.desc + '</div><div class="pp-s">' + pp.solution + '</div></div></div>';
+    });
+    h += '</div>';
+  }
   el.innerHTML = h;
 }
 

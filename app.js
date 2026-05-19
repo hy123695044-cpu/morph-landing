@@ -1527,27 +1527,25 @@ function switchAuthTab(mode) {
 function doAuth() {
   var email = document.getElementById('auth-email').value.trim();
   var pass = document.getElementById('auth-pass').value;
+  var nick = document.getElementById('auth-nick').value.trim() || email.split('@')[0];
   if (!email || pass.length < 3) { document.getElementById('auth-err').textContent='请填写完整'; return; }
   if (_firebaseReady) {
-    /* Firebase real auth */
     if (_authMode === 'login') {
       firebase.auth().signInWithEmailAndPassword(email, pass)
-        .then(function(r){ _chatUser = r.user; afterAuth(); })
+        .then(function(r){ _chatUser = r.user; _chatUser._nick = nick; afterAuth(); })
         .catch(function(e){ document.getElementById('auth-err').textContent=e.message; });
     } else {
       firebase.auth().createUserWithEmailAndPassword(email, pass)
         .then(function(r){
           _chatUser = r.user;
-          if (document.getElementById('auth-nick').value) {
-            _chatUser.displayName = document.getElementById('auth-nick').value;
-          }
+          _chatUser._nick = nick;
+          r.user.updateProfile({displayName: nick});
           afterAuth();
         })
         .catch(function(e){ document.getElementById('auth-err').textContent=e.message; });
     }
   } else {
-    /* Demo mode */
-    _chatUser = { email: email, displayName: document.getElementById('auth-nick').value || email.split('@')[0], uid: 'demo_' + Date.now() };
+    _chatUser = { email: email, _nick: nick, uid: 'demo_' + Date.now() };
     afterAuth();
   }
 }
@@ -1555,7 +1553,7 @@ function doAuth() {
 function afterAuth() {
   closeAuth();
   toggleChat();
-  addChatMsg({ name: '系统', text: '欢迎 ' + (_chatUser.displayName||_chatUser.email) + '！', time: new Date().toLocaleTimeString() });
+  addChatMsg({ name: '系统', text: '欢迎 ' + (_chatUser._nick||_chatUser.displayName||_chatUser.email) + '！', time: new Date().toLocaleTimeString() });
 }
 
 function addChatMsg(msg, isMe) {
@@ -1576,20 +1574,19 @@ function sendChatMsg() {
   if (!text) return;
   input.value = '';
   if (!_chatUser) { openAuth(); return; }
-  addChatMsg({ name: _chatUser.displayName||_chatUser.email, text: text, time: new Date().toLocaleTimeString() }, true);
-  _chatMsgs.push({ name: _chatUser.displayName||_chatUser.email, text: text, time: Date.now() });
+  var name = _chatUser._nick || _chatUser.displayName || _chatUser.email || '战友';
+  addChatMsg({ name: name, text: text, time: new Date().toLocaleTimeString() }, true);
   if (_firebaseReady) {
-    /* Save to Firestore */
-    try {
-      firebase.firestore().collection('chats').add({ name: _chatUser.displayName||_chatUser.email, text: text, time: firebase.firestore.FieldValue.serverTimestamp(), uid: _chatUser.uid });
-    } catch(e) {}
-  }
-  /* Simulate a reply after 1-3 seconds */
-  if (Math.random() > 0.4) {
-    var replies = ['说得对！👍','哈哈是的','我也这么觉得😊','收到收到！','有道理有道理','你说得太好了','同意+1','原来如此！','学到了','好主意！'];
-    setTimeout(function(){
-      addChatMsg({ name: '战友' + Math.floor(Math.random()*100), text: replies[Math.floor(Math.random()*replies.length)], time: new Date().toLocaleTimeString() });
-    }, 1000 + Math.random() * 2000);
+    try { firebase.firestore().collection('chats').add({ name: name, text: text, time: firebase.firestore.FieldValue.serverTimestamp(), uid: _chatUser.uid }); } catch(e) {}
+  } else {
+    _chatMsgs.push({ name: name, text: text, time: Date.now() });
+    /* Demo: random reply */
+    if (Math.random() > 0.4) {
+      var replies = ['说得对！👍','哈哈是的','我也这么觉得😊','收到收到！','有道理有道理','你说得太好了','同意+1','原来如此！','学到了','好主意！'];
+      setTimeout(function(){
+        addChatMsg({ name: '战友' + Math.floor(Math.random()*100), text: replies[Math.floor(Math.random()*replies.length)], time: new Date().toLocaleTimeString() });
+      }, 1000 + Math.random() * 2000);
+    }
   }
 }
 
@@ -1598,15 +1595,15 @@ function loadChatHistory() {
   var empty = document.getElementById('chat-empty');
   if (!container) return;
   if (_firebaseReady) {
-    try {
-      firebase.firestore().collection('chats').orderBy('time','desc').limit(20).get().then(function(snap){
+    /* Real-time listener */
+    if (!window._chatListener) {
+      window._chatListener = firebase.firestore().collection('chats').orderBy('time','asc').limit(50).onSnapshot(function(snap){
         container.innerHTML = '';
-        snap.forEach(function(doc){ var d=doc.data(); addChatMsg({name:d.name,text:d.text,time:d.time?d.time.toDate().toLocaleTimeString():''}); });
         if (empty) empty.style.display = 'none';
+        snap.forEach(function(doc){ var d=doc.data(); addChatMsg({name:d.name,text:d.text,time:d.time?d.time.toDate().toLocaleTimeString():''}); });
       });
-    } catch(e) {}
+    }
   } else {
-    /* Demo messages */
     var demos = [
       {name:'王阿姨',text:'今天去安吉竹海走了走，空气真好！'},
       {name:'张建国',text:'发一张我拍的照片🌄',time:'14:23'},

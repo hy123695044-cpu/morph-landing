@@ -1564,17 +1564,29 @@ function playCourseLesson(courseId, lessonNum, lessonName) {
 function shareSite() {
   var url = window.location.href;
   var text = '兵姐康养旅居 - 后半生的另一种活法';
+  /* Try Web Share API first */
   if (navigator.share) {
-    navigator.share({title: text, text: text, url: url}).catch(function(){});
-  } else {
-    /* Fallback: copy link */
-    var ta = document.createElement('textarea');
-    ta.value = url;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    alert('✅ 链接已复制！分享给好友，TA 注册后你将获得粮票奖励！');
+    navigator.share({title: text, text: text, url: url}).catch(function(e){});
+    return;
+  }
+  /* Fallback: copy link */
+  try {
+    navigator.clipboard.writeText(url).then(function() {
+      alert('✅ 链接已复制！分享给好友，TA注册后双方都得粮票奖励！');
+    }).catch(function() {
+      /* Final fallback */
+      var ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('✅ 链接已复制！分享给好友，TA注册后双方都得粮票奖励！');
+    });
+  } catch(e) {
+    prompt('复制链接分享给好友：', url);
   }
 }
 /* Check referral */

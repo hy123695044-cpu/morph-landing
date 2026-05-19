@@ -184,9 +184,9 @@ window.CONTENT = {
 
   contact: {
     subtitle: "来兵姐的小院坐坐",
-    wechat: "bingjie_anji",
-    phone: "138-xxxx-xxxx",
-    address: "浙江 · 安吉 · 天荒坪镇"
+    wechat: "zxbj1960",
+    phone: "",
+    address: "浙江省湖州市安吉县递铺三官老庄"
   },
 
   ticketGuide: {

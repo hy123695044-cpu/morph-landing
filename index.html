@@ -512,24 +512,25 @@ img{max-width:100%;display:block}
   transform:translateX(100%);
   transition:transform 0.45s cubic-bezier(0.22,1,0.36,1);
   -webkit-overflow-scrolling:touch;
-  background:rgba(250,248,245,0.95)
+  background:linear-gradient(rgba(20,25,20,0.93),rgba(15,20,15,0.96)),url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');
+  background-size:cover;background-position:center;background-attachment:fixed
 }
 .subpage.open{transform:translateX(0)}
 .sub-header{
   position:sticky;top:0;z-index:10;
   display:flex;align-items:center;gap:6px;
   padding:0 16px;height:52px;
-  background:rgba(250,248,245,0.92);
+  background:rgba(20,25,20,0.92);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(0,0,0,0.03)
+  border-bottom:1px solid rgba(255,255,255,0.06)
 }
 .sub-back{
   background:none;border:none;cursor:pointer;
-  font-size:0.52rem;color:#2d2a24;padding:6px 2px;display:flex;align-items:center;gap:2px;
+  font-size:0.52rem;color:rgba(255,255,255,0.6);padding:6px 2px;display:flex;align-items:center;gap:2px;
   font-family:inherit;font-weight:600;letter-spacing:1px
 }
-.sub-back:hover{color:#c4956a}
-.sub-title{font-size:0.55rem;font-weight:600;letter-spacing:2px;color:#2d2a24}
+.sub-back:hover{color:#d4b88a}
+.sub-title{font-size:0.55rem;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,0.9)}
 .sub-body{padding:0 20px 60px;max-width:1080px;margin:0 auto;width:100%}
 .sub-tabs{
   display:flex;gap:2px;margin-bottom:18px;border-bottom:1px solid #f0ece4;
@@ -998,12 +999,12 @@ img{max-width:100%;display:block}
     url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=60');
   background-size:cover;background-position:center;background-attachment:fixed
 }
-#sub-s-stay{background:linear-gradient(rgba(42,42,34,0.9),rgba(42,42,34,0.94)),
-    url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80');
+#sub-s-stay{background:linear-gradient(rgba(20,25,20,0.92),rgba(15,20,15,0.96)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');
   background-size:cover;background-position:center;background-attachment:fixed
 }
-#sub-s-about{background:linear-gradient(rgba(250,248,245,0.92),rgba(245,242,236,0.95)),
-    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80');
+#sub-s-about{background:linear-gradient(rgba(20,25,20,0.92),rgba(15,20,15,0.96)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');
   background-size:cover;background-position:center;background-attachment:fixed
 }
 
@@ -1428,7 +1429,7 @@ body.loaded, .subpage.open{opacity:1}
       <p class="s7-etym reveal">「安且吉兮」——取自《诗经》</p>
       <p class="s7-p reveal">安吉，位于浙江省西北部，中国首个生态县。百万亩竹林，森林覆盖率71%，被誉为「中国竹乡」。</p>
       <p class="s7-p reveal">白茶飘香，竹海如涛。春挖笋、夏避暑、秋登高、冬赏雪——四时皆景。</p>
-      <div class="s7-contact reveal">微信：bingjie_anji　电话：138-xxxx-xxxx　地址：浙江 · 安吉 · 天荒坪镇</div>
+      <div class="s7-contact reveal">微信：zxbj1960　地址：浙江省湖州市安吉县递铺三官老庄 · 安吉逸睿客栈</div>
     </div>
     <div id="s7-stats"></div>
   </div>
@@ -1436,9 +1437,9 @@ body.loaded, .subpage.open{opacity:1}
 
 <!-- FOOTER -->
 <footer id="ft">
-  <div class="ft-b">兵姐康养旅居</div>
-  <div class="ft-t">后半生的另一种活法</div>
-  <div class="ft-c">© 2025 兵姐康养旅居</div>
+  <div class="ft-b">安吉逸睿客栈 · 兵姐康养旅居</div>
+  <div class="ft-t">微信：zxbj1960</div>
+  <div class="ft-c">浙江省湖州市安吉县递铺三官老庄</div>
 </footer>
 
 <div id="search-overlay"><div id="search-box"><input id="search-input" placeholder="搜课程、搜帖子..." onkeydown="if(event.key==='Enter')doSearch()"><button onclick="closeSearch()">取消</button></div><div id="search-results"></div></div>

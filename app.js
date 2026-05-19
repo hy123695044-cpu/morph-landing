@@ -389,12 +389,11 @@ document.addEventListener('DOMContentLoaded',function(){
   if(bl){
     bl.innerHTML=
       '<div class="s2-sec-h">我的</div>'+
-      '<div class="s2-my-row"><div class="s2-my-item" onclick="toggleMyMenu(\'tickets\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#d4a86a,#c08850)">券</span><span class="s2-my-t">粮票中心</span></div>'+
-      '<div class="s2-my-item" onclick="toggleMyMenu(\'tasks\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#e8935a,#d4733e)">赏</span><span class="s2-my-t">悬赏任务</span></div>'+
-      '<div class="s2-my-item" onclick="toggleMyMenu(\'about\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#9aba7a,#7a9a5a)">人</span><span class="s2-my-t">关于兵姐</span></div></div>'+
-      '<div class="s2-my-menu" id="s2-my-tickets"><span onclick="openSubpage(\'s-tickets\')">等级说明</span><span onclick="openSubpage(\'s-tickets\')">赚粮票攻略</span><span onclick="openSubpage(\'s-tickets\')">消费指南</span></div>'+
-      '<div class="s2-my-menu" id="s2-my-tasks"><span onclick="openSubpage(\'s-community\')">热门任务</span><span onclick="openSubpage(\'s-community\')">我的悬赏</span><span onclick="openSubpage(\'s-community\')">排行榜</span></div>'+
-      '<div class="s2-my-menu" id="s2-my-about"><span onclick="openSubpage(\'s-about\')">个人介绍</span><span onclick="openSubpage(\'s-about\')">兵姐的足迹</span><span onclick="openSubpage(\'s-about\')">联系兵姐</span></div>';
+      '<div class="s2-my-row">'+
+      '<div class="s2-my-group"><div class="s2-my-item" onclick="toggleMyMenu(\'tickets\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#d4a86a,#c08850)">券</span><span class="s2-my-t">粮票中心</span></div><div class="s2-my-menu" id="s2-my-tickets"><span onclick="openSubpage(\'s-tickets\')">等级说明</span><span onclick="openSubpage(\'s-tickets\')">赚粮票攻略</span><span onclick="openSubpage(\'s-tickets\')">消费指南</span></div></div>'+
+      '<div class="s2-my-group"><div class="s2-my-item" onclick="toggleMyMenu(\'tasks\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#e8935a,#d4733e)">赏</span><span class="s2-my-t">悬赏任务</span></div><div class="s2-my-menu" id="s2-my-tasks"><span onclick="openSubpage(\'s-community\')">热门任务</span><span onclick="openSubpage(\'s-community\')">我的悬赏</span><span onclick="openSubpage(\'s-community\')">排行榜</span></div></div>'+
+      '<div class="s2-my-group"><div class="s2-my-item" onclick="toggleMyMenu(\'about\')"><span class="s2-my-ico" style="background:linear-gradient(145deg,#9aba7a,#7a9a5a)">人</span><span class="s2-my-t">关于兵姐</span></div><div class="s2-my-menu" id="s2-my-about"><span onclick="openSubpage(\'s-about\')">个人介绍</span><span onclick="openSubpage(\'s-about\')">兵姐的足迹</span><span onclick="openSubpage(\'s-about\')">联系兵姐</span></div></div>'+
+      '</div>';
   }
   window.toggleMyMenu = function(id) {
     document.querySelectorAll('.s2-my-menu').forEach(function(m){ m.classList.remove('open'); });

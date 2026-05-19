@@ -337,7 +337,12 @@ for(var _i=0;_i<30;_i++){
 (function(){
   document.addEventListener('click',function(e){
     var b=e.target.closest('#nav-toggle');
-    if(!b)return;document.getElementById('nav-menu').classList.toggle('open');b.classList.toggle('open')
+    if(!b){/* Click outside: close menu */
+      var m=document.getElementById('nav-menu'),t=document.getElementById('nav-toggle');
+      if(m&&m.classList.contains('open')){m.classList.remove('open');if(t)t.classList.remove('open')}
+      return;
+    }
+    document.getElementById('nav-menu').classList.toggle('open');b.classList.toggle('open')
   });
   document.addEventListener('click',function(e){
     var l=e.target.closest('.nav-link');
@@ -1426,7 +1431,10 @@ function switchAuthTab(mode) {
 function doAuth() {
   var email = document.getElementById('auth-email').value.trim();
   var pass = document.getElementById('auth-pass').value;
-  var nick = document.getElementById('auth-nick').value.trim() || email.split('@')[0];
+  var nickInput = document.getElementById('auth-nick').value.trim();
+  /* Get nickname: try saved first, then input, then email prefix */
+  var savedUser = JSON.parse(localStorage.getItem('chatUser')||'{}');
+  var nick = nickInput || savedUser.nick || email.split('@')[0];
   if (!email || pass.length < 3) { document.getElementById('auth-err').textContent='请填写完整'; return; }
   if (_firebaseReady) {
     if (_authMode === 'login') {

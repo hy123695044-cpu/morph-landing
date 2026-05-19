@@ -454,23 +454,6 @@ function closeSubpage() {
   document.body.style.overflow = '';
 }
 
-/* Swipe left-to-right to close subpage (mobile) */
-document.addEventListener('touchstart', function(e) {
-  window._swipeX = e.touches[0].clientX;
-  window._swipeY = e.touches[0].clientY;
-}, {passive:true});
-document.addEventListener('touchend', function(e) {
-  if (!window._swipeX) return;
-  var dx = e.changedTouches[0].clientX - window._swipeX;
-  var dy = e.changedTouches[0].clientY - window._swipeY;
-  /* Left-to-right swipe > 80px, not too vertical */
-  if (dx > 80 && Math.abs(dy) < dx) {
-    var openSub = document.querySelector('.subpage.open');
-    if (openSub) closeSubpage();
-  }
-  window._swipeX = null;
-}, {passive:true});
-
 function closeCourseDetail() {
   document.getElementById('sub-course-detail').classList.remove('open');
   document.body.style.overflow = 'hidden';
@@ -1211,8 +1194,8 @@ function renderStayAccordion() {
   var tabs = [
     { id: 'rooms', label: '房型展示', content: renderStayRoomsInline },
     { id: 'book', label: '预约住宿', content: renderStayBookInline },
-    { id: 'trips', label: '往期旅居', content: renderStayTripsInline },
-    { id: 'yard', label: '合作院子', content: renderStayYardInline }
+    { id: 'yard', label: '合作院子', content: renderStayYardInline },
+    { id: 'trips', label: '往期旅居', content: renderStayTripsInline }
   ];
   var h = '<div class="s4-tab-h">';
   tabs.forEach(function(t, i) {
@@ -1534,21 +1517,6 @@ function loadChatHistory() {
     if (empty) empty.style.display = 'none';
   }
 }
-
-/* Swipe back gesture for subpages */
-(function(){
-  var sx = 0;
-  document.addEventListener('touchstart', function(e) {
-    sx = e.touches[0].clientX;
-  });
-  document.addEventListener('touchmove', function(e) {
-    var dx = e.touches[0].clientX - sx;
-    if (dx > 80 && document.querySelector('.subpage.open')) {
-      sx = 0;
-      closeSubpage();
-    }
-  });
-})();
 
 /* Online count fluctuation for chat */
 setInterval(function(){

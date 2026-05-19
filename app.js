@@ -1216,7 +1216,7 @@ function renderStayRoomsInline() {
   if (!C.stay.rooms) return '<div class="s4-empty">暂无房型信息</div>';
   var h = '<div class="s4-rooms">';
   C.stay.rooms.forEach(function(r) {
-    h += '<div class="s4-room"><div class="s4-room-img" style="background-image:url(' + (r.img||'') + ')"></div><div class="s4-room-n">' + r.name + '</div><div class="s4-room-info">' + r.beds + ' · ' + r.capacity + ' · ' + r.area + '</div><div class="s4-room-d">' + r.desc + '</div><div class="s4-room-pr">¥' + r.price + '<small>/晚</small></div></div>';
+    h += '<div class="s4-room" onclick="showRoomDetail(\'' + r.name.replace(/'/g,"\\'") + '\',\'' + r.beds.replace(/'/g,"\\'") + '\',\'' + r.desc.replace(/'/g,"\\'") + '\',\'' + r.price + '\',\'' + (r.img||'') + '\')"><div class="s4-room-img" style="background-image:url(' + (r.img||'') + ')"></div><div class="s4-room-n">' + r.name + '</div><div class="s4-room-info">' + r.beds + ' · ' + r.capacity + ' · ' + r.area + '</div><div class="s4-room-d">' + r.desc + '</div><div class="s4-room-pr">¥' + r.price + '<small>/晚</small></div></div>';
   });
   h += '</div>';
   return h;
@@ -1243,17 +1243,30 @@ function renderStayBookInline() {
 }
 
 function renderStayYardInline() {
-  return '<div class="s4-yard"><div class="s4-yard-t">合作院子招募中</div><div class="s4-yard-d">在安吉竹林深处，有一个小村落正在寻找有缘人。如果你也想过「采菊东篱下」的生活，欢迎来坐坐。</div><button class="s4-yard-btn">了解详情</button></div>';
+  return '<div class="s4-yard"><div class="s4-yard-t">合作院子招募中</div><div class="s4-yard-d">在安吉竹林深处，有一个小村落正在寻找有缘人。如果你也想过「采菊东篱下」的生活，欢迎来坐坐。</div><button class="s4-yard-btn" onclick="alert(\'📋 合作院子招募中\\n\\n📍 位置：浙江安吉·天荒坪镇\\n\\n兵姐正在寻找志同道合的伙伴一起打造康养小院。\\n如果你有自己的院子，或者想一起共建，欢迎联系！\\n\\n微信：zxbj1960\')">了解详情</button></div>';
 }
 
 function renderStayTripsInline() {
   if (!C.stay.pastTrips) return '';
   var h = '<div class="s4-trips">';
   C.stay.pastTrips.forEach(function(t) {
-    h += '<div class="s4-trip"><span class="s4-trip-s">' + t.season + '</span><span class="s4-trip-p">' + t.place + ' · ' + t.people + '人</span><span class="s4-trip-d">' + t.desc + '</span></div>';
+    h += '<div class="s4-trip"><span class="s4-trip-s">' + t.season + '</span><span class="s4-trip-p">' + t.place + ' · <strong style="color:#d4733e;font-size:0.6rem">' + t.people + '人</strong></span><span class="s4-trip-d">' + t.desc + '</span></div>';
   });
   h += '</div>';
   return h;
+}
+
+/* Room detail popup */
+function showRoomDetail(name, beds, desc, price, img) {
+  var h = '<div class="shop-detail-overlay" onclick="this.remove()"><div class="shop-detail" onclick="event.stopPropagation()">';
+  if(img) h += '<div style="width:100%;height:160px;background:url(' + img + ') center/cover;border-radius:8px;margin-bottom:10px"></div>';
+  h += '<div class="shop-detail-close" onclick="this.closest(\'.shop-detail-overlay\').remove()">x</div>';
+  h += '<div class="shop-detail-name" style="font-size:0.65rem">' + name + '</div>';
+  h += '<div style="font-size:0.5rem;color:#8a7a6a;margin:4px 0">' + beds + ' · ' + desc + '</div>';
+  h += '<div style="font-size:0.6rem;color:#d4733e;font-weight:700">¥' + price + '<span style="font-size:0.45rem;color:#8a7a6a;font-weight:400">/晚</span></div>';
+  h += '<button class="cd-buy" style="margin-top:10px;width:100%" onclick="this.closest(\'.shop-detail-overlay\').remove()">预约入住</button>';
+  h += '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', h);
 }
 
 /* S4 tab switching */

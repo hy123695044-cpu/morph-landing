@@ -7,12 +7,12 @@
  * 项目设置 → 一般 → 您的应用 → Web 应用 → 配置
  */
 var firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBmc-dIh_aQUiezzxSbjJdVML_OZj1_8xc",
+  authDomain: "morph-landing.firebaseapp.com",
+  projectId: "morph-landing",
+  storageBucket: "morph-landing.firebasestorage.app",
+  messagingSenderId: "1097463451061",
+  appId: "1:1097463451061:web:b85c8eac3905a61fb19dfc"
 };
 
 /* Firebase 是否已配置 */
